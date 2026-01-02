@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: #020617;
+  color: #ffffff;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: auto !important;
+  min-height: 100%;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 7vw;
+  background: #0b1220;
+}
+
+.header a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+.header a:hover {
+  color: #B90504;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #0b1220;
+}
+
+.page {
+  min-height: 70vh;
+  padding: 100px 7vw;
+}
