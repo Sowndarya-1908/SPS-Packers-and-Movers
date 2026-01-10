@@ -62,7 +62,7 @@ export default function Header() {
   border-radius:2px;
 }
 
-/* RIGHT */
+/* RIGHT SECTION */
 .sps-right{
   display:flex;
   align-items:center;
@@ -81,16 +81,18 @@ export default function Header() {
   font-size:14px;
 }
 
-/* HAMBURGER */
+/* HAMBURGER DEFAULT (DESKTOP HIDDEN) */
 .sps-hamburger{
   display:none;
-  font-size:30px;
-  color:#FDFCFC;
+  font-size:32px;
+  color:#FFFFFF;
   cursor:pointer;
 }
 
 /* ================= MOBILE ================= */
 @media(max-width:900px){
+
+  /* MOBILE NAV MENU */
   .sps-nav{
     position:fixed;
     top:90px;
@@ -114,17 +116,29 @@ export default function Header() {
     font-size:18px;
   }
 
+  /* HAMBURGER ALWAYS ON TOP RIGHT */
   .sps-hamburger{
     display:block;
-    z-index:10002;
+    position:absolute;
+    right:20px;
+    top:28px;
+    font-size:32px;
+    color:#fff;
+    z-index:10005;
+  }
+
+  /* HIDE CTA ON MOBILE */
+  .sps-right{
+    display:none;
   }
 }
 
-/* PAGE OFFSET */
+/* PAGE CONTENT OFFSET */
 .page{
   padding-top:90px;
 }
-    `;
+`;
+
     const style = document.createElement("style");
     style.innerHTML = css;
     document.head.appendChild(style);
@@ -134,10 +148,13 @@ export default function Header() {
 
   return (
     <header className="sps-header">
+
+      {/* LOGO */}
       <Link to="/" className="sps-logo">
         SPS Packers & Movers
       </Link>
 
+      {/* NAVIGATION */}
       <nav className={`sps-nav ${open ? "open" : ""}`}>
         <Link to="/" className={isActive("/") ? "active" : ""} onClick={() => setOpen(false)}>Home</Link>
         <Link to="/about" className={isActive("/about") ? "active" : ""} onClick={() => setOpen(false)}>About</Link>
@@ -145,10 +162,13 @@ export default function Header() {
         <Link to="/contact" className={isActive("/contact") ? "active" : ""} onClick={() => setOpen(false)}>Contact</Link>
       </nav>
 
+      {/* DESKTOP RIGHT BUTTON */}
       <div className="sps-right">
         <a href="tel:9361046387" className="sps-cta">Call Now</a>
-        <div className="sps-hamburger" onClick={() => setOpen(!open)}>☰</div>
       </div>
+
+      {/* MOBILE HAMBURGER */}
+      <div className="sps-hamburger" onClick={() => setOpen(!open)}>☰</div>
     </header>
   );
 }

@@ -125,89 +125,355 @@ Please contact me with details.`;
   }, []);
 
   return (
-    <section className="sps-service-wrap">
+   <section className="sps-service-wrap">
 
   {/* ================= HOUSE SHIFTING ================= */}
-  {/* ROW 1 — IMAGE LEFT | CONTENT RIGHT */}
   <div className="sps-service-row">
-    
     <div className="sps-service-img">
-      <img
-         src="/images/ser/house.png"
-        alt="House Shifting"
-      />
+      <img src="/images/services/houseshifting.png" alt="House Shifting" />
     </div>
 
     <div className="sps-service-content">
       <h3>House Shifting</h3>
       <p>
-        With a dedicated team of professionals, we offer timely and
-        well-planned household relocation services ensuring safe packing,
-        secure transport, and careful handling of every item.
+        We make home relocation seamless and stress-free. Our team uses high-quality
+        packing materials and modern equipment to safely move furniture, appliances,
+        kitchen items, and valuables with utmost care.
       </p>
 
       <div className="sps-btns">
-        <button
-          className="sps-btn sps-btn-primary"
-          onClick={() => navigate("/contact")}
-        >
+        <button className="sps-btn sps-btn-primary" onClick={() => navigate("/contact")}>
           Contact Us
         </button>
-
-        <button
-          className="sps-btn sps-btn-whatsapp"
-          onClick={() => openWhatsApp("House Shifting")}
-        >
+        <button className="sps-btn sps-btn-whatsapp" onClick={() => openWhatsApp("House Shifting")}>
           WhatsApp Now
         </button>
       </div>
     </div>
-
   </div>
 
   {/* ================= OFFICE SHIFTING ================= */}
-  {/* ROW 2 — CONTENT LEFT | IMAGE RIGHT */}
   <div className="sps-service-row">
 
     <div className="sps-service-content">
       <h3>Office Shifting</h3>
       <p>
-        Our office shifting services ensure minimal downtime. From IT
-        equipment to furniture, we manage every aspect with precision and
-        professional care.
+        Our office relocation services ensure minimal downtime. We handle workstations,
+        computers, files, furniture, and IT equipment with professional planning and 
+        timely execution.
       </p>
 
       <div className="sps-btns">
-        <button
-          className="sps-btn sps-btn-primary"
-          onClick={() => navigate("/contact")}
-        >
+        <button className="sps-btn sps-btn-primary" onClick={() => navigate("/contact")}>
           Contact Us
         </button>
-
-        <button
-          className="sps-btn sps-btn-whatsapp"
-          onClick={() => openWhatsApp("Office Shifting")}
-        >
+        <button className="sps-btn sps-btn-whatsapp" onClick={() => openWhatsApp("Office Shifting")}>
           WhatsApp Now
         </button>
       </div>
     </div>
 
     <div className="sps-service-img">
-      <img
-        src="/images/ser/house.png"
-        alt="Office Shifting"
-      />
+      <img src="/images/services/office.png" alt="Office Shifting" />
+    </div>
+  </div>
+
+  {/* ================= TRANSPORTATION ================= */}
+  <div className="sps-service-row">
+    <div className="sps-service-img">
+      <img src="/images/services/transs.png" alt="Transportation" />
     </div>
 
+    <div className="sps-service-content">
+      <h3>Transportation</h3>
+      <p>
+        We provide fast and reliable transportation services with GPS-enabled vehicles. 
+        Whether it’s local or long-distance movement, your goods reach the destination 
+        safely and on time.
+      </p>
+
+      <div className="sps-btns">
+        <button className="sps-btn sps-btn-primary" onClick={() => navigate("/contact")}>
+          Contact Us
+        </button>
+        <button className="sps-btn sps-btn-whatsapp" onClick={() => openWhatsApp("Transportation")}>
+          WhatsApp Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {/* ================= AC INSTALLATION ================= */}
+  <div className="sps-service-row">
+
+    <div className="sps-service-content">
+      <h3>AC Installation</h3>
+      <p>
+        Our trained technicians professionally handle AC dismantling, packing, shifting, 
+        and re-installation. We ensure 100% damage-free handling of pipes, units, and wiring.
+      </p>
+
+      <div className="sps-btns">
+        <button className="sps-btn sps-btn-primary" onClick={() => navigate("/contact")}>
+          Contact Us
+        </button>
+        <button className="sps-btn sps-btn-whatsapp" onClick={() => openWhatsApp("AC Installation")}>
+          WhatsApp Now
+        </button>
+      </div>
+    </div>
+
+    <div className="sps-service-img">
+      <img src="/images/services/ac.png" alt="AC Installation" />
+    </div>
+  </div>
+
+  {/* ================= GODOWN SHIFTING ================= */}
+  <div className="sps-service-row">
+    <div className="sps-service-img">
+      <img src="/images/services/godown.png" alt="Godown Shifting" />
+    </div>
+
+    <div className="sps-service-content">
+      <h3>Godown Shifting</h3>
+      <p>
+        We specialize in warehouse and godown relocation with proper inventory handling,
+        pallet movement, heavy equipment shifting, and organized loading/unloading.
+      </p>
+
+      <div className="sps-btns">
+        <button className="sps-btn sps-btn-primary" onClick={() => navigate("/contact")}>
+          Contact Us
+        </button>
+        <button className="sps-btn sps-btn-whatsapp" onClick={() => openWhatsApp("Godown Shifting")}>
+          WhatsApp Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {/* ================= COMMERCIAL MOVES ================= */}
+  <div className="sps-service-row">
+
+    <div className="sps-service-content">
+      <h3>Commercial Moves</h3>
+      <p>
+        From small businesses to large industries, we provide complete commercial relocation 
+        solutions including machinery shifting, inventory movement, and industrial packing.
+      </p>
+
+      <div className="sps-btns">
+        <button className="sps-btn sps-btn-primary" onClick={() => navigate("/contact")}>
+          Contact Us
+        </button>
+        <button className="sps-btn sps-btn-whatsapp" onClick={() => openWhatsApp("Commercial Moves")}>
+          WhatsApp Now
+        </button>
+      </div>
+    </div>
+
+    <div className="sps-service-img">
+      <img src="/images/services/comm.png" alt="Commercial Moves" />
+    </div>
   </div>
 
 </section>
 
+
   );
 }
 
+ function ServicesIntro() {
+  useEffect(() => {
+    const css = `
+/* ===== SERVICES INTRO ===== */
+.sps-services-intro{
+  padding:90px 6vw;
+  background:#FDFCFC;
+  font-family:Inter,system-ui;
+}
+
+/* GRID */
+.sps-services-wrap{
+  max-width:1300px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1.05fr 0.95fr;
+  gap:60px;
+  align-items:center;
+}
+
+/* IMAGE SIDE */
+.sps-services-image{
+  position:relative;
+}
+
+.sps-services-image img{
+  width:100%;
+  border-radius:18px;
+  box-shadow:0 30px 60px rgba(0,0,0,0.18);
+}
+
+/* EXPERIENCE BADGE */
+.sps-exp-badge{
+  position:absolute;
+  top:-30px;
+  left:-30px;
+  background:#ffffff;
+  border-radius:14px;
+  padding:18px 22px;
+  box-shadow:0 20px 40px rgba(150,5,70,0.25);
+  text-align:center;
+}
+
+.sps-exp-badge h3{
+  font-size:42px;
+  font-weight:900;
+  color:#960546;
+  line-height:1;
+}
+
+.sps-exp-badge p{
+  font-size:14px;
+  font-weight:700;
+  color:#7E314B;
+  margin-top:6px;
+}
+
+/* CONTENT SIDE */
+.sps-services-content small{
+  display:block;
+  font-size:13px;
+  letter-spacing:0.18em;
+  font-weight:800;
+  color:#960546;
+  margin-bottom:14px;
+}
+
+.sps-services-content h2{
+  font-size:42px;
+  font-weight:900;
+  color:#1f1b3a;
+  line-height:1.25;
+  margin-bottom:18px;
+}
+
+.sps-services-content h2 span{
+  color:#960546;
+}
+
+.sps-services-content p{
+  font-size:16px;
+  color:#555;
+  line-height:1.75;
+  margin-bottom:26px;
+}
+
+/* SERVICES LIST */
+.sps-services-list{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px 28px;
+}
+
+.sps-service-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:15px;
+  font-weight:600;
+  color:#1f1b3a;
+}
+
+.sps-service-icon{
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:#960546;
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:13px;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:1000px){
+  .sps-services-wrap{
+    grid-template-columns:1fr;
+  }
+
+  .sps-exp-badge{
+    position:static;
+    width:max-content;
+    margin-bottom:20px;
+  }
+
+  .sps-services-content h2{
+    font-size:32px;
+  }
+
+  .sps-services-list{
+    grid-template-columns:1fr;
+  }
+}
+    `;
+    const style = document.createElement("style");
+    style.innerHTML = css;
+    document.head.appendChild(style);
+  }, []);
+
+  return (
+    <section className="sps-services-intro">
+      <div className="sps-services-wrap">
+        {/* LEFT IMAGE */}
+        <div className="sps-services-image">
+          <div className="sps-exp-badge">
+            <h3>10+</h3>
+            <p>Years Experience</p>
+          </div>
+
+          <img
+            src="/images/ser/house.png"
+            alt="Professional Moving Services"
+          />
+        </div>
+
+        {/* RIGHT CONTENT */}
+        <div className="sps-services-content">
+          <small>OUR SERVICES</small>
+
+          <h2>
+            Explore Our Wide Range <br />
+            of <span>Services.</span>
+          </h2>
+
+          <p>
+            Discover our complete moving solutions at SPS Packers & Movers.
+            From local to long-distance moves, packing, unpacking, and storage
+            options, we’ve got you covered. Our experienced team ensures a
+            smooth relocation process tailored to your needs.
+          </p>
+
+          <div className="sps-services-list">
+            {[
+              "House Relocations",
+              "Corporate Relocations",
+              "Premium Moving Service",
+              "Warehousing / Storage",
+              "Car Transportation",
+              "Insurance"
+            ].map((service, i) => (
+              <div key={i} className="sps-service-item">
+                <div className="sps-service-icon">➜</div>
+                {service}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function Services() {
   useEffect(() => {
@@ -309,6 +575,7 @@ padding:120px 6vw;
         Delivering Excellence <span>Across India.</span>
       </h1>
     </section>
+    <ServicesIntro />
     <ServicesShowcase />
     </>
   );

@@ -2,258 +2,844 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 
-const services = [
-  {
-    title: "House Shifting",
-    img: "/images/services/houseshifting.png",
-    desc: "Safe packing & smooth relocation."
-  },
-  {
-    title: "Transportation",
-    img: "/images/services/transs.png",
-    desc: "Fast & secure logistics services."
-  },
-  {
-    title: "AC Installation",
-    img: "/images/services/ac.png",
-    desc: "Safe dismantling & re-installation."
-  },
-  {
-    title: "Godown Shifting",
-    img: "/images/services/godown.png",
-    desc: "Warehouse & inventory relocation."
-  },
-  {
-    title: "Office Shifting",
-    img: "/images/services/office.png",
-    desc: "Professional office relocation."
-  },
-  {
-    title: "Commercial Moves",
-    img: "/images/services/comm.png",
-    desc: "End-to-end business moves."
-  }
-];
+// const services = [
+//   {
+//     title: "House Shifting",
+//     img: "/images/services/houseshifting.png",
+//     desc: "Safe packing & smooth relocation."
+//   },
+//   {
+//     title: "Transportation",
+//     img: "/images/services/transs.png",
+//     desc: "Fast & secure logistics services."
+//   },
+//   {
+//     title: "AC Installation",
+//     img: "/images/services/ac.png",
+//     desc: "Safe dismantling & re-installation."
+//   },
+//   {
+//     title: "Godown Shifting",
+//     img: "/images/services/godown.png",
+//     desc: "Warehouse & inventory relocation."
+//   },
+//   {
+//     title: "Office Shifting",
+//     img: "/images/services/office.png",
+//     desc: "Professional office relocation."
+//   },
+//   {
+//     title: "Commercial Moves",
+//     img: "/images/services/comm.png",
+//     desc: "End-to-end business moves."
+//   }
+// ];
 
- function ServicesSlide() {
-  const [active, setActive] = useState(2);
+// function ServicesSlide() {
+//   const [active, setActive] = useState(2);
+
+//   useEffect(() => {
+//     const css = `
+// /* ================== SECTION ================== */
+// .sps-coverflow{
+//   background:#fff;
+//   padding:100px 0;
+//   overflow:hidden;
+// }
+
+// .sps-section-head{
+//   text-align:center;
+//   margin-bottom:70px;
+//   font-family:Inter,system-ui;
+// }
+
+// .sps-section-head h2{
+//   font-size:46px;
+//   font-weight:900;
+//   color:#1f1b3a;
+//   margin:0;
+// }
+
+// .sps-section-head span{
+//   color:#960546;
+// }
+
+// /* ================== COVERFLOW ================== */
+// .sps-flow{
+//   position:relative;
+//   height:240px;
+//   display:flex;
+//   justify-content:center;
+//   align-items:center;
+//   perspective:1200px;
+// }
+
+// /* ================== CARD OUTER ================== */
+// .sps-card{
+//   width:420px;
+//   height:150px;
+//   background:rgba(255,255,255,0.12);
+//   backdrop-filter:blur(8px);
+//   border-radius:16px;
+//   padding:0;
+//   position:absolute;
+//   text-decoration:none;
+//   transition:transform 0.5s, opacity 0.4s;
+//   display:flex;
+//   align-items:center;
+// }
+
+// /* ================== INNER CONTENT ================== */
+// .sps-card-inner{
+//   display:flex;
+//   align-items:center;
+//   width:100%;
+//   height:100%;
+//   padding:15px 18px;
+// }
+
+// /* ================== ICON BADGE ================== */
+// .sps-card-icon{
+//   width:85px;
+//   height:85px;
+//   border-radius:14px;
+//   display:flex;
+//   flex-direction:column;
+//   align-items:center;
+//   justify-content:center;
+//   color:#fff;
+//   margin-right:20px;
+//   box-shadow:0 10px 25px rgba(0,0,0,0.25);
+// }
+
+// .sps-card-icon img{
+//   width:42px;
+//   height:42px;
+//   object-fit:contain;
+//   margin-bottom:4px;
+// }
+
+// .sps-card-icon span{
+//   font-size:11px;
+//   font-weight:700;
+// }
+
+// /* ================== GRADIENTS PER CARD ================== */
+// .sps-0{ background:linear-gradient(135deg,#8b00ff,#ff00c8); }
+// .sps-1{ background:linear-gradient(135deg,#ff7a00,#ff1f00); }
+// .sps-2{ background:linear-gradient(135deg,#007bff,#00e0ff); }
+// .sps-3{ background:linear-gradient(135deg,#ff00c8,#ff7a00); }
+// .sps-4{ background:linear-gradient(135deg,#7b2cff,#14ffe9); }
+// .sps-5{ background:linear-gradient(135deg,#00c2ff,#0066ff); }
+
+// /* ================== TEXT ================== */
+// .sps-card-text h3{
+//   font-size:20px;
+//   font-weight:900;
+//   color:#fff;
+//   margin:0 0 6px 0;
+// }
+
+// .sps-card-text p{
+//   font-size:14px;
+//   color:#f1f1f1;
+//   line-height:1.45;
+//   margin:0;
+// }
+
+// /* ================== COVERFLOW POSITIONS ================== */
+// .sps-center{
+//   transform:translateX(0) scale(1.15);
+//   z-index:3;
+//   box-shadow:
+//     0 0 0 3px rgba(255,255,255,0.2),
+//     0 25px 65px rgba(0,0,0,0.45),
+//     0 0 30px rgba(255,255,255,0.25);
+// }
+
+// .sps-left{
+//   transform:translateX(-280px) rotateY(40deg) scale(0.9);
+//   opacity:0.5;
+// }
+
+// .sps-right{
+//   transform:translateX(280px) rotateY(-40deg) scale(0.9);
+//   opacity:0.5;
+// }
+
+// .sps-hide{
+//   transform:scale(0.65);
+//   opacity:0;
+// }
+
+// /* ================== CONTROLS ================== */
+// .sps-controls{
+//   display:flex;
+//   justify-content:center;
+//   gap:20px;
+//   margin-top:40px;
+// }
+
+// .sps-btn{
+//   background:#960546;
+//   color:#fff;
+//   border:none;
+//   width:45px;
+//   height:45px;
+//   border-radius:50%;
+//   font-size:22px;
+//   cursor:pointer;
+//   box-shadow:0 5px 15px rgba(0,0,0,0.25);
+// }
+
+// /* ================== MOBILE ================== */
+// @media(max-width:900px){
+//   .sps-left{ transform:translateX(-180px) rotateY(35deg) scale(0.85); }
+//   .sps-right{ transform:translateX(180px) rotateY(-35deg) scale(0.85); }
+//   .sps-section-head h2{ font-size:32px; }
+// }
+//     `;
+
+//     const style = document.createElement("style");
+//     style.innerHTML = css;
+//     document.head.appendChild(style);
+//   }, []);
+
+//   const prev = () => {
+//     setActive((prev) => (prev - 1 + services.length) % services.length);
+//   };
+
+//   const next = () => {
+//     setActive((prev) => (prev + 1) % services.length);
+//   };
+
+//   const getClass = (index) => {
+//     if (index === active) return "sps-card sps-center";
+//     if (index === active - 1 || (active === 0 && index === services.length - 1))
+//       return "sps-card sps-left";
+//     if (index === active + 1 || (active === services.length - 1 && index === 0))
+//       return "sps-card sps-right";
+//     return "sps-card sps-hide";
+//   };
+
+//   return (
+//     <section className="sps-coverflow">
+
+//       <div className="sps-section-head">
+//         <h2>
+//           Reliable moving services built <br />
+//           <span>around you</span>
+//         </h2>
+//       </div>
+
+//       <div className="sps-flow">
+//         {services.map((s, i) => (
+//           <Link to="/services" key={i} className={getClass(i)}>
+//             <div className="sps-card-inner">
+
+//               <div className={`sps-card-icon sps-${i}`}>
+//                 <img src={s.img} alt={s.title} />
+//                 <span>OPTION</span>
+//               </div>
+
+//               <div className="sps-card-text">
+//                 <h3>{s.title}</h3>
+//                 <p>{s.desc}</p>
+//               </div>
+
+//             </div>
+//           </Link>
+//         ))}
+//       </div>
+
+//       <div className="sps-controls">
+//         <button className="sps-btn" onClick={prev}>‹</button>
+//         <button className="sps-btn" onClick={next}>›</button>
+//       </div>
+
+//     </section>
+//   );
+// }
+
+//  function ServicesOptions() {
+
+//   const services = [
+//     {
+//       title: "House Shifting",
+//       desc: "Safe packing & smooth relocation.",
+//       color: "linear-gradient(135deg, #9b00ff, #ff00b4)"
+//     },
+//     {
+//       title: "Transportation",
+//       desc: "Fast & secure logistics services.",
+//       color: "linear-gradient(135deg, #ff7a00, #ff1f00)"
+//     },
+//     {
+//       title: "AC Installation",
+//       desc: "Safe dismantling & re-installation.",
+//       color: "linear-gradient(135deg, #007bff, #00e0ff)"
+//     },
+//     {
+//       title: "Godown Shifting",
+//       desc: "Warehouse & inventory relocation.",
+//       color: "linear-gradient(135deg, #ff00b4, #ff7a00)"
+//     },
+//     {
+//       title: "Office Shifting",
+//       desc: "Professional office relocation.",
+//       color: "linear-gradient(135deg, #7b2cff, #14ffe9)"
+//     },
+//     {
+//       title: "Commercial Moves",
+//       desc: "End-to-end business moves.",
+//       color: "linear-gradient(135deg, #00c2ff, #0066ff)"
+//     }
+//   ];
+
+//   /* ADD CSS */
+//   useEffect(() => {
+//     const css = `
+// /* ================== WRAPPER ================== */
+// .sps-services-list {
+//   width: 100%;
+//   max-width: 900px;
+//   margin: 80px auto;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 40px;
+//   font-family: Inter, system-ui;
+// }
+
+// /* ================== CARD BOX ================== */
+// .sps-service-card {
+//   display: flex;
+//   align-items: center;
+//   gap: 20px;
+//   padding: 18px 25px;
+//   background: #ffffff10;
+//   border-radius: 18px;
+//   box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+//   backdrop-filter: blur(8px);
+//   color: #fff;
+//   position: relative;
+//   overflow: hidden;
+// }
+
+// /* angled shape (like image) */
+// .sps-service-card::before {
+//   content: "";
+//   position: absolute;
+//   inset: 0;
+//   border-radius: 18px;
+//   padding: 3px;
+//   background: var(--grad);
+//   -webkit-mask:
+//     linear-gradient(#fff 0 0) content-box,
+//     linear-gradient(#fff 0 0);
+//   -webkit-mask-composite: xor;
+//           mask-composite: exclude;
+// }
+
+// /* ================== ICON ================== */
+// .sps-icon-box {
+//   width: 80px;
+//   height: 80px;
+//   background: var(--grad);
+//   border-radius: 14px;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   font-size: 13px;
+//   font-weight: 700;
+//   color: #fff;
+//   text-align: center;
+//   padding: 10px;
+// }
+
+// .sps-icon-box img {
+//   width: 38px;
+//   height: 38px;
+//   margin-bottom: 4px;
+// }
+
+// /* ================== TEXT ================== */
+// .sps-card-text h3 {
+//   font-size: 22px;
+//   font-weight: 900;
+//   margin: 0 0 5px 0;
+//   color: #fff;
+// }
+
+// .sps-card-text p {
+//   margin: 0;
+//   font-size: 14px;
+//   color: #eeeeee;
+// }
+
+// /* ================== MOBILE ================== */
+// @media (max-width: 600px) {
+//   .sps-service-card {
+//     flex-direction: column;
+//     text-align: center;
+//   }
+// }
+// `;
+
+//     const style = document.createElement("style");
+//     style.innerHTML = css;
+//     document.head.appendChild(style);
+//   }, []);
+
+//   return (
+//     <div className="sps-services-list">
+
+//       {services.map((s, i) => (
+//         <div
+//           key={i}
+//           className="sps-service-card"
+//           style={{ "--grad": s.color }}
+//         >
+//           <div className="sps-icon-box">
+//             <img src="/images/services/icon.png" alt="icon" />
+//             OPTION
+//           </div>
+
+//           <div className="sps-card-text">
+//             <h3>{s.title}</h3>
+//             <p>{s.desc}</p>
+//           </div>
+//         </div>
+//       ))}
+
+//     </div>
+//   );
+// }
+
+
+
+ function ServicesOptions() {
+  
+  const services = [
+    {
+      title: "House Shifting",
+      desc: "Safe packing & smooth relocation.",
+      icon: "/images/services/houseshifting.png",
+      color: "linear-gradient(135deg, #960546, #B95778)"
+    },
+    {
+      title: "Transportation",
+      desc: "Fast & secure logistics services.",
+      icon: "/images/services/transs.png",
+      color: "linear-gradient(135deg, #B95778, #7E314B)"
+    },
+    {
+      title: "AC Installation",
+      desc: "Safe dismantling & re-installation.",
+      icon: "/images/services/ac.png",
+      color: "linear-gradient(135deg, #960546, #7E314B)"
+    },
+    {
+      title: "Godown Shifting",
+      desc: "Warehouse & inventory relocation.",
+      icon: "/images/services/godown.png",
+      color: "linear-gradient(135deg, #7E314B, #B95778)"
+    },
+    {
+      title: "Office Shifting",
+      desc: "Professional office relocation.",
+      icon: "/images/services/office.png",
+      color: "linear-gradient(135deg, #960546, #B95778)"
+    },
+    {
+      title: "Commercial Moves",
+      desc: "End-to-end business moves.",
+      icon: "/images/services/comm.png",
+      color: "linear-gradient(135deg, #B95778, #7E314B)"
+    }
+  ];
 
   useEffect(() => {
     const css = `
-/* ===== COVERFLOW ===== */
-.sps-coverflow{
-  background:#fff;
-  padding:100px 0;
-  overflow:hidden;
+/* ================= SECTION ================= */
+.sps-services-section {
+  width: 100%;
+  padding: 80px 0;
+  font-family: Inter, system-ui;
 }
 
-.sps-flow{
-  position:relative;
-  height:380px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  perspective:1200px;
+.sps-services-heading {
+  text-align: center;
+  margin-bottom: 55px;
 }
 
-.sps-card{
-  position:absolute;
-  width:360px;
-  height:360px;
-  background:#EED3D6;
-  border-radius:16px;
-
-  /* ✅ ADD THIS */
-  border:2px solid #7E314B;
-
-  box-shadow:0 25px 60px rgba(0,0,0,0.45);
-  transition:transform 0.55s ease, opacity 0.4s;
+.sps-services-heading h2 {
+  font-size: 42px;
+  font-weight: 900;
+  color: #1E1B4B;
 }
 
-.sps-card img{
-  width:100%;
-  height:200px;
-  object-fit:cover;
+/* ================= LIST ================= */
+.sps-services-list {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
 }
 
-.sps-card-content{
-  padding:10px;
-  text-align:center;
+/* ================= CARD ================= */
+.sps-service-card {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 22px 28px;
+  background: #ffffffdf;
+  border-radius: 18px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.15);
+  backdrop-filter: blur(10px);
+  color: #000;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  transform: translateX(-40px);
+  opacity: 0;
+  animation: slideIn 0.7s forwards;
 }
 
-.sps-card-content h3{
-  color:#960546;
-  font-weight:900;
-//   margin-bottom:8px;
-}
-
-.sps-card-content p{
-  color:#7E314B;
-  font-size:14px;
-}
-
-/* POSITIONS */
-.sps-center{
-  transform:translateX(0) scale(1.2);
-  z-index:3;
-}
-
-.sps-left{
-  transform:translateX(-280px) rotateY(40deg) scale(0.9);
-  opacity:0.6;
-}
-
-.sps-right{
-  transform:translateX(280px) rotateY(-40deg) scale(0.9);
-  opacity:0.6;
-}
-
-.sps-hide{
-  transform:translateX(0) scale(0.6);
-  opacity:0;
-}
-
-/* CONTROLS */
-.sps-controls{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  margin-top:30px;
-  color:#D79DAB;
-}
-
-.sps-btn{
-  background:#D79DAB;
-//   color:#fff;
-  border:none;
-  padding:10px 18px;
-  border-radius:50%;
-  font-size:20px;
-  cursor:pointer;
-}
-.sps-card{
-  text-decoration: none !important;
-  color: inherit;
-}
-  .sps-coverflow a{
-  text-decoration: none !important;
-}
-  .sps-card{
-  border:2px solid #7E314B;
-  border-radius:16px;
-  text-decoration:none !important;
-  color:inherit;
-}
-  .sps-section-head{
-  text-align:center;
-  margin-bottom:70px;
-  font-family:Inter,system-ui;
-}
-
-/* TOP LABEL */
-.sps-section-head small{
-  display:inline-block;
-  margin-bottom:14px;
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:0.18em;
-  color:#7E314B; /* Dark Rose / Wine */
-}
-
-/* MAIN HEADING */
-.sps-section-head h2{
-  font-size:46px;
-  font-weight:900;
-  line-height:1.2;
-  margin:0;
-  color:#1f1b3a;
-}
-
-/* HIGHLIGHT WORD */
-.sps-section-head h2 span{
-  color:#960546; /* Deep Magenta */
-}
-
-/* MOBILE */
-@media(max-width:900px){
-  .sps-section-head h2{
-    font-size:32px;
+/* SLIDE-IN ANIMATION */
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
-/* MOBILE */
-@media(max-width:768px){
-  .sps-left{ transform:translateX(-180px) rotateY(35deg) scale(0.85); }
-  .sps-right{ transform:translateX(180px) rotateY(-35deg) scale(0.85); }
+/* border gradient */
+.sps-service-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  padding: 3px;
+  background: var(--grad);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
 }
 
-.sps-center{
-  transform:translateX(0) scale(1.2);
-  z-index:3;
-
-  /* optional glow */
-  box-shadow:
-    0 0 0 2px #7E314B,
-    0 30px 70px rgba(126,49,75,0.45);
+/* ================= HOVER EFFECT ================= */
+.sps-service-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 18px 35px rgba(150,5,70,0.25);
 }
 
+.sps-service-card:hover .sps-icon-box {
+  transform: rotate(-3deg) scale(1.08);
+}
 
-    `;
+.sps-service-card:hover .sps-number {
+  transform: translateX(6px);
+}
+
+/* ================= NUMBER ================= */
+.sps-number {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  font-size: 32px;
+  font-weight: 900;
+  color: #960546;
+  opacity: 0.15;
+  transition: 0.3s;
+}
+
+/* ================= ICON ================= */
+.sps-icon-box {
+  width: 85px;
+  height: 85px;
+  background: var(--grad);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.sps-icon-box img {
+  width: 42px;
+  height: 42px;
+  margin-bottom: 4px;
+}
+
+/* ================= TEXT ================= */
+.sps-card-text h3 {
+  font-size: 22px;
+  font-weight: 900;
+  margin: 0 0 6px 0;
+  color: #1E1B4B;
+}
+
+.sps-card-text p {
+  margin: 0;
+  font-size: 15px;
+  color: #444;
+  line-height: 1.5;
+}
+
+/* ================= MOBILE ================= */
+@media(max-width: 650px) {
+  .sps-service-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px;
+  }
+  .sps-number { right: 10px; font-size: 26px; }
+}
+`;
+
     const style = document.createElement("style");
     style.innerHTML = css;
     document.head.appendChild(style);
   }, []);
 
-  const prev = () => {
-    setActive((prev) => (prev - 1 + services.length) % services.length);
-  };
-
-  const next = () => {
-    setActive((prev) => (prev + 1) % services.length);
-  };
-
-  const getClass = (index) => {
-    if (index === active) return "sps-card sps-center";
-    if (index === active - 1 || (active === 0 && index === services.length - 1))
-      return "sps-card sps-left";
-    if (index === active + 1 || (active === services.length - 1 && index === 0))
-      return "sps-card sps-right";
-    return "sps-card sps-hide";
-  };
-
   return (
-    <section className="sps-coverflow">
-        <div className="sps-section-head">
-  {/* <small>OUR WORK PROCESS</small> */}
+    <section className="sps-services-section">
+      
+      {/* HEADING */}
+      <div className="sps-services-heading">
+        <h2>Our Services</h2>
+      </div>
 
-  <h2>
-    Reliable moving services built <br />
-    <span>around you</span>
-  </h2>
-</div>
-      <div className="sps-flow">
+      {/* LIST */}
+      <div className="sps-services-list">
         {services.map((s, i) => (
           <Link
-            to="/services"
+            to="/services"  // 👈 All cards go to Services page
             key={i}
-            className={getClass(i)}
+            className="sps-service-card"
+            style={{ "--grad": s.color }}
           >
-            <img src={s.img} alt={s.title} />
-            <div className="sps-card-content">
+            <div className="sps-icon-box">
+              <img src={s.icon} alt={s.title} />
+              OPTION
+            </div>
+
+            <div className="sps-card-text">
               <h3>{s.title}</h3>
               <p>{s.desc}</p>
             </div>
+
+            <div className="sps-number">
+              {String(i + 1).padStart(2, "0")}
+            </div>
+
           </Link>
         ))}
       </div>
 
-      <div className="sps-controls">
-        <button className="sps-btn" onClick={prev}>‹</button>
-        <button className="sps-btn" onClick={next}>›</button>
-      </div>
     </section>
   );
 }
+
+
+//  function ServicesOptions() {
+
+//   const services = [
+//     {
+//       title: "House Shifting",
+//       desc: "Safe packing & smooth relocation.",
+//       icon: "/images/services/houseshifting.png",
+//       color: "linear-gradient(135deg, #9b00ff, #ff00b4)"
+//     },
+//     {
+//       title: "Transportation",
+//       desc: "Fast & secure logistics services.",
+//       icon: "/images/services/transs.png",
+//       color: "linear-gradient(135deg, #ff7a00, #ff1f00)"
+//     },
+//     {
+//       title: "AC Installation",
+//       desc: "Safe dismantling & re-installation.",
+//       icon: "/images/services/ac.png",
+//       color: "linear-gradient(135deg, #007bff, #00e0ff)"
+//     },
+//     {
+//       title: "Godown Shifting",
+//       desc: "Warehouse & inventory relocation.",
+//       icon: "/images/services/godown.png",
+//       color: "linear-gradient(135deg, #ff00b4, #ff7a00)"
+//     },
+//     {
+//       title: "Office Shifting",
+//       desc: "Professional office relocation.",
+//       icon: "/images/services/office.png",
+//       color: "linear-gradient(135deg, #7b2cff, #14ffe9)"
+//     },
+//     {
+//       title: "Commercial Moves",
+//       desc: "End-to-end business moves.",
+//       icon: "/images/services/comm.png",
+//       color: "linear-gradient(135deg, #00c2ff, #0066ff)"
+//     }
+//   ];
+
+//   /* ADD CSS */
+//   useEffect(() => {
+//     const css = `
+// /* ================== WRAPPER ================== */
+// .sps-services-section {
+//   width: 100%;
+//   padding: 80px 0;
+//   font-family: Inter, system-ui;
+// }
+
+// .sps-services-heading {
+//   text-align: center;
+//   margin-bottom: 50px;
+// }
+
+// .sps-services-heading h2 {
+//   font-size: 42px;
+//   font-weight: 900;
+//   color: #1f1b3a;
+// }
+
+// .sps-services-list {
+//   width: 100%;
+//   max-width: 900px;
+//   margin: auto;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 40px;
+// }
+
+// /* ================== CARD BOX ================== */
+// .sps-service-card {
+//   display: flex;
+//   align-items: center;
+//   gap: 22px;
+//   padding: 20px 28px;
+//   background: rgba(255,255,255,0.2);
+//   border-radius: 18px;
+//   box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+//   backdrop-filter: blur(10px);
+//   color: #000;
+//   position: relative;
+//   overflow: hidden;
+// }
+
+// /* angled gradient outline */
+// .sps-service-card::before {
+//   content: "";
+//   position: absolute;
+//   inset: 0;
+//   border-radius: 18px;
+//   padding: 3px;
+//   background: var(--grad);
+//   -webkit-mask:
+//     linear-gradient(#fff 0 0) content-box,
+//     linear-gradient(#fff 0 0);
+//   -webkit-mask-composite: xor;
+//           mask-composite: exclude;
+// }
+
+// /* ================== ICON ================== */
+// .sps-icon-box {
+//   width: 85px;
+//   height: 85px;
+//   background: var(--grad);
+//   border-radius: 16px;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   color: #fff;
+//   font-size: 12px;
+//   font-weight: 700;
+// }
+
+// .sps-icon-box img {
+//   width: 42px;
+//   height: 42px;
+//   margin-bottom: 4px;
+// }
+
+// /* ================== TEXT ================== */
+// .sps-card-text h3 {
+//   font-size: 22px;
+//   font-weight: 900;
+//   margin: 0 0 6px 0;
+//   color: #222;
+// }
+
+// .sps-card-text p {
+//   margin: 0;
+//   font-size: 15px;
+//   color: #444;
+//   line-height: 1.5;
+// }
+
+// /* ================== MOBILE ================== */
+// @media (max-width: 650px) {
+//   .sps-service-card {
+//     flex-direction: column;
+//     text-align: center;
+//     padding: 25px;
+//   }
+
+//   .sps-card-text h3 {
+//     font-size: 20px;
+//   }
+// }
+// `;
+
+//     const style = document.createElement("style");
+//     style.innerHTML = css;
+//     document.head.appendChild(style);
+//   }, []);
+
+
+//   return (
+//     <section className="sps-services-section">
+
+//       {/* HEADING */}
+//       <div className="sps-services-heading">
+//         <h2>Our Services</h2>
+//       </div>
+
+//       {/* SERVICES LIST */}
+//       <div className="sps-services-list">
+//         {services.map((s, i) => (
+//           <div
+//             key={i}
+//             className="sps-service-card"
+//             style={{ "--grad": s.color }}
+//           >
+//             <div className="sps-icon-box">
+//               <img src={s.icon} alt={s.title} />
+//               OPTION
+//             </div>
+
+//             <div className="sps-card-text">
+//               <h3>{s.title}</h3>
+//               <p>{s.desc}</p>
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+
+//     </section>
+//   );
+// }
+
 
 function AboutSlide() {
   const stat1Ref = useRef(null);
@@ -458,8 +1044,365 @@ function AboutSlide() {
   );
 }
 
+function GeometricHero() {
+  useEffect(() => {
+    const css = `
+/* ================== HERO WRAPPER ================== */
+.geo-hero {
+  width: 100%;
+  height: 100vh;
+  padding: 0 6vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #ff0080, #7928ca, #2afadf, #4c83ff);
+  background-size: 400% 400%;
+  animation: geoBG 12s ease infinite;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+  font-family: 'Inter', sans-serif;
+}
 
+/* BACKGROUND ANIMATION */
+@keyframes geoBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
+/* LEFT COLUMN */
+.geo-left {
+  max-width: 480px;
+  z-index: 10;
+}
+
+.geo-title {
+  font-size: 48px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.geo-sub {
+  font-size: 20px;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+.geo-desc {
+  font-size: 16px;
+  line-height: 1.7;
+  opacity: 0.85;
+  margin-bottom: 28px;
+}
+
+.geo-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #14ffe9, #ff00e0);
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.geo-btn:hover {
+  opacity: 0.85;
+}
+
+/* ================== GEOMETRIC SHAPES ================== */
+.geo-shapes {
+  position: absolute;
+  right: -80px;
+  bottom: -50px;
+  width: 60%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.shape-box {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  background: linear-gradient(135deg, #ffec00, #ff00c8);
+  transform: rotate(25deg);
+  border-radius: 12px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+}
+
+.shape-box.small {
+  width: 80px;
+  height: 80px;
+}
+
+.shape-box.tiny {
+  width: 55px;
+  height: 55px;
+}
+
+/* shape positions */
+.shape1 { top: 12%; right: 22%; }
+.shape2 { top: 40%; right: 10%; }
+.shape3 { top: 65%; right: 28%; }
+.shape4.small { top: 22%; right: 42%; }
+.shape5.tiny { top: 75%; right: 15%; }
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 900px) {
+  .geo-hero {
+    flex-direction: column;
+    text-align: center;
+    height: auto;
+    padding-top: 120px;
+    padding-bottom: 160px;
+  }
+
+  .geo-left {
+    max-width: 100%;
+  }
+
+  .geo-shapes {
+    width: 100%;
+    right: 0;
+    bottom: 0;
+  }
+
+  .shape-box {
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 600px) {
+  .geo-title { font-size: 34px; }
+  .geo-sub { font-size: 18px; }
+  .geo-desc { font-size: 14px; }
+}
+`;
+
+    const style = document.createElement("style");
+    style.innerHTML = css;
+    document.head.appendChild(style);
+  }, []);
+
+  return (
+    <section className="geo-hero">
+
+      {/* LEFT CONTENT */}
+      <div className="geo-left">
+        <h1 className="geo-title">GEOMETRIC</h1>
+        <h3 className="geo-sub">Landing Page</h3>
+        <p className="geo-desc">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
+          suscipit tellus vitae purus dignissim, nec tincidunt neque condimentum.
+        </p>
+        <button className="geo-btn">Learn More</button>
+      </div>
+
+      {/* GEOMETRIC SHAPES */}
+      <div className="geo-shapes">
+        <div className="shape-box shape1"></div>
+        <div className="shape-box shape2"></div>
+        <div className="shape-box shape3"></div>
+        <div className="shape-box small shape4"></div>
+        <div className="shape-box tiny shape5"></div>
+      </div>
+
+    </section>
+  );
+}
+
+function StatsWaveStrip() {
+  const refs = useRef([]);
+
+  useEffect(() => {
+    const animateCounter = (el) => {
+      const target = +el.dataset.value;
+      let current = 0;
+      const step = Math.ceil(target / 60);
+
+      const interval = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          current = target;
+          clearInterval(interval);
+        }
+        el.innerText =
+          target >= 100 ? `${current}+` : `${current}%`;
+      }, 25);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !entry.target.classList.contains("done")) {
+            entry.target.classList.add("done");
+            animateCounter(entry.target);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    refs.current.forEach((el) => el && observer.observe(el));
+
+    const css = `
+/* ===== STATS WAVE STRIP ===== */
+.sps-stats{
+  position:relative;
+  padding:90px 6vw;
+  background:linear-gradient(135deg,#960546,#B95778);
+  color:#fff;
+  overflow:hidden;
+  font-family:Inter,system-ui;
+}
+
+/* TOP & BOTTOM WAVES */
+.sps-stats::before,
+.sps-stats::after{
+  content:"";
+  position:absolute;
+  left:0;
+  width:100%;
+  height:50px;
+  background:#FDFCFC;
+}
+
+.sps-stats::before{
+  top:-1px;
+  border-bottom-left-radius:100% 60%;
+  border-bottom-right-radius:100% 60%;
+}
+
+.sps-stats::after{
+  bottom:-1px;
+  border-top-left-radius:100% 60%;
+  border-top-right-radius:100% 60%;
+}
+
+/* GRID */
+.sps-stats-grid{
+  position:relative;
+  z-index:2;
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:40px;
+  text-align:center;
+}
+
+/* ITEM */
+.sps-stat{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+}
+
+/* ICON */
+.sps-stat-icon{
+  width:52px;
+  height:52px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:rgba(255,255,255,0.18);
+  font-size:26px;
+}
+
+/* NUMBER */
+.sps-stat-num{
+  font-size:40px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+/* LABEL */
+.sps-stat-label{
+  font-size:15px;
+  font-weight:600;
+  opacity:0.95;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:900px){
+  .sps-stats-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:30px;
+  }
+}
+
+@media(max-width:500px){
+  .sps-stats-grid{
+    grid-template-columns:1fr;
+  }
+}
+    `;
+
+    const style = document.createElement("style");
+    style.innerHTML = css;
+    document.head.appendChild(style);
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section className="sps-stats">
+      <div className="sps-stats-grid">
+        <div className="sps-stat">
+          <div className="sps-stat-icon">📍</div>
+          <div
+            className="sps-stat-num"
+            data-value="500"
+            ref={(el) => (refs.current[0] = el)}
+          >
+            0
+          </div>
+          <div className="sps-stat-label">Cities Covered</div>
+        </div>
+
+        <div className="sps-stat">
+          <div className="sps-stat-icon">🏢</div>
+          <div
+            className="sps-stat-num"
+            data-value="1000"
+            ref={(el) => (refs.current[1] = el)}
+          >
+            0
+          </div>
+          <div className="sps-stat-label">Business Offices Relocated</div>
+        </div>
+
+        <div className="sps-stat">
+          <div className="sps-stat-icon">🚚</div>
+          <div
+            className="sps-stat-num"
+            data-value="100"
+            ref={(el) => (refs.current[2] = el)}
+          >
+            0
+          </div>
+          <div className="sps-stat-label">Self-Owned Container Trucks</div>
+        </div>
+
+        <div className="sps-stat">
+          <div className="sps-stat-icon">😊</div>
+          <div
+            className="sps-stat-num"
+            data-value="96"
+            ref={(el) => (refs.current[3] = el)}
+          >
+            0%
+          </div>
+          <div className="sps-stat-label">Satisfied Customers</div>
+        </div>
+      </div>
+    </section>
+  );
+}
 // function SecondSlide() {
 //   useEffect(() => {
 //     const css = `
@@ -616,6 +1559,189 @@ function AboutSlide() {
 // }
 
 
+function Testimonials() {
+
+ const testimonials = [
+    {
+      name: "Praveen Kumar",
+      text: "The service was excellent! My household items were packed neatly and delivered safely without any damage.",
+      img: "https://i.pravatar.cc/150?img=3"
+    },
+    {
+      name: "Sathya Narayanan",
+      text: "Professional team, quick shifting, and very polite staff. Highly recommended for home shifting in Tamilnadu!",
+      img: "https://i.pravatar.cc/150?img=12"
+    },
+    {
+      name: "Lakshmi Priya",
+      text: "Affordable and reliable packers. My office shifting was done smoothly with zero downtime.",
+      img: "https://i.pravatar.cc/150?img=47"
+    }
+  ];
+
+  const [index, setIndex] = useState(0);
+
+  const next = () => setIndex((index + 1) % testimonials.length);
+  const prev = () => setIndex((index - 1 + testimonials.length) % testimonials.length);
+
+  useEffect(() => {
+    const css = `
+/* ================== WRAPPER ================== */
+.sps-testimonial-section {
+  padding: 80px 6vw;
+  text-align: center;
+  font-family: Inter, system-ui;
+}
+
+.sps-testimonial-title {
+  font-size: 40px;
+  font-weight: 900;
+  color: #1E1B4B;
+  margin-bottom: 40px;
+}
+
+.sps-testimonial-slider {
+  max-width: 750px;
+  margin: auto;
+  position: relative;
+}
+
+/* ================== CARD ================== */
+.sps-testimonial-card {
+  // background: #ffffff;
+  border-radius: 18px;
+  padding: 50px 35px;
+  position: relative;
+  color: #1E1B4B;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  transition: 0.5s;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.sps-testimonial-card.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* bubble shape */
+.sps-testimonial-bubble {
+  position: absolute;
+  inset: 0;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #960546, #B95778);
+  z-index: -1;
+  clip-path: polygon(0 0, 92% 0, 100% 50%, 92% 100%, 0 100%);
+}
+
+/* ================== IMAGE ================== */
+.sps-testimonial-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  overflow: hidden;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.sps-testimonial-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ================== TEXT ================== */
+.sps-testimonial-text {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  color: #fff;
+  padding: 0 10px;
+}
+
+.sps-testimonial-name {
+  font-size: 18px;
+  color: #fff;
+  font-weight: 700;
+}
+
+/* ================== SLIDER BUTTONS ================== */
+.sps-testimonial-controls {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.sps-testimonial-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  background: #960546;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(150,5,70,0.3);
+  transition: 0.3s;
+}
+
+.sps-testimonial-btn:hover {
+  background: #7E314B;
+}
+
+/* ================== MOBILE ================== */
+@media(max-width: 600px) {
+  .sps-testimonial-title {
+    font-size: 32px;
+  }
+  .sps-testimonial-card {
+    padding: 40px 20px;
+  }
+}
+`;
+
+    const style = document.createElement("style");
+    style.innerHTML = css;
+    document.head.appendChild(style);
+  }, []);
+
+  return (
+    <section className="sps-testimonial-section">
+      
+      <h2 className="sps-testimonial-title">What Our Clients Say</h2>
+
+      <div className="sps-testimonial-slider">
+
+        <div className="sps-testimonial-card active">
+          <div
+            className="sps-testimonial-bubble"
+            style={{ 
+              background: "linear-gradient(135deg, #960546, #B95778)" 
+            }}
+          ></div>
+
+          {/* CLIENT IMAGE */}
+          <div className="sps-testimonial-img">
+            <img src={testimonials[index].img} alt="client" />
+          </div>
+
+          {/* TEXT */}
+          <p className="sps-testimonial-text">“{testimonials[index].text}”</p>
+          <div className="sps-testimonial-name">— {testimonials[index].name}</div>
+        </div>
+
+        {/* CONTROLS */}
+        <div className="sps-testimonial-controls">
+          <button className="sps-testimonial-btn" onClick={prev}>‹</button>
+          <button className="sps-testimonial-btn" onClick={next}>›</button>
+        </div>
+
+      </div>
+    </section>
+  );
+}
 
 
 
@@ -858,528 +1984,134 @@ function WorkProcess() {
 }
 
 
+ function CustomerSatisfactionTimeline() {
 
-function WhyChooseUs() {
   useEffect(() => {
     const css = `
-/* ===== WHY CHOOSE US ===== */
-.sps-why{
-  padding:80px 6vw;
-  background:linear-gradient(180deg,#FDFCFC,#EED3D6);
-  font-family:Inter,system-ui;
-  color:#7E314B;
+
+/* ================== SECTION ================== */
+.sps-cust3-section {
+  padding: 90px 6vw;
+  font-family: Inter, system-ui;
+  background: #ffffff;
 }
 
-/* HEADER */
-.sps-why-head{
-  text-align:center;
-  margin-bottom:60px;
+.sps-cust3-title {
+  text-align: center;
+  font-size: 42px;
+  font-weight: 900;
+  color: #1E1B4B;
+  margin-bottom: 25px;
 }
 
-.sps-why-head small{
-  display:block;
-  font-size:13px;
-  letter-spacing:0.14em;
-  font-weight:800;
-  color:#B95778;
-  margin-bottom:14px;
+.sps-cust3-sub {
+  max-width: 780px;
+  margin: 0 auto 55px auto;
+  text-align: center;
+  font-size: 17px;
+  color: #555;
+  line-height: 1.8;
 }
 
-
-.sps-why-head h2{
-  font-size:42px;
-  font-weight:900;
-  margin:0;
-    color:#960546;
+/* ================= TIMELINE ================= */
+.sps-cust3-timeline {
+  border-left: 5px solid #960546;
+  padding-left: 35px;
+  max-width: 780px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
-.sps-why-head h2 span{
-   color:#7E314B;
+/* ITEM */
+.sps-cust3-item {
+  position: relative;
+  padding-bottom: 5px;
+  animation: fadeSlide 0.7s ease;
 }
 
-/* GRID */
-.sps-why-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:32px;
-}
-
-/* FLIP CARD */
-.sps-flip-card{
-  perspective:900px;
-}
-
-.sps-flip-inner{
-  position:relative;
-  width:100%;
-  height:100%;
-  min-height:260px;
-  transition:transform 0.8s cubic-bezier(.32,0,.15,1);
-  transform-style:preserve-3d;
-}
-
-.sps-flip-card:hover .sps-flip-inner{
-  transform:rotateY(180deg);
-}
-
-/* FRONT & BACK */
-.sps-flip-front,
-.sps-flip-back{
-  position:absolute;
-  inset:0;
-  // background:#ffffff;
-  border-radius:18px;
-  padding:34px 28px;
-  // box-shadow:0 14px 36px rgba(79,70,229,0.25);
-  backface-visibility:hidden;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
-/* FRONT */
-.sps-flip-front{
-  background:#FFFFFF;
-  box-shadow:0 14px 36px rgba(150,5,70,0.22);
-}
-
-/* BACK */
-.sps-flip-back{
-  transform:rotateY(180deg);
-  background:linear-gradient(135deg,#960546,#7E314B);
-  color:#FDFCFC;
-  box-shadow:0 20px 46px rgba(150,5,70,0.45);
-
-/* ICON */
-.sps-why-icon{
-  width:80px;
-  height:80px;
-  border-radius:8px;
-    background:linear-gradient(135deg,#960546,#B95778);
-  color:#fff;
-  display:grid;
-  place-items:center;
-  font-size:22px;
-  font-weight:900;
-  margin-bottom:18px;
+/* DOT */
+.sps-cust3-item::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 4px solid #960546;
+  background: #fff;
+  position: absolute;
+  left: -47px;
+  top: 4px;
 }
 
 /* TEXT */
-.sps-flip-front h4{
-  font-size:18px;
-  font-weight:800;
-  margin-bottom:10px;
-  color:#960546;
-}
-.sps-flip-front p{
-   font-size:14px;
-  color:#7E314B;
+.sps-cust3-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2a2a2a;
 }
 
-.sps-flip-back h4{
-  font-size:18px;
-  font-weight:800;
-  margin-bottom:10px;
-  color:#FFFFFF;
+/* ANIMATION */
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateX(-15px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-.sps-flip-back p{
-  font-size:14px;
-  line-height:1.6;
-  opacity:0.95;
-  color:#FDFCFC;
-}
-/* ===== RESPONSIVE GRID FIX ===== */
-
-/* Tablets */
-@media (max-width: 1000px) {
-  .sps-why-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* MOBILE */
+@media(max-width: 700px) {
+  .sps-cust3-title { font-size: 34px; }
+  .sps-cust3-timeline { padding-left: 25px; }
+  .sps-cust3-item::before { left: -35px; }
 }
 
-/* Mobile - ONE CARD PER ROW */
-@media (max-width: 600px) {
-  .sps-why {
-    padding: 60px 5vw;
-  }
+    `;
 
-  .sps-why-head h2 {
-    font-size: 30px;
-    line-height: 1.3;
-  }
-
-  .sps-why-grid {
-    grid-template-columns: 1fr; /* ✅ ONE CARD PER ROW */
-    gap: 24px;
-  }
-
-  .sps-flip-inner {
-    min-height: 240px;
-  }
-}
-
-/* ================= FORCE MOBILE ONE COLUMN ================= */
-@media (max-width: 600px) {
-
-  /* GRID MUST BE 1 COLUMN */
-  .sps-why-grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 24px;
-  }
-
-  /* RESET CARD POSITIONING */
-  .sps-why-card,
-  .sps-flip-card,
-  .sps-flip-inner {
-    position: relative !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 auto !important;
-  }
-
-  /* PREVENT OVERFLOW */
-  .sps-why {
-    overflow-x: hidden;
-  }
-
-  /* OPTIONAL: reduce height for mobile */
-  .sps-flip-inner {
-    min-height: 240px;
-  }
-}
-
-`;
     const style = document.createElement("style");
     style.innerHTML = css;
     document.head.appendChild(style);
   }, []);
 
-  const cards = [
-    {
-      icon: "✓",
-      title: "Trusted & Experienced Team",
-      desc: "Our skilled professionals have years of experience handling household, office, and commercial relocations safely."
-    },
-    {
-      icon: "₹",
-      title: "Transparent Pricing",
-      desc: "We provide clear and honest pricing with no hidden charges, ensuring complete peace of mind."
-    },
-    {
-      icon: "🛡️",
-      title: "Safe & Secure Moving",
-      desc: "High-quality packing materials and careful handling ensure your belongings remain safe."
-    },
-    {
-      icon: "⏱️",
-      title: "On-Time Delivery",
-      desc: "We respect your time and ensure prompt pickup and delivery without delays."
-    },
-    {
-      icon: "📦",
-      title: "Complete Moving Solutions",
-      desc: "From packing to unpacking, we handle everything end-to-end."
-    },
-    {
-      icon: "📞",
-      title: "Dedicated Support",
-      desc: "Our customer support team is available at every stage of your relocation."
-    }
-  ];
-
   return (
-    <section className="sps-why">
-      <div className="sps-why-head">
-        <small>WHY CHOOSE US</small>
-        <h2>
-          Why choose <span>SPS Packers & Movers</span>
-        </h2>
+    <section className="sps-cust3-section">
+
+      <h2 className="sps-cust3-title">⭐ Customer Satisfaction Guaranteed</h2>
+
+      <p className="sps-cust3-sub">
+        We prioritize safety, speed, and service quality, making us one of the 
+        most preferred packers and movers in Tamilnadu  
+        <br /><br />
+        Thousands of customers trust us because of:
+      </p>
+
+      <div className="sps-cust3-timeline">
+
+        <div className="sps-cust3-item">
+          <div className="sps-cust3-text">Consistent service quality</div>
+        </div>
+
+        <div className="sps-cust3-item">
+          <div className="sps-cust3-text">Reliable staff</div>
+        </div>
+
+        <div className="sps-cust3-item">
+          <div className="sps-cust3-text">Transparent pricing</div>
+        </div>
+
+        <div className="sps-cust3-item">
+          <div className="sps-cust3-text">Fast response</div>
+        </div>
+
+        <div className="sps-cust3-item">
+          <div className="sps-cust3-text">Excellent Google reviews</div>
+        </div>
+
       </div>
 
-      <div className="sps-why-grid">
-        {cards.map((c, i) => (
-          <div className="sps-flip-card" key={i}>
-            <div className="sps-flip-inner">
-              <div className="sps-flip-front">
-                <div className="sps-why-icon">{c.icon}</div>
-                <h4>{c.title}</h4>
-                <p>Hover to learn more</p>
-              </div>
-
-              <div className="sps-flip-back">
-                <h4>{c.title}</h4>
-                <p>{c.desc}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
     </section>
   );
 }
 
 
-
-// function ServicesSlide() {
-//  useEffect(() => {
-//   const css = `
-// /* ================= GLOBAL / COVERFLOW ================= */
-// html, body {
-//   position: relative;
-//   padding: 0;
-//   margin: 0;
-//   background: radial-gradient(circle, #333 0%, black 100%);
-//   height: 100%;
-//   width: 100%;
-//   text-align: center;
-//   font-family: Inter, system-ui;
-// }
-
-// /* COVERFLOW */
-// #coverflow {
-//   height: 100%;
-//   width: 100%;
-//   perspective: 600px;
-// }
-
-// #coverflow section {
-//   position: absolute;
-//   top: 50%;
-//   left: 50%;
-//   width: 170px;
-//   height: 170px;
-//   margin-left: -90px;
-//   margin-top: -90px;
-//   background-color: white;
-//   background-size: cover;
-//   transform-style: preserve-3d;
-//   transition: all 300ms ease-in;
-//   -webkit-box-reflect: below 0
-//     linear-gradient(transparent 0%, transparent 30%, rgba(255,255,255,0.4));
-// }
-
-// /* CONTROLS */
-// #controls {
-//   position: absolute;
-//   width: 100%;
-//   bottom: 10%;
-//   z-index: 1;
-//   user-select: none;
-//   color: #999;
-//   font-size: 18px;
-// }
-
-// #controls a {
-//   color: white;
-//   cursor: pointer;
-// }
-
-// #controls a:hover {
-//   color: #66FFFF;
-// }
-
-// /* ================= SERVICES SLIDE (PINK BRAND) ================= */
-// .sps-services{
-//   padding:80px 6vw;
-//   background:#FDFCFC;
-//   font-family:Inter,system-ui;
-// }
-
-// .sps-services-grid{
-//   display:grid;
-//   grid-template-columns:repeat(3,1fr);
-//   gap:34px;
-// }
-
-// .sps-service-link{
-//   text-decoration:none;
-//   height:100%;
-// }
-
-// .sps-service-card{
-//   background:#EED3D6;
-//   border-radius:14px;
-//   overflow:hidden;
-//   box-shadow:0 15px 40px rgba(150,5,70,0.18);
-//   display:flex;
-//   flex-direction:column;
-//   transition:0.35s ease;
-//   position:relative;
-//   height:100%;
-// }
-
-// .sps-service-card:hover{
-//   transform:translateY(-6px);
-//   box-shadow:0 22px 50px rgba(150,5,70,0.32);
-// }
-
-// .sps-service-img img{
-//   width:100%;
-//   height:220px;
-//   object-fit:cover;
-// }
-
-// .sps-service-content{
-//   padding:26px 22px 34px;
-//   text-align:center;
-// }
-
-// .sps-service-content h3{
-//   font-size:22px;
-//   font-weight:800;
-//   margin-bottom:14px;
-//   color:#960546;
-// }
-
-// .sps-service-content p{
-//   font-size:15px;
-//   line-height:1.75;
-//   color:#7E314B;
-// }
-
-// .sps-service-bar{
-//   position:absolute;
-//   bottom:0;
-//   left:0;
-//   width:100%;
-//   height:5px;
-//   background:#B95778;
-// }
-
-// @media(max-width:900px){
-//   .sps-services{
-//     padding:60px 5vw;
-//   }
-
-//   .sps-services-grid{
-//     grid-template-columns:1fr;
-//     gap:26px;
-//   }
-
-//   .sps-service-img img{
-//     height:200px;
-//   }
-// }
-//   `;
-
-//   const style = document.createElement("style");
-//   style.innerHTML = css;
-//   document.head.appendChild(style);
-// }, []);
-
-
-//   return (
-//     <section className="sps-services">
-//       <div className="sps-services-grid">
-
-//         <Link to="/services" className="sps-service-link">
-//           <div className="sps-service-card">
-//             <div className="sps-service-img">
-//               <img src="/images/services/houseshifting.png" alt="House Shifting" />
-//             </div>
-//             <div className="sps-service-content">
-//               <h3>House Shifting</h3>
-//               <p>
-//                 We provide safe and reliable house shifting services for families
-//                 and individuals. Our trained professionals ensure careful packing,
-//                 secure loading, and timely delivery of your household belongings.
-//               </p>
-//             </div>
-//             <div className="sps-service-bar"></div>
-//           </div>
-//         </Link>
-
-//         <Link to="/services" className="sps-service-link">
-//           <div className="sps-service-card">
-//             <div className="sps-service-img">
-//               <img src="/images/services/transs.png" alt="Transportation Services" />
-//             </div>
-//             <div className="sps-service-content">
-//               <h3>Transportation</h3>
-//               <p>
-//                 Our transportation services ensure fast, safe, and efficient
-//                 movement of goods across cities and states. We use well-maintained
-//                 vehicles for smooth and hassle-free logistics.
-//               </p>
-//             </div>
-//             <div className="sps-service-bar"></div>
-//           </div>
-//         </Link>
-
-//         <Link to="/services" className="sps-service-link">
-//           <div className="sps-service-card">
-//             <div className="sps-service-img">
-//               <img src="/images/services/ac.png" alt="AC Uninstallation and Installation" />
-//             </div>
-//             <div className="sps-service-content">
-//               <h3>AC Uninstallation & Installation</h3>
-//               <p>
-//                 Our technicians handle AC uninstallation and installation with
-//                 precision and care. We ensure safe dismantling, transport, and
-//                 reinstallation without damage.
-//               </p>
-//             </div>
-//             <div className="sps-service-bar"></div>
-//           </div>
-//         </Link>
-
-//         <Link to="/services" className="sps-service-link">
-//           <div className="sps-service-card">
-//             <div className="sps-service-img">
-//               <img src="/images/services/godown.png" alt="Godown Shifting" />
-//             </div>
-//             <div className="sps-service-content">
-//               <h3>Godown Shifting</h3>
-//               <p>
-//                 We offer professional godown shifting services for warehouses and
-//                 storage units. Our team manages inventory handling, packing, and
-//                 transportation efficiently.
-//               </p>
-//             </div>
-//             <div className="sps-service-bar"></div>
-//           </div>
-//         </Link>
-
-//         <Link to="/services" className="sps-service-link">
-//           <div className="sps-service-card">
-//             <div className="sps-service-img">
-//               <img src="/images/services/office.png" alt="Office Shifting" />
-//             </div>
-//             <div className="sps-service-content">
-//               <h3>Office Shifting</h3>
-//               <p>
-//                 Our office shifting services are designed to minimize downtime.
-//                 From IT equipment to furniture, we handle complete office
-//                 relocations smoothly and professionally.
-//               </p>
-//             </div>
-//             <div className="sps-service-bar"></div>
-//           </div>
-//         </Link>
-
-//         <Link to="/services" className="sps-service-link">
-//           <div className="sps-service-card">
-//             <div className="sps-service-img">
-//               <img src="/images/services/comm.png" alt="Commercial Moves" />
-//             </div>
-//             <div className="sps-service-content">
-//               <h3>Commercial Moves</h3>
-//               <p>
-//                 We provide end-to-end commercial moving solutions for factories,
-//                 retail stores, and businesses. Our structured approach ensures
-//                 safe handling and timely execution.
-//               </p>
-//             </div>
-//             <div className="sps-service-bar"></div>
-//           </div>
-//         </Link>
-
-//       </div>
-//     </section>
-//   );
-// }
 
 
 export default function Home() {
@@ -1691,13 +2423,13 @@ html,body{
       </div>
     </section>
 
-
  <AboutSlide /> 
- <ServicesSlide /> 
-  {/* <SecondSlide />  */}
-  <WorkProcess />
-<WhyChooseUs /> 
+ <ServicesOptions />
+ <StatsWaveStrip />
 
+ <WorkProcess />
+ <CustomerSatisfactionTimeline />
+<Testimonials />
 </>
   );
 }

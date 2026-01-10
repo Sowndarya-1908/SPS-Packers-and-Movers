@@ -40,3 +40,6 @@ html, body {
   min-height: 70vh;
   padding: 100px 7vw;
 }
+body {
+  padding-top: 90px;
+}
