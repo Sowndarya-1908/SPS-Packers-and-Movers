@@ -14,20 +14,23 @@ export default function Header() {
   left:0;
   width:100%;
   height:90px;
-  background:#960546;
+  background: linear-gradient(90deg, #15304D 0%, #486C85 100%);
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:0 6vw;
   font-family:Inter,system-ui;
   z-index:9999;
+  box-shadow:0 10px 30px rgba(21,48,77,0.35);
 }
 
 /* LOGO */
 .sps-logo{
   font-size:20px;
   font-weight:900;
-  color:#FDFCFC;
+  background:linear-gradient(90deg,#ffffff,#c7dfff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
   text-decoration:none;
   z-index:10001;
 }
@@ -41,16 +44,23 @@ export default function Header() {
 .sps-nav a{
   text-decoration:none;
   font-weight:600;
-  color:#FDFCFC;
+  color:#ffffff;
   font-size:15px;
   position:relative;
+  transition:0.3s ease;
+}
+
+/* HOVER */
+.sps-nav a:hover{
+  color:#c7dfff;
 }
 
 /* ACTIVE LINK */
 .sps-nav a.active{
-  color:#EED3D6;
+  color:#c7dfff;
 }
 
+/* ACTIVE UNDERLINE */
 .sps-nav a.active::after{
   content:"";
   position:absolute;
@@ -58,8 +68,9 @@ export default function Header() {
   bottom:-6px;
   width:100%;
   height:3px;
-  background:#B95778;
   border-radius:2px;
+  background:linear-gradient(90deg,#ffffff,#c7dfff);
+  box-shadow:0 0 10px rgba(199,223,255,0.6);
 }
 
 /* RIGHT SECTION */
@@ -70,35 +81,40 @@ export default function Header() {
   z-index:10001;
 }
 
-/* CTA */
+/* CTA — BUTTON */
 .sps-cta{
-  background:#B95778;
-  color:#FDFCFC;
+  background: linear-gradient(90deg, #ffffff, #c7dfff);
+  color:#15304D;
   padding:10px 18px;
-  border-radius:8px;
-  font-weight:700;
+  border-radius:10px;
+  font-weight:800;
   text-decoration:none;
   font-size:14px;
+  transition:0.3s ease;
+  border:none;
 }
 
-/* HAMBURGER DEFAULT (DESKTOP HIDDEN) */
+.sps-cta:hover{
+  box-shadow:0 0 18px rgba(199,223,255,0.8);
+}
+
+/* HAMBURGER */
 .sps-hamburger{
   display:none;
   font-size:32px;
-  color:#FFFFFF;
+  color:#ffffff;
   cursor:pointer;
 }
 
 /* ================= MOBILE ================= */
 @media(max-width:900px){
 
-  /* MOBILE NAV MENU */
   .sps-nav{
     position:fixed;
     top:90px;
     left:0;
     width:100%;
-    background:#FDFCFC;
+    background: linear-gradient(180deg, #15304D, #486C85);
     flex-direction:column;
     align-items:center;
     gap:22px;
@@ -112,33 +128,34 @@ export default function Header() {
   }
 
   .sps-nav a{
-    color:#960546;
+    color:#ffffff;
     font-size:18px;
   }
 
-  /* HAMBURGER ALWAYS ON TOP RIGHT */
+  .sps-nav a.active{
+    color:#c7dfff;
+  }
+
   .sps-hamburger{
     display:block;
     position:absolute;
     right:20px;
     top:28px;
     font-size:32px;
-    color:#fff;
+    color:#ffffff;
     z-index:10005;
   }
 
-  /* HIDE CTA ON MOBILE */
   .sps-right{
     display:none;
   }
 }
 
-/* PAGE CONTENT OFFSET */
+/* PAGE OFFSET */
 .page{
   padding-top:90px;
 }
 `;
-
     const style = document.createElement("style");
     style.innerHTML = css;
     document.head.appendChild(style);
@@ -151,7 +168,7 @@ export default function Header() {
 
       {/* LOGO */}
       <Link to="/" className="sps-logo">
-        SPS Packers & Movers
+        CHENNAI LAL Packers & Movers
       </Link>
 
       {/* NAVIGATION */}
@@ -162,13 +179,14 @@ export default function Header() {
         <Link to="/contact" className={isActive("/contact") ? "active" : ""} onClick={() => setOpen(false)}>Contact</Link>
       </nav>
 
-      {/* DESKTOP RIGHT BUTTON */}
+      {/* CTA */}
       <div className="sps-right">
         <a href="tel:9361046387" className="sps-cta">Call Now</a>
       </div>
 
-      {/* MOBILE HAMBURGER */}
+      {/* MOBILE MENU ICON */}
       <div className="sps-hamburger" onClick={() => setOpen(!open)}>☰</div>
+
     </header>
   );
 }

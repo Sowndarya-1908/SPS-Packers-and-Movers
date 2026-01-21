@@ -1,9 +1,38 @@
+/* ===========================================
+   GLOBAL COLOR VARIABLES (BLUE THEME)
+=========================================== */
+:root {
+  /* PRIMARY BLUE GRADIENT */
+  --clr-blue-1: #062242;
+  --clr-blue-2: #3F6C87;
+  --clr-blue-3: #4F8AA8;
+
+  /* BACKGROUND BLUE THEME */
+  --bg-blue-1: #062242;
+  --bg-blue-2: #3F6C87;
+
+  /* HEADER & FOOTER DARK BG */
+  --bg-header: #031423;
+
+  /* TEXT COLORS */
+  --txt-main: #ffffff;     /* white */
+  --txt-light: #C8D7E5;    /* soft blue */
+
+  /* HOVER COLOR */
+  --hover-blue: var(--clr-blue-2);
+}
+
+/* ===========================================
+   BODY + GLOBAL
+=========================================== */
 body {
   margin: 0;
   font-family: Inter, Arial, sans-serif;
-  background: #020617;
-  color: #ffffff;
+  background: linear-gradient(135deg, var(--bg-blue-1), var(--bg-blue-2));
+  color: var(--txt-main);
+  padding-top: 90px;
 }
+
 html, body {
   margin: 0;
   padding: 0;
@@ -12,34 +41,48 @@ html, body {
   overflow-y: auto !important;
   overflow-x: hidden;
 }
+
+/* ===========================================
+   HEADER
+=========================================== */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 7vw;
-  background: #0b1220;
+  background: var(--bg-header);
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
 
 .header a {
-  color: white;
+  color: var(--txt-main);
   margin-left: 20px;
   text-decoration: none;
+  font-weight: 500;
 }
 
+/* BLUE GRADIENT HOVER EFFECT */
 .header a:hover {
-  color: #B90504;
+  background: linear-gradient(90deg, var(--clr-blue-1), var(--clr-blue-2), var(--clr-blue-3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
+/* ===========================================
+   FOOTER
+=========================================== */
 .footer {
   text-align: center;
   padding: 20px;
-  background: #0b1220;
+  background: var(--bg-header);
+  color: var(--txt-light);
+  font-size: 14px;
 }
 
+/* ===========================================
+   PAGE AREA
+=========================================== */
 .page {
   min-height: 70vh;
   padding: 100px 7vw;
-}
-body {
-  padding-top: 90px;
 }

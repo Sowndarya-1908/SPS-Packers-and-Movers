@@ -11,7 +11,7 @@ export default function ContactPage() {
 
   const [success, setSuccess] = useState(false);
 
-  const PHONE_NUMBER = "919361046387"; // your WhatsApp number
+  const PHONE_NUMBER = "919361046387";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,10 +30,8 @@ export default function ContactPage() {
       message
     )}`;
 
-    // 1️⃣ Show success message immediately
     setSuccess(true);
 
-    // 2️⃣ Clear form
     setForm({
       name: "",
       phone: "",
@@ -42,7 +40,6 @@ export default function ContactPage() {
       service: ""
     });
 
-    // 3️⃣ Redirect to WhatsApp IN SAME TAB (no new tab)
     setTimeout(() => {
       window.location.href = whatsappURL;
     }, 1200);
@@ -70,12 +67,12 @@ export default function ContactPage() {
 .sps-contact-left h2{
   font-size:42px;
   font-weight:900;
-  color:#960546;
+  color:#062242; /* BLUE */
 }
 
 .sps-contact-left p{
   font-size:16px;
-  color:#7E314B;
+  color:#062242; /* BLUE */
   line-height:1.7;
   margin:18px 0;
 }
@@ -85,8 +82,8 @@ export default function ContactPage() {
   flex-direction:column;
   gap:14px;
   margin-top:22px;
-  color:#960546;
-  font-weight:600;
+  color:#062242; /* BLUE */
+  font-weight:700;
 }
 
 /* FORM CARD */
@@ -95,12 +92,12 @@ export default function ContactPage() {
   backdrop-filter:blur(18px);
   border-radius:22px;
   padding:30px;
-  border:1.5px solid rgba(150,5,70,.25);
-  box-shadow:0 30px 60px rgba(150,5,70,.25);
+  border:1.5px solid rgba(6,34,66,0.25); /* BLUE SHADE */
+  box-shadow:0 30px 60px rgba(6,34,66,0.25);
 }
 
 .sps-contact-card h3{
-  color:#960546;
+  color:#062242; /* BLUE */
   font-weight:900;
   margin-bottom:18px;
 }
@@ -115,14 +112,20 @@ export default function ContactPage() {
 .sps-contact-card select{
   padding:15px;
   border-radius:12px;
-  border:1.5px solid #EED3D6;
+  border:1.5px solid #B7C4D3; /* LIGHT BLUE */
   font-size:15px;
+  color:#062242; /* BLUE */
+}
+
+.sps-contact-card input::placeholder,
+.sps-contact-card select{
+  color:#3F6C87; /* SOFT BLUE */
 }
 
 .sps-contact-card input:focus,
 .sps-contact-card select:focus{
   outline:none;
-  border-color:#B95778;
+  border-color:#062242; /* BLUE */
 }
 
 /* SUBMIT */
@@ -131,7 +134,7 @@ export default function ContactPage() {
   padding:16px;
   border:none;
   border-radius:14px;
-  background:linear-gradient(90deg,#960546,#B95778);
+  background:linear-gradient(90deg,#062242,#3F6C87); /* BLUE GRADIENT */
   color:#fff;
   font-weight:900;
   font-size:16px;
@@ -143,12 +146,12 @@ export default function ContactPage() {
   position:fixed;
   bottom:30px;
   right:30px;
-  background:#960546;
+  background:#062242; /* BLUE */
   color:#fff;
   padding:16px 22px;
   border-radius:14px;
   font-weight:800;
-  box-shadow:0 12px 30px rgba(150,5,70,.45);
+  box-shadow:0 12px 30px rgba(6,34,66,.45);
   animation:slideUp .4s ease;
   z-index:9999;
 }
@@ -175,7 +178,7 @@ export default function ContactPage() {
         <div className="sps-contact-grid">
           {/* LEFT */}
           <div className="sps-contact-left">
-            <h2>Contact SPS Packers & Movers</h2>
+            <h2>Contact CHENNAI LAL Packers & Movers</h2>
 
             <p>
               We provide safe, reliable, and affordable packing & moving
@@ -235,9 +238,7 @@ export default function ContactPage() {
                 <option>Storage / Warehousing</option>
               </select>
 
-              <button className="sps-contact-btn">
-                Submit Enquiry
-              </button>
+              <button className="sps-contact-btn">Submit Enquiry</button>
             </form>
           </div>
         </div>

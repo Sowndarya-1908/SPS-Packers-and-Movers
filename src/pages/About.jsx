@@ -6,8 +6,6 @@ function MissionVision() {
     const css = `
 /* ===== MISSION & VISION ===== */
 .sps-mv{
-  // padding:70px 6vw;
-  // background:#FDFCFC;
   padding-bottom:30px;
   font-family:Inter,system-ui;
 }
@@ -19,10 +17,10 @@ function MissionVision() {
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:40px;
-  background:#ffffff;
+  background: linear-gradient(135deg,#062242,#3F6C87); /* UPDATED BLUE BG */
   border-radius:18px;
   padding:40px 46px;
-  box-shadow:0 18px 45px rgba(150,5,70,0.12);
+  box-shadow:0 18px 45px rgba(0,0,0,0.15);
 }
 
 /* ITEM */
@@ -39,23 +37,24 @@ function MissionVision() {
   border-radius:50%;
   display:grid;
   place-items:center;
-  background:linear-gradient(135deg,#960546,#B95778);
-  color:#fff;
+  background:#fff; 
+  color:#062242; /* BLUE TEXT */
   font-size:20px;
+  font-weight:900;
 }
 
-/* TEXT */
+/* TEXT UPDATED */
 .sps-mv-item h3{
   font-size:22px;
   font-weight:900;
   margin-bottom:10px;
-  color:#1f1b3a;
+  color:#ffffff; /* WHITE FOR BLUE BG */
 }
 
 .sps-mv-item p{
   font-size:15.5px;
   line-height:1.7;
-  color:#7E314B;
+  color:#ffffff; /* WHITE FOR BLUE BG */
 }
 
 /* ===== RESPONSIVE ===== */
@@ -104,6 +103,8 @@ function MissionVision() {
     </section>
   );
 }
+
+
 
 // function UniqueFactsTimeline() {
 //   const itemRefs = useRef([]);
@@ -322,9 +323,7 @@ function ChooseWe() {
     const css = `
 /* ================= SECTION WRAPPER ================= */
 .choosewe-hero {
-  // padding: 90px 6vw;
   padding-top:20px;
-  // background: #ffffff;
   font-family: Inter, system-ui;
 }
 
@@ -342,24 +341,24 @@ function ChooseWe() {
 .choosewe-left small {
   display: block;
   font-size: 15px;
-  color: #0B0E3F;
+  color: #062242; /* UPDATED BLUE */
   font-weight: 700;
   letter-spacing: 1px;
 }
 
-/* EXACT UNDERLINE */
+/* UNDERLINE UPDATED */
 .choosewe-underline {
   width: 65px;
   height: 4px;
   margin: 10px 0 25px;
-  background: linear-gradient(90deg, #C30458 50%, #FF1F00 50%);
+  background: linear-gradient(90deg, #062242, #3F6C87); /* BLUE GRADIENT */
   border-radius: 3px;
 }
 
 .choosewe-left h2 {
   font-size: 46px;
   font-weight: 900;
-  color: #0B0E3F;
+  color: #062242; /* UPDATED BLUE */
   line-height: 1.25;
   margin-bottom: 28px;
 }
@@ -367,20 +366,21 @@ function ChooseWe() {
 .choosewe-sub-heading {
   font-size: 22px;
   font-weight: 800;
-  color: #0B0E3F;
+  color: #062242; /* UPDATED BLUE */
   margin-bottom: 20px;
 }
 
 .choosewe-description {
   font-size: 16px;
   line-height: 1.85;
-  color: #7A1C38;
+  color: #062242; /* UPDATED BLUE */
   max-width: 720px;
 }
 
 /* ================= RIGHT IMAGE ================= */
 .choosewe-right img {
-  width: 100%;
+  width: 550px;
+  height:500px;
   border-radius: 0px;
   display: block;
 }
@@ -435,14 +435,14 @@ function ChooseWe() {
           <h2>Hire the Best Packers and Movers in India</h2>
 
           <div className="choosewe-sub-heading">
-            We provide the best industrial solutions for our customers to grow for 25+ years.
+            We provide the best industrial solutions for our customers to grow for 10+ years.
           </div>
 
           <p className="choosewe-description">
-            SPS Packers & Movers is a renowned service provider for packing and moving of 
+            CHENNAI LAL Packers & Movers is a renowned service provider for packing and moving 
             households, office furniture, equipment, machinery, industrial goods, and more.
             We are a leader in the relocation industry and serve customers nationwide.
-            SPS Packers & Movers is an independent relocation management company ranked among 
+            CHENNAI LAL Packers & Movers is an independent relocation management company ranked among 
             India's leading packers and movers specializing in household & corporate goods 
             transportation with facilities for warehousing and storage.
           </p>
@@ -450,7 +450,7 @@ function ChooseWe() {
 
         {/* RIGHT SIDE IMAGE */}
         <div className="choosewe-right">
-          <img src="/images/services/transs.png" alt="Packers and Movers" />
+          <img src="/images/bgserv/hiremini.png" alt="Packers and Movers" />
         </div>
 
       </div>
@@ -465,10 +465,8 @@ function AboutHero() {
     const css = `
 /* ===== ABOUT HERO ===== */
 .sps-about-hero{
-padding-top:20px;
-padding-bottom:30px;
-  // padding:90px 6vw;
-  // background:#FDFCFC;
+  padding-top:20px;
+  padding-bottom:30px;
   font-family:Inter,system-ui;
 }
 
@@ -503,13 +501,14 @@ padding-bottom:30px;
   border:6px solid #fff;
 }
 
-/* RIGHT CONTENT */
+/* ===== RIGHT CONTENT ===== */
+
 .sps-about-content small{
   display:block;
   font-size:13px;
   letter-spacing:0.14em;
   font-weight:800;
-  color:#960546;
+  color:#062242; /* UPDATED BLUE */
   margin-bottom:12px;
 }
 
@@ -517,23 +516,23 @@ padding-bottom:30px;
   font-size:42px;
   line-height:1.25;
   font-weight:900;
-  color:#1f1b3a;
+  color:#062242; /* UPDATED BLUE */
   margin-bottom:16px;
 }
 
 .sps-about-content h1 span{
-  color:#960546;
+  color:#062242; /* BLUE */
 }
 
 .sps-about-content p.sub{
   font-size:18px;
-  color:#555;
+  color:#062242; /* UPDATED BLUE */
   margin-bottom:22px;
 }
 
 .sps-about-content p{
   font-size:16px;
-  color:#666;
+  color:#062242; /* UPDATED BLUE */
   line-height:1.7;
   margin-bottom:26px;
 }
@@ -559,14 +558,14 @@ padding-bottom:30px;
   align-items:center;
   font-size:16px;
   font-weight:600;
-  color:#1f1b3a;
+  color:#062242; /* UPDATED BLUE */
 }
 
 .sps-check span{
   width:22px;
   height:22px;
   border-radius:50%;
-  background:#960546;
+  background:#062242; /* BLUE */
   color:#fff;
   display:grid;
   place-items:center;
@@ -575,22 +574,29 @@ padding-bottom:30px;
 
 /* EXPERIENCE CARD */
 .sps-exp-card{
-  background:linear-gradient(135deg,#960546,#7E314B);
+  background:linear-gradient(135deg,#062242,#3F6C87); /* BLUE GRADIENT */
   border-radius:18px;
   padding:26px;
   color:#fff;
-  box-shadow:0 25px 55px rgba(150,5,70,0.45);
+  box-shadow:0 25px 55px rgba(6,34,66,0.45);
 }
 
 .sps-exp-card h3{
   font-size:20px;
   margin-bottom:14px;
+  color:white;
 }
 
 .sps-exp-number{
   font-size:42px;
   font-weight:900;
   margin-top:10px;
+  color:white;
+}
+
+.sps-exp-card p{
+  color:white;
+  font-size:16px;
 }
 
 /* ===== MOBILE ===== */
@@ -638,7 +644,7 @@ padding-bottom:30px;
 
         {/* RIGHT */}
         <div className="sps-about-content">
-          <small>SPS PACKERS & MOVERS</small>
+          <small>CHENNAI LAL PACKERS & MOVERS</small>
 
           <h1>
             Reliable Packers And Movers <span>Solutions Saves Your Time!</span>
@@ -649,7 +655,7 @@ padding-bottom:30px;
           </p>
 
           <p>
-            SPS Packers & Movers is a leading relocation service provider in
+            CHENNAI LAL Packers & Movers is a leading relocation service provider in
             South India, offering safe, reliable, and cost-effective moving
             solutions. With years of industry experience, we specialize in home
             shifting, office relocation, vehicle transportation, and storage
@@ -657,6 +663,7 @@ padding-bottom:30px;
           </p>
 
           <div className="sps-about-bottom">
+
             {/* FEATURES */}
             <div className="sps-checks">
               {[
@@ -677,12 +684,14 @@ padding-bottom:30px;
               <div className="sps-exp-number">10+</div>
               <p>Years Of Experience</p>
             </div>
+
           </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 function HowWeWork() {
   useEffect(() => {
@@ -885,9 +894,9 @@ function HowWeWork() {
     const css = `
 /* ===== WHY DIFFERENT ===== */
 .sps-different{
-  // padding:90px 6vw;
-  // background:linear-gradient(180deg,#FDFCFC,#EED3D6);
   font-family:Inter,system-ui;
+  background:white; /* CLEAN WHITE */
+  padding:90px 6vw;
 }
 
 /* HEADER */
@@ -899,11 +908,11 @@ function HowWeWork() {
 .sps-different-head h2{
   font-size:42px;
   font-weight:900;
-  color:#960546;
+  color:#062242; /* UPDATED BLUE */
 }
 
 .sps-different-head h2 span{
-  color:#7E314B;
+  color:#3F6C87; /* SOFT BLUE */
 }
 
 /* GRID */
@@ -920,14 +929,14 @@ function HowWeWork() {
   background:#ffffff;
   border-radius:22px;
   padding:34px 28px;
-  box-shadow:0 20px 45px rgba(150,5,70,0.25);
+  box-shadow:0 20px 45px rgba(6,34,66,0.15); /* BLUE SHADOW */
   transition:all .35s ease;
-  border:1.5px solid rgba(183,87,120,0.35);
+  border:1.5px solid rgba(6,34,66,0.25); /* BLUE BORDER */
 }
 
 .sps-diff-card:hover{
   transform:translateY(-8px);
-  box-shadow:0 30px 60px rgba(150,5,70,0.35);
+  box-shadow:0 30px 60px rgba(6,34,66,0.25); /* BLUE HOVER SHADOW */
 }
 
 /* ICON */
@@ -935,7 +944,7 @@ function HowWeWork() {
   width:58px;
   height:58px;
   border-radius:50%;
-  background:linear-gradient(135deg,#960546,#B95778);
+  background:linear-gradient(135deg,#062242,#3F6C87); /* BLUE GRADIENT */
   color:#FDFCFC;
   display:grid;
   place-items:center;
@@ -949,13 +958,13 @@ function HowWeWork() {
   font-size:19px;
   font-weight:800;
   margin-bottom:10px;
-  color:#960546;
+  color:#062242; /* UPDATED BLUE */
 }
 
 .sps-diff-card p{
   font-size:15px;
   line-height:1.65;
-  color:#7E314B;
+  color:#3F6C87; /* SOFT BLUE */
 }
 
 /* RESPONSIVE */
@@ -1046,15 +1055,14 @@ function HowWeWork() {
 }
 
 
- function WhyChooseSPS() {
+function WhyChooseSPS() {
   useEffect(() => {
     const css = `
 /* ===== WHY CHOOSE SPS ===== */
 .sps-why{
-  // padding:90px 6vw;
-  // background:#FDFCFC;
   padding-bottom:20px;
   font-family:Inter,system-ui;
+  background:#FFFFFF;
 }
 
 /* HEADER */
@@ -1066,11 +1074,11 @@ function HowWeWork() {
 .sps-why-head h2{
   font-size:42px;
   font-weight:900;
-  color:#1f1b3a;
+  color:#062242; /* UPDATED BLUE */
 }
 
 .sps-why-head h2 span{
-  color:#960546;
+  color:#062242; /* BLUE TITLE SPAN */
 }
 
 /* GRID */
@@ -1094,7 +1102,7 @@ function HowWeWork() {
 
 .sps-why-card:hover{
   transform:translateY(-8px);
-  box-shadow:0 28px 60px rgba(150,5,70,0.25);
+  box-shadow:0 28px 60px rgba(6,34,66,0.25); /* BLUE SHADOW */
 }
 
 /* ICON */
@@ -1105,23 +1113,23 @@ function HowWeWork() {
   border-radius:50%;
   display:grid;
   place-items:center;
-  background:linear-gradient(135deg,#960546,#B95778);
+  background:linear-gradient(135deg,#062242,#3F6C87); /* BLUE GRADIENT */
   color:#fff;
   font-size:26px;
 }
 
-/* TITLE */
+/* CARD TITLE */
 .sps-why-card h4{
   font-size:20px;
   font-weight:800;
   margin-bottom:10px;
-  color:#1f1b3a;
+  color:#062242; /* BLUE TEXT */
 }
 
-/* TEXT */
+/* CARD PARAGRAPH */
 .sps-why-card p{
   font-size:15px;
-  color:#7E314B;
+  color:#062242; /* BLUE TEXT */
   line-height:1.6;
 }
 
@@ -1197,6 +1205,7 @@ function HowWeWork() {
 }
 
 
+
  function AwardsStripDark() {
   useEffect(() => {
     const css = `
@@ -1204,8 +1213,8 @@ function HowWeWork() {
 .sps-awards-dark{
   padding:50px 0;
   background:
-    radial-gradient(circle at top, rgba(150,5,70,0.25), transparent 45%),
-    linear-gradient(180deg,#1a0b14,#0e0509);
+    radial-gradient(circle at top, rgba(6,34,66,0.35), transparent 45%),
+    linear-gradient(180deg,#0a1624,#05101c); /* DARK BLUE BACKGROUND */
   font-family:Inter,system-ui;
   overflow:hidden;
 }
@@ -1220,18 +1229,18 @@ function HowWeWork() {
   font-size:13px;
   letter-spacing:0.18em;
   font-weight:800;
-  color:#B95778;
+  color:#3F6C87;  /* BLUE SHADE */
   margin-bottom:12px;
 }
 
 .sps-awards-dark-head h2{
   font-size:38px;
   font-weight:900;
-  color:#FDFCFC;
+  color:#062242; /* MAIN BLUE */
 }
 
 .sps-awards-dark-head h2 span{
-  color:#EED3D6;
+  color:#3F6C87; /* LIGHTER BLUE */
 }
 
 /* SLIDER */
@@ -1258,7 +1267,7 @@ function HowWeWork() {
   border-radius:18px;
   display:grid;
   place-items:center;
-  border:1px solid rgba(183,87,120,0.35);
+  border:1px solid rgba(6,34,66,0.35); /* BLUE BORDER */
   box-shadow:
     0 14px 30px rgba(0,0,0,0.45),
     inset 0 1px 0 rgba(255,255,255,0.15);
@@ -1277,7 +1286,7 @@ function HowWeWork() {
 .sps-award-dark:hover{
   transform:translateY(-6px) scale(1.04);
   box-shadow:
-    0 22px 50px rgba(150,5,70,0.55),
+    0 22px 50px rgba(6,34,66,0.55), /* BLUE SHADOW */
     inset 0 1px 0 rgba(255,255,255,0.25);
 }
 
@@ -1331,7 +1340,7 @@ function HowWeWork() {
     },
     {
       alt: "Quality Award",
-      img: "data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEyOCIgd2lkdGg9IjEyOCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjZmZmIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjciIHI9IjQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIi8+PHJlY3Qg eT0iMTQiIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHg9IjgiIHJ4PSIyIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPjwvc3ZnPg=="
+      img: "data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEyOCIgd2lkdGg9IjEyOCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjZmZmIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjciIHI9IjQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIi8+PHJlY3QgIHk9IjE0IiB3aWR0aD0iOCIgaGVpZ2h0PSI4IiB4PSI4IiByeD0iMiIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiLz48L3N2Zz4="
     },
     {
       alt: "Safety Certificate",
@@ -1370,27 +1379,25 @@ function KeyHighlights() {
 /* ===== KEY HIGHLIGHTS ===== */
 .sps-highlights{
   padding:6vw;
-  // background:#FDFCFC;
-  // padding-bottom:20px;
+  background:white; /* Removed old gradient */
   font-family:Inter,system-ui;
 }
 
 /* HEADER */
 .sps-highlights-head{
   text-align:center;
-  // margin-bottom:70px;
 }
 
 .sps-highlights-head h2{
   font-size:42px;
   font-weight:900;
-  color:#960546;
+  color:#062242; /* BLUE */
   margin-bottom:10px;
 }
 
 .sps-highlights-head p{
   font-size:16px;
-  color:#7E314B;
+  color:#062242; /* BLUE */
 }
 
 /* GRID */
@@ -1405,34 +1412,16 @@ function KeyHighlights() {
   background:#ffffff;
   border-radius:18px;
   padding:32px 28px;
-  box-shadow:0 14px 35px rgba(150,5,70,0.18);
-  border:1.5px solid rgba(183,87,120,0.25);
+  box-shadow:0 14px 35px rgba(0,0,0,0.10);
+  border:1.5px solid rgba(6,34,66,0.25); /* BLUE SHADE */
   transition:all .35s ease;
   position:relative;
   overflow:hidden;
 }
 
-.sps-highlight-card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    120deg,
-    rgba(150,5,70,0.08),
-    rgba(183,87,120,0.05),
-    transparent 60%
-  );
-  opacity:0;
-  transition:.35s ease;
-}
-
-.sps-highlight-card:hover::before{
-  opacity:1;
-}
-
 .sps-highlight-card:hover{
   transform:translateY(-8px);
-  box-shadow:0 22px 55px rgba(150,5,70,0.35);
+  box-shadow:0 22px 55px rgba(6,34,66,0.28); /* BLUE SHADOW */
 }
 
 /* ICON */
@@ -1440,8 +1429,8 @@ function KeyHighlights() {
   width:54px;
   height:54px;
   border-radius:14px;
-  background:#EED3D6;
-  color:#960546;
+  background:linear-gradient(135deg,#062242,#3F6C87);
+  color:white;
   display:grid;
   place-items:center;
   font-size:24px;
@@ -1453,13 +1442,13 @@ function KeyHighlights() {
   font-size:20px;
   font-weight:800;
   margin-bottom:12px;
-  color:#960546;
+  color:#062242; /* BLUE */
 }
 
 .sps-highlight-card p{
   font-size:15px;
   line-height:1.7;
-  color:#7E314B;
+  color:#062242; /* BLUE */
 }
 
 /* RESPONSIVE */
@@ -1490,71 +1479,54 @@ function KeyHighlights() {
 
   return (
     <section className="sps-highlights">
-      {/* HEADER */}
       <div className="sps-highlights-head">
         <h2>Key Highlights</h2>
         <p>What sets us apart in the logistics industry</p>
       </div>
 
-      {/* GRID */}
       <div className="sps-highlights-grid">
+
         <div className="sps-highlight-card">
           <div className="sps-highlight-icon">🌐</div>
           <h4>Extensive Network</h4>
-          <p>
-            Serving 500+ destinations across India, with a strong presence
-            across major highways and logistics hubs.
-          </p>
+          <p>Serving 500+ destinations across India, with a strong presence across major highways.</p>
         </div>
 
         <div className="sps-highlight-card">
           <div className="sps-highlight-icon">💻</div>
           <h4>Technology Pioneer</h4>
-          <p>
-            Among the first movers to digitize operations with modern software,
-            tracking systems, and automation.
-          </p>
+          <p>Digitized operations with modern tracking systems and automation.</p>
         </div>
 
         <div className="sps-highlight-card">
           <div className="sps-highlight-icon">👥</div>
           <h4>Strong Workforce</h4>
-          <p>
-            Backed by a skilled team of professionals ensuring reliable,
-            efficient, and timely service delivery.
-          </p>
+          <p>Skilled professionals ensuring reliable and timely service delivery.</p>
         </div>
 
         <div className="sps-highlight-card">
           <div className="sps-highlight-icon">🚚</div>
           <h4>Robust Fleet</h4>
-          <p>
-            A well-maintained fleet handling large volumes of cargo daily
-            across long and short distances.
-          </p>
+          <p>Large fleet managing daily cargo across long and short distances.</p>
         </div>
 
         <div className="sps-highlight-card">
           <div className="sps-highlight-icon">🏆</div>
           <h4>Industry Recognition</h4>
-          <p>
-            Recognized by leading institutions and corporate clients for
-            quality, reliability, and trust.
-          </p>
+          <p>Recognized for quality, reliability, and trust.</p>
         </div>
 
         <div className="sps-highlight-card">
           <div className="sps-highlight-icon">📈</div>
           <h4>Strategic Growth</h4>
-          <p>
-            Continuously expanding operations and partnerships to enhance
-            reach and service capabilities.
-          </p>
+          <p>Expanding operations and partnerships to boost service capability.</p>
         </div>
+
       </div>
     </section>
   );
 }
+
 
 function StatsWaveStrip() {
   const refs = useRef([]);
@@ -1571,8 +1543,7 @@ function StatsWaveStrip() {
           current = target;
           clearInterval(interval);
         }
-        el.innerText =
-          target >= 100 ? `${current}+` : `${current}%`;
+        el.innerText = target >= 100 ? `${current}+` : `${current}%`;
       }, 25);
     };
 
@@ -1595,13 +1566,13 @@ function StatsWaveStrip() {
 .sps-stats{
   position:relative;
   padding:90px 6vw;
-  background:linear-gradient(135deg,#960546,#B95778);
+  background:linear-gradient(135deg,#062242,#3F6C87); /* BLUE */
   color:#fff;
   overflow:hidden;
   font-family:Inter,system-ui;
 }
 
-/* TOP & BOTTOM WAVES */
+/* WAVES */
 .sps-stats::before,
 .sps-stats::after{
   content:"";
@@ -1609,7 +1580,7 @@ function StatsWaveStrip() {
   left:0;
   width:100%;
   height:50px;
-  background:#FDFCFC;
+  background:#fff;
 }
 
 .sps-stats::before{
@@ -1636,14 +1607,6 @@ function StatsWaveStrip() {
   text-align:center;
 }
 
-/* ITEM */
-.sps-stat{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:10px;
-}
-
 /* ICON */
 .sps-stat-icon{
   width:52px;
@@ -1660,6 +1623,7 @@ function StatsWaveStrip() {
   font-size:40px;
   font-weight:900;
   letter-spacing:1px;
+  color:white;
 }
 
 /* LABEL */
@@ -1667,9 +1631,10 @@ function StatsWaveStrip() {
   font-size:15px;
   font-weight:600;
   opacity:0.95;
+  color:white;
 }
 
-/* ===== MOBILE ===== */
+/* MOBILE */
 @media(max-width:900px){
   .sps-stats-grid{
     grid-template-columns:repeat(2,1fr);
@@ -1694,91 +1659,58 @@ function StatsWaveStrip() {
   return (
     <section className="sps-stats">
       <div className="sps-stats-grid">
+
         <div className="sps-stat">
           <div className="sps-stat-icon">📍</div>
-          <div
-            className="sps-stat-num"
-            data-value="500"
-            ref={(el) => (refs.current[0] = el)}
-          >
-            0
-          </div>
+          <div className="sps-stat-num" data-value="500" ref={(el) => (refs.current[0] = el)}>0</div>
           <div className="sps-stat-label">Cities Covered</div>
         </div>
 
         <div className="sps-stat">
           <div className="sps-stat-icon">🏢</div>
-          <div
-            className="sps-stat-num"
-            data-value="1000"
-            ref={(el) => (refs.current[1] = el)}
-          >
-            0
-          </div>
+          <div className="sps-stat-num" data-value="1000" ref={(el) => (refs.current[1] = el)}>0</div>
           <div className="sps-stat-label">Business Offices Relocated</div>
         </div>
 
         <div className="sps-stat">
           <div className="sps-stat-icon">🚚</div>
-          <div
-            className="sps-stat-num"
-            data-value="100"
-            ref={(el) => (refs.current[2] = el)}
-          >
-            0
-          </div>
+          <div className="sps-stat-num" data-value="100" ref={(el) => (refs.current[2] = el)}>0</div>
           <div className="sps-stat-label">Self-Owned Container Trucks</div>
         </div>
 
         <div className="sps-stat">
           <div className="sps-stat-icon">😊</div>
-          <div
-            className="sps-stat-num"
-            data-value="96"
-            ref={(el) => (refs.current[3] = el)}
-          >
-            0%
-          </div>
+          <div className="sps-stat-num" data-value="96" ref={(el) => (refs.current[3] = el)}>0%</div>
           <div className="sps-stat-label">Satisfied Customers</div>
         </div>
+
       </div>
     </section>
   );
 }
 
- function ShiftingProcess() {
+function ShiftingProcess() {
   useEffect(() => {
     const css = `
 /* ====== GLOBAL ====== */
 .shift-wrap {
-  padding:  6vw;
-  padding-top:0px;
-
-  // background: #FFF6F9;
+  padding: 6vw;
+  padding-top: 0px;
   font-family: Inter, sans-serif;
+  background:#ffffff;
 }
 
 /* HEADING */
 .shift-title {
   text-align: center;
-  font-size:42px;
-  line-height:1.25;
-  font-weight:900;
-  color:#1f1b3a;
-  // margin-bottom:16px;
+  font-size: 42px;
+  line-height: 1.25;
+  font-weight: 900;
+  color: #062242; /* BLUE */
 }
-  .shift-title h2 span{
-  color:#960546;
+.shift-title span {
+  color: #062242; /* BLUE */
 }
-
-//   .sps-about-content h1{
-//   font-size:42px;
-//   line-height:1.25;
-//   font-weight:900;
-//   color:#1f1b3a;
-//   margin-bottom:16px;
-// }
-
 
 /* TIMELINE WRAPPER */
 .shift-timeline {
@@ -1795,7 +1727,7 @@ function StatsWaveStrip() {
   bottom: 0;
   width: 6px;
   border-radius: 20px;
-  background: linear-gradient(180deg, #C30458, #9F0052);
+  background: linear-gradient(180deg, #062242, #3F6C87); /* BLUE GRADIENT */
 }
 
 /* EACH STEP */
@@ -1806,6 +1738,7 @@ function StatsWaveStrip() {
   margin-bottom: 50px;
 }
 
+/* ICON */
 .shift-icon-box {
   width: 65px;
   height: 65px;
@@ -1814,8 +1747,8 @@ function StatsWaveStrip() {
   align-items: center;
   justify-content: center;
   background: #ffffff;
-  border: 3px solid #C30458;
-  box-shadow: 0 0 15px rgba(195, 4, 88, 0.25);
+  border: 3px solid #062242; /* BLUE */
+  box-shadow: 0 0 15px rgba(6, 34, 66, 0.25); /* BLUE GLOW */
   font-size: 28px;
 }
 
@@ -1825,21 +1758,21 @@ function StatsWaveStrip() {
   padding: 22px 28px;
   border-radius: 16px;
   width: 100%;
-  box-shadow: 0 8px 30px rgba(195, 4, 88, 0.10);
+  box-shadow: 0 8px 30px rgba(6, 34, 66, 0.1); /* BLUE SHADOW */
 }
 
 .shift-card-title {
   font-size: 22px;
   font-weight: 800;
   margin-bottom: 8px;
-  background: linear-gradient(90deg, #C30458, #9F0052);
+  background: linear-gradient(90deg, #062242, #3F6C87); /* BLUE GRADIENT TEXT */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .shift-card-text {
   font-size: 16px;
-  color: #7A1C38;
+  color: #062242; /* BLUE */
   line-height: 1.6;
 }
 
@@ -1882,8 +1815,7 @@ function StatsWaveStrip() {
 
   return (
     <section className="shift-wrap">
-      <h2 className="shift-title">Check Out Our <span>
-Shifting Process</span></h2>
+      <h2 className="shift-title">Check Out Our <span>Shifting Process</span></h2>
 
       <div className="shift-timeline">
         {steps.map((s, i) => (
@@ -1900,6 +1832,7 @@ Shifting Process</span></h2>
     </section>
   );
 }
+
 
 function AboutSection() {
   useEffect(() => {
@@ -1923,7 +1856,7 @@ function AboutSection() {
 .about-main-img img {
   width: 90%;
   border-radius: 26px;
-  height:500px;
+  height: 500px;
 }
 
 .about-small-img {
@@ -1932,20 +1865,20 @@ function AboutSection() {
   right: 20px;
   width: 55%;
   border-radius: 22px;
-  border: 6px solid #C30458; /* Brand primary */
+  border: 6px solid #062242; /* UPDATED BLUE BORDER */
 }
 
 .about-small-img img {
   width: 100%;
   border-radius: 18px;
-  height:305px;
+  height: 305px;
 }
 
 /* RIGHT CONTENT */
 .about-top-text {
   font-size: 15px;
   font-weight: 700;
-  color: #0B0E3F; /* Dark brand color */
+  color: #062242; /* BLUE */
   letter-spacing: 1px;
 }
 
@@ -1953,14 +1886,14 @@ function AboutSection() {
   font-size: 42px;
   font-weight: 900;
   margin: 15px 0;
-  color: #0B0E3F;
+  color: #062242; /* BLUE */
 }
 
 .about-desc {
   font-size: 17px;
   line-height: 1.7;
   margin-bottom: 35px;
-  color: #7A1C38;
+  color: #062242; /* BLUE */
 }
 
 /* FEATURES */
@@ -1974,23 +1907,24 @@ function AboutSection() {
 .feature-icon-box {
   width: 55px;
   height: 55px;
-  background: #FFF1F7;
+  background: #E8EEF5; /* light blue background */
   border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 26px;
+  color: #062242; /* BLUE */
 }
 
 .feature-title {
   font-size: 20px;
   font-weight: 800;
-  color: #0B0E3F;
+  color: #062242; /* BLUE */
 }
 
 .feature-text {
   font-size: 15px;
-  color: #7A1C38;
+  color: #062242; /* BLUE */
   margin-top: 4px;
 }
 
@@ -2062,7 +1996,7 @@ function AboutSection() {
         </h2>
 
         <p className="about-desc">
-          At SPS Packers & Movers, we make every move stress-free — whether it’s
+          At CHENNAI LAL Packers & Movers, we make every move stress-free — whether it’s
           your home, office, or vehicle. With trusted service and trained
           professionals, we ensure your belongings are packed safely, transported
           securely, and delivered on time.
@@ -2092,9 +2026,10 @@ function AboutSection() {
   );
 }
 
+
 function Testimonials() {
 
- const testimonials = [
+  const testimonials = [
     {
       name: "Praveen Kumar",
       text: "The service was excellent! My household items were packed neatly and delivered safely without any damage.",
@@ -2129,7 +2064,7 @@ function Testimonials() {
 .sps-testimonial-title {
   font-size: 40px;
   font-weight: 900;
-  color: #1E1B4B;
+  color: #062242; /* BLUE */
   margin-bottom: 40px;
 }
 
@@ -2141,11 +2076,10 @@ function Testimonials() {
 
 /* ================== CARD ================== */
 .sps-testimonial-card {
-  // background: #ffffff;
   border-radius: 18px;
   padding: 50px 35px;
   position: relative;
-  color: #1E1B4B;
+  color: #fff;
   box-shadow: 0 10px 25px rgba(0,0,0,0.12);
   transition: 0.5s;
   opacity: 0;
@@ -2162,7 +2096,7 @@ function Testimonials() {
   position: absolute;
   inset: 0;
   border-radius: 30px;
-  background: linear-gradient(135deg, #960546, #B95778);
+  background: linear-gradient(135deg, #062242, #3F6C87); /* BLUE GRADIENT */
   z-index: -1;
   clip-path: polygon(0 0, 92% 0, 100% 50%, 92% 100%, 0 100%);
 }
@@ -2189,13 +2123,13 @@ function Testimonials() {
   font-size: 16px;
   line-height: 1.7;
   margin-bottom: 20px;
-  color: #fff;
+  color: #ffffff;
   padding: 0 10px;
 }
 
 .sps-testimonial-name {
   font-size: 18px;
-  color: #fff;
+  color: #ffffff;
   font-weight: 700;
 }
 
@@ -2212,16 +2146,16 @@ function Testimonials() {
   height: 45px;
   border-radius: 50%;
   border: none;
-  background: #960546;
+  background: #062242; /* BLUE */
   color: #fff;
   font-size: 20px;
   cursor: pointer;
-  box-shadow: 0 10px 20px rgba(150,5,70,0.3);
+  box-shadow: 0 10px 20px rgba(6,34,66,0.3);
   transition: 0.3s;
 }
 
 .sps-testimonial-btn:hover {
-  background: #7E314B;
+  background: #3F6C87; /* LIGHT BLUE HOVER */
 }
 
 /* ================== MOBILE ================== */
@@ -2251,7 +2185,7 @@ function Testimonials() {
           <div
             className="sps-testimonial-bubble"
             style={{ 
-              background: "linear-gradient(135deg, #960546, #B95778)" 
+              background: "linear-gradient(135deg, #062242, #3F6C87)" 
             }}
           ></div>
 
@@ -2276,62 +2210,63 @@ function Testimonials() {
   );
 }
 
-export default function About() {
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    from: "",
-    to: "",
-    service: ""
-  });
 
-  const heroLeftRef = useRef(null);
-  const cardRef = useRef(null);
-  const featureRefs = useRef([]);
+  export default function About() {
+    const [form, setForm] = useState({
+      name: "",
+      phone: "",
+      from: "",
+      to: "",
+      service: ""
+    });
 
-  const handleHeroSubmit = (e) => {
-    e.preventDefault();
+    const heroLeftRef = useRef(null);
+    const cardRef = useRef(null);
+    const featureRefs = useRef([]);
 
-    const message = `
-About Page Enquiry – SPS Packers & Movers
+    const handleHeroSubmit = (e) => {
+      e.preventDefault();
 
-Name: ${form.name}
-Phone: ${form.phone}
-From City: ${form.from}
-To City: ${form.to}
-Service Type: ${form.service}
-    `;
+      const message = `
+  About Page Enquiry – SPS Packers & Movers
 
-    const ownerNumber = "917550057453";
-    const whatsappURL = `https://wa.me/${ownerNumber}?text=${encodeURIComponent(
-      message
-    )}`;
+  Name: ${form.name}
+  Phone: ${form.phone}
+  From City: ${form.from}
+  To City: ${form.to}
+  Service Type: ${form.service}
+      `;
 
-    window.open(whatsappURL, "_blank");
-  };
+      const ownerNumber = "917550057453";
+      const whatsappURL = `https://wa.me/${ownerNumber}?text=${encodeURIComponent(
+        message
+      )}`;
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add("show");
+      window.open(whatsappURL, "_blank");
+    };
+
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("show");
+          });
+        },
+        { threshold: 0.25 }
+      );
+
+      setTimeout(() => {
+        heroLeftRef.current?.classList.add("show");
+        cardRef.current?.classList.add("show");
+
+        featureRefs.current.forEach((el, i) => {
+          if (el) setTimeout(() => el.classList.add("show"), i * 150);
         });
-      },
-      { threshold: 0.25 }
-    );
+      }, 200);
 
-    setTimeout(() => {
-      heroLeftRef.current?.classList.add("show");
-      cardRef.current?.classList.add("show");
+      featureRefs.current.forEach((el) => el && observer.observe(el));
 
-      featureRefs.current.forEach((el, i) => {
-        if (el) setTimeout(() => el.classList.add("show"), i * 150);
-      });
-    }, 200);
-
-    featureRefs.current.forEach((el) => el && observer.observe(el));
-
-    const css = `
+      const css = `
 *{ box-sizing:border-box; }
 html,body{
   margin:0;
@@ -2344,8 +2279,7 @@ html,body{
 .heroq-section{
   min-height:100vh;
   background:
-    linear-gradient(rgba(30,20,40,0.70), rgba(30,20,40,0.70)),
-    linear-gradient(120deg, rgba(150,5,70,0.55), rgba(126,49,75,0.55)),
+    linear-gradient(rgba(6,34,66,0.75), rgba(6,34,66,0.75)), /* BLUE OVERLAY */
     url("/images/truck.png") center/cover no-repeat;
 
   display:grid;
@@ -2371,17 +2305,17 @@ html,body{
   font-size:46px;
   font-weight:900;
   line-height:1.2;
-  color:#ffffff;
+  color:#ffffff; /* VISIBLE NOW */
 }
 
 .heroq-left h1 span{
-  color:#EED3D6;
+  color:#dce8f7; /* Light blue */
 }
 
 .heroq-left p.sub{
   margin:16px 0 26px;
   font-size:17px;
-  color:#FDFCFC;
+  color:#ffffff; /* VISIBLE NOW */
   max-width:520px;
 }
 
@@ -2394,14 +2328,24 @@ html,body{
 .heroq-feature{
   display:flex;
   gap:14px;
-  color:#fff;
+  color:#ffffff; /* WHITE FIXED */
 }
 
+.heroq-feature h4{
+  color:#ffffff; 
+  font-weight:800;
+}
+
+.heroq-feature p{
+  color:#ffffff;
+}
+
+/* ===== ICON ===== */
 .heroq-icon{
   min-width:42px;
   height:42px;
   border-radius:50%;
-  background:#960546;
+  background:linear-gradient(135deg,#062242,#3F6C87); /* BLUE */
   color:#fff;
   display:grid;
   place-items:center;
@@ -2410,22 +2354,25 @@ html,body{
 
 /* ===== GLASS CARD ===== */
 .heroq-card{
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background: rgba(255,255,255,0.92); /* WHITE GLASS */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius:22px;
   padding:28px;
   max-width:520px;
   width:100%;
   justify-self:end;
-  border:1.5px solid rgba(183,87,120,0.35);
+  border:1.5px solid rgba(6,34,66,0.25); /* LIGHT BLUE BORDER */
   box-shadow:
-    0 30px 60px rgba(150,5,70,0.25),
-    inset 0 1px 0 rgba(81,4,67,0.55);
+    0 18px 40px rgba(6,34,66,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.65);
 }
+
 
 .heroq-card h3{
   margin-bottom:16px;
-  color:#960546;
+  color:#062242; /* BLUE */
+  font-weight:900;
 }
 
 /* ===== FORM ===== */
@@ -2440,9 +2387,18 @@ html,body{
   width:100%;
   padding:16px;
   border-radius:12px;
-  border:1.5px solid #EED3D6;
+  border:1.5px solid #062242; /* BLUE BORDER */
   font-size:16px;
-  background:#FDFCFC;
+  background:#ffffff; /* WHITE INPUT BACKGROUND */
+  color:#062242; /* BLUE INPUT TEXT */
+}
+
+.heroq-card input::placeholder{
+  color:#3F6C87; /* LIGHT BLUE */
+}
+
+.heroq-card select{
+  color:#062242;
 }
 
 .heroq-btn{
@@ -2450,7 +2406,7 @@ html,body{
   padding:16px;
   border:none;
   border-radius:12px;
-  background:linear-gradient(90deg,#960546,#B95778);
+  background:linear-gradient(90deg,#062242,#3F6C87);
   color:#fff;
   font-weight:800;
   font-size:17px;
@@ -2459,7 +2415,7 @@ html,body{
 
 .heroq-btn:hover{
   transform:translateY(-2px);
-  box-shadow:0 12px 25px rgba(150,5,70,0.45);
+  box-shadow:0 12px 25px rgba(6,34,66,0.45);
 }
 
 /* ===== MOBILE ===== */
@@ -2478,104 +2434,106 @@ html,body{
     font-size:34px;
   }
 }
-    `;
-    const style = document.createElement("style");
-    style.innerHTML = css;
-    document.head.appendChild(style);
 
-    return () => observer.disconnect();
-  }, []);
 
-  return (
-    <>
-    <section className="heroq-section">
-      <div className="heroq-left fade-left" ref={heroLeftRef}>
-        <h1>
-          About <span>SPS Packers & Movers</span>
-        </h1>
+      `;
+      const style = document.createElement("style");
+      style.innerHTML = css;
+      document.head.appendChild(style);
 
-        <p className="sub">
-          SPS Packers & Movers is a trusted relocation company committed to
-          delivering safe, reliable, and professional moving solutions across India.
-        </p>
+      return () => observer.disconnect();
+    }, []);
 
-        <div className="heroq-features">
-          {[
-            ["🏆", "Years of Experience", "Proven expertise in handling relocations"],
-            ["🌍", "Nationwide Presence", "Serving homes & businesses across India"],
-            ["🤝", "Customer First", "Transparency, care, and commitment"]
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="heroq-feature fade-up"
-              ref={(el) => (featureRefs.current[i] = el)}
-            >
-              <div className="heroq-icon">{item[0]}</div>
-              <div>
-                <h4>{item[1]}</h4>
-                <p>{item[2]}</p>
+    return (
+      <>
+      <section className="heroq-section">
+        <div className="heroq-left fade-left" ref={heroLeftRef}>
+          <h1>
+            About <span>CHENNAI LAL Packers & Movers</span>
+          </h1>
+
+          <p className="sub">
+            CHENNAI LAL Packers & Movers is a trusted relocation company committed to
+            delivering safe, reliable, and professional moving solutions across India.
+          </p>
+
+          <div className="heroq-features">
+            {[
+              ["🏆", "Years of Experience", "Proven expertise in handling relocations"],
+              ["🌍", "Nationwide Presence", "Serving homes & businesses across India"],
+              ["🤝", "Customer First", "Transparency, care, and commitment"]
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="heroq-feature fade-up"
+                ref={(el) => (featureRefs.current[i] = el)}
+              >
+                <div className="heroq-icon">{item[0]}</div>
+                <div>
+                  <h4>{item[1]}</h4>
+                  <p>{item[2]}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className="heroq-card fade-right" ref={cardRef}>
-        <h3>Talk to Our Team</h3>
+        <div className="heroq-card fade-right" ref={cardRef}>
+          <h3>Talk to Our Team</h3>
 
-        <form onSubmit={handleHeroSubmit}>
-          <input placeholder="Full Name" required
-            value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
-          />
-          <input placeholder="Mobile Number" required
-            value={form.phone}
-            onChange={(e) => setForm({ ...form, phone: e.target.value })}
-          />
-          <input placeholder="From City" required
-            value={form.from}
-            onChange={(e) => setForm({ ...form, from: e.target.value })}
-          />
-          <input placeholder="To City" required
-            value={form.to}
-            onChange={(e) => setForm({ ...form, to: e.target.value })}
-          />
+          <form onSubmit={handleHeroSubmit}>
+            <input placeholder="Full Name" required
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+            />
+            <input placeholder="Mobile Number" required
+              value={form.phone}
+              onChange={(e) => setForm({ ...form, phone: e.target.value })}
+            />
+            <input placeholder="From City" required
+              value={form.from}
+              onChange={(e) => setForm({ ...form, from: e.target.value })}
+            />
+            <input placeholder="To City" required
+              value={form.to}
+              onChange={(e) => setForm({ ...form, to: e.target.value })}
+            />
 
-          <select required
-            value={form.service}
-            onChange={(e) => setForm({ ...form, service: e.target.value })}
-          >
-            <option value="">Select Service</option>
-            <option>House Shifting</option>
-            <option>Office Shifting</option>
-            <option>Commercial Moves</option>
-          </select>
+            <select required
+              value={form.service}
+              onChange={(e) => setForm({ ...form, service: e.target.value })}
+            >
+              <option value="">Select Service</option>
+              <option>House Shifting</option>
+              <option>Office Shifting</option>
+              <option>Commercial Moves</option>
+            </select>
 
-          <button className="heroq-btn">Contact Us</button>
-        </form>
-      </div>
-    </section>
+            <button className="heroq-btn">Contact Us</button>
+          </form>
+        </div>
+      </section>
 
 
-<AboutHero />
+  <AboutHero />
 
-<MissionVision />
-<ChooseWe /> 
-<WhyDifferent /> 
- <AboutSection />
- 
+  <MissionVision />
+  <ChooseWe /> 
+  <WhyDifferent /> 
+  <AboutSection />
+  
 
-<WhyChooseSPS />
+  <WhyChooseSPS />
 
-<StatsWaveStrip />
-{/* <HowWeWork /> */}
-{/* <UniqueFactsTimeline /> */}
-{/* <CompanyTimeline /> */}
-<AwardsStripDark />
+  <StatsWaveStrip />
+  {/* <HowWeWork /> */}
+  {/* <UniqueFactsTimeline /> */}
+  {/* <CompanyTimeline /> */}
+  <AwardsStripDark />
 
-<ShiftingProcess />
-<KeyHighlights />
-<Testimonials />
-</>
-  );
-}
+  <ShiftingProcess />
+  <KeyHighlights />
+  <Testimonials />
+  </>
+    );
+  }
