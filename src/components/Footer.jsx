@@ -102,16 +102,20 @@ export default function Footer() {
 
         {/* SERVICES */}
         <div>
-          <h4>Services</h4>
-          <a>House Shifting</a>
-          <a>Office Shifting</a>
-          <a>Transportation</a>
-          <a>Commercial Moves</a>
+          <h4> <Link to="/services">Services</Link></h4>
+          <Link to="/services">House Shifting</Link>
+          <Link to="/services">Office Relocation</Link>
+          <Link to="/services">Vehicle Transportation</Link>
+          <Link to="/services">Godown Shifting</Link>
+          <Link to="/services">AC Installation</Link>
+          <Link to="/services">Commercial Moves</Link>
+        
         </div>
-
+  
+           
         {/* CONTACT */}
         <div>
-          <h4>Contact</h4>
+          <h4><Link to="/contact">Contact</Link></h4>
           <p>📞 93610 46387</p>
           <p>📧 info@spspackers.com</p>
           <p>📍 India</p>

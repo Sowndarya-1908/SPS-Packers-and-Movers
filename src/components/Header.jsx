@@ -24,15 +24,29 @@ export default function Header() {
   box-shadow:0 10px 30px rgba(21,48,77,0.35);
 }
 
-/* LOGO */
+/* ================= LOGO WRAPPER ================= */
 .sps-logo{
-  font-size:20px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  z-index:10001;
+}
+
+/* LOGO IMAGE */
+.sps-logo img{
+  height:55px;
+  width:auto;
+  object-fit:contain;
+}
+
+/* LOGO TEXT */
+.sps-logo-text{
+  font-size:18px;
   font-weight:900;
   background:linear-gradient(90deg,#ffffff,#c7dfff);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  text-decoration:none;
-  z-index:10001;
 }
 
 /* DESKTOP NAV */
@@ -81,7 +95,7 @@ export default function Header() {
   z-index:10001;
 }
 
-/* CTA — BUTTON */
+/* CTA BUTTON */
 .sps-cta{
   background: linear-gradient(90deg, #ffffff, #c7dfff);
   color:#15304D;
@@ -109,6 +123,14 @@ export default function Header() {
 /* ================= MOBILE ================= */
 @media(max-width:900px){
 
+  .sps-logo img{
+    height:45px;
+  }
+
+  .sps-logo-text{
+    font-size:14px;
+  }
+
   .sps-nav{
     position:fixed;
     top:90px;
@@ -128,12 +150,7 @@ export default function Header() {
   }
 
   .sps-nav a{
-    color:#ffffff;
     font-size:18px;
-  }
-
-  .sps-nav a.active{
-    color:#c7dfff;
   }
 
   .sps-hamburger{
@@ -141,9 +158,6 @@ export default function Header() {
     position:absolute;
     right:20px;
     top:28px;
-    font-size:32px;
-    color:#ffffff;
-    z-index:10005;
   }
 
   .sps-right{
@@ -166,9 +180,12 @@ export default function Header() {
   return (
     <header className="sps-header">
 
-      {/* LOGO */}
+      {/* LOGO + TEXT */}
       <Link to="/" className="sps-logo">
-        CHENNAI LAL Packers & Movers
+        <img src="/images/loo.png" alt="Chennai Lal Packers & Movers Logo" />
+        <div className="sps-logo-text">
+          CHENNAI LAL
+        </div>
       </Link>
 
       {/* NAVIGATION */}
@@ -177,6 +194,7 @@ export default function Header() {
         <Link to="/about" className={isActive("/about") ? "active" : ""} onClick={() => setOpen(false)}>About</Link>
         <Link to="/services" className={isActive("/services") ? "active" : ""} onClick={() => setOpen(false)}>Services</Link>
         <Link to="/contact" className={isActive("/contact") ? "active" : ""} onClick={() => setOpen(false)}>Contact</Link>
+        <Link to="/blog" className={isActive("/blog") ? "active" : ""} onClick={() => setOpen(false)}>Blog</Link>
       </nav>
 
       {/* CTA */}

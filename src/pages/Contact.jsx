@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 export default function ContactPage() {
+
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -10,8 +11,9 @@ export default function ContactPage() {
   });
 
   const [success, setSuccess] = useState(false);
+  const sectionRef = useRef(null);
 
-  const PHONE_NUMBER = "919361046387";
+  const PHONE_NUMBER = "917550057453";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,9 +28,7 @@ export default function ContactPage() {
 🛠 Service: ${form.service}
     `;
 
-    const whatsappURL = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(
-      message
-    )}`;
+    const whatsappURL = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
 
     setSuccess(true);
 
@@ -46,12 +46,54 @@ export default function ContactPage() {
   };
 
   useEffect(() => {
+
+    /* ===== SCROLL REVEAL ===== */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.25 });
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
     const css = `
-/* ===== CONTACT PAGE ===== */
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+/* ===== CONTACT SECTION ===== */
 .sps-contact{
   padding:100px 6vw;
-  background:linear-gradient(180deg,#FDFCFC,#EED3D6);
+  background:
+    linear-gradient(180deg,#FDFCFC,#EED3D6);
   font-family:Inter,system-ui;
+  position:relative;
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(60px);
+  transition:1s ease;
+}
+
+.sps-contact.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Subtle floating gradient animation */
+.sps-contact::before{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  background:radial-gradient(circle,#06224220,transparent 70%);
+  top:-150px;
+  right:-150px;
+  animation:floatBg 10s ease-in-out infinite alternate;
+}
+
+@keyframes floatBg{
+  from{ transform:translateY(0); }
+  to{ transform:translateY(40px); }
 }
 
 /* GRID */
@@ -61,18 +103,28 @@ export default function ContactPage() {
   display:grid;
   grid-template-columns:1.1fr 0.9fr;
   gap:60px;
+  align-items:center;
 }
 
-/* LEFT */
+/* ===== LEFT ===== */
+.sps-contact-left{
+  animation:fadeLeft 1s ease forwards;
+}
+
+@keyframes fadeLeft{
+  from{opacity:0; transform:translateX(-60px);}
+  to{opacity:1; transform:translateX(0);}
+}
+
 .sps-contact-left h2{
   font-size:42px;
   font-weight:900;
-  color:#062242; /* BLUE */
+  color:#062242;
 }
 
 .sps-contact-left p{
   font-size:16px;
-  color:#062242; /* BLUE */
+  color:#062242;
   line-height:1.7;
   margin:18px 0;
 }
@@ -82,22 +134,28 @@ export default function ContactPage() {
   flex-direction:column;
   gap:14px;
   margin-top:22px;
-  color:#062242; /* BLUE */
+  color:#062242;
   font-weight:700;
 }
 
-/* FORM CARD */
+/* ===== FORM CARD ===== */
 .sps-contact-card{
-  background:rgba(255,255,255,0.75);
+  background:rgba(255,255,255,0.85);
   backdrop-filter:blur(18px);
   border-radius:22px;
-  padding:30px;
-  border:1.5px solid rgba(6,34,66,0.25); /* BLUE SHADE */
+  padding:35px;
+  border:1.5px solid rgba(6,34,66,0.2);
   box-shadow:0 30px 60px rgba(6,34,66,0.25);
+  animation:fadeRight 1s ease forwards;
+}
+
+@keyframes fadeRight{
+  from{opacity:0; transform:translateX(60px);}
+  to{opacity:1; transform:translateX(0);}
 }
 
 .sps-contact-card h3{
-  color:#062242; /* BLUE */
+  color:#062242;
   font-weight:900;
   margin-bottom:18px;
 }
@@ -105,77 +163,111 @@ export default function ContactPage() {
 .sps-contact-card form{
   display:flex;
   flex-direction:column;
-  gap:14px;
+  gap:16px;
 }
 
 .sps-contact-card input,
 .sps-contact-card select{
   padding:15px;
   border-radius:12px;
-  border:1.5px solid #B7C4D3; /* LIGHT BLUE */
+  border:1.5px solid #B7C4D3;
   font-size:15px;
-  color:#062242; /* BLUE */
-}
-
-.sps-contact-card input::placeholder,
-.sps-contact-card select{
-  color:#3F6C87; /* SOFT BLUE */
+  transition:0.3s ease;
 }
 
 .sps-contact-card input:focus,
 .sps-contact-card select:focus{
   outline:none;
-  border-color:#062242; /* BLUE */
+  border-color:#062242;
+  box-shadow:0 0 0 3px rgba(6,34,66,0.15);
 }
 
-/* SUBMIT */
+/* BUTTON */
 .sps-contact-btn{
   margin-top:8px;
   padding:16px;
   border:none;
   border-radius:14px;
-  background:linear-gradient(90deg,#062242,#3F6C87); /* BLUE GRADIENT */
+  background:linear-gradient(90deg,#062242,#3F6C87);
   color:#fff;
   font-weight:900;
   font-size:16px;
   cursor:pointer;
+  transition:0.3s ease;
 }
 
-/* SUCCESS MESSAGE */
+.sps-contact-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 15px 30px rgba(6,34,66,.35);
+}
+
+/* SUCCESS POPUP */
 .sps-success{
   position:fixed;
   bottom:30px;
   right:30px;
-  background:#062242; /* BLUE */
+  background:linear-gradient(135deg,#062242,#3F6C87);
   color:#fff;
-  padding:16px 22px;
+  padding:18px 24px;
   border-radius:14px;
   font-weight:800;
-  box-shadow:0 12px 30px rgba(6,34,66,.45);
-  animation:slideUp .4s ease;
+  box-shadow:0 15px 35px rgba(6,34,66,.45);
+  animation:popup 0.5s ease;
   z-index:9999;
 }
 
-@keyframes slideUp{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
+@keyframes popup{
+  from{opacity:0; transform:translateY(30px) scale(.9);}
+  to{opacity:1; transform:translateY(0) scale(1);}
 }
 
-/* MOBILE */
+/* ===== RESPONSIVE ===== */
+
+/* Tablet */
 @media(max-width:900px){
-  .sps-contact-grid{ grid-template-columns:1fr; }
-  .sps-contact-left h2{ font-size:32px; }
+  .sps-contact-grid{
+    grid-template-columns:1fr;
+    gap:40px;
+  }
+
+  .sps-contact-left h2{
+    font-size:32px;
+  }
 }
-    `;
+
+/* Mobile */
+@media(max-width:480px){
+
+  .sps-contact{
+    padding:80px 5vw;
+  }
+
+  .sps-contact-card{
+    padding:25px;
+  }
+
+  .sps-success{
+    right:15px;
+    left:15px;
+    bottom:20px;
+    text-align:center;
+  }
+}
+`;
+
     const style = document.createElement("style");
     style.innerHTML = css;
     document.head.appendChild(style);
+
+    return () => observer.disconnect();
+
   }, []);
 
   return (
     <>
-      <section className="sps-contact">
+      <section className="sps-contact" ref={sectionRef}>
         <div className="sps-contact-grid">
+
           {/* LEFT */}
           <div className="sps-contact-left">
             <h2>Contact CHENNAI LAL Packers & Movers</h2>
@@ -235,10 +327,14 @@ export default function ContactPage() {
                 <option>House Shifting</option>
                 <option>Office Relocation</option>
                 <option>Vehicle Transportation</option>
-                <option>Storage / Warehousing</option>
+                <option>Godown Shifting</option>
+                <option>AC Installation</option>
+                <option>Commercial Moves</option>
               </select>
 
-              <button className="sps-contact-btn">Submit Enquiry</button>
+              <button className="sps-contact-btn">
+                Submit Enquiry
+              </button>
             </form>
           </div>
         </div>

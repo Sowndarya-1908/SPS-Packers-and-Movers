@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import { Link } from "react-router-dom";
 
 function ServicesShowcase() {
+
   const navigate = useNavigate();
+  const sectionRef = useRef([]);
 
   const openWhatsApp = (service) => {
     const ownerNumber = "917550057453";
@@ -11,286 +15,281 @@ function ServicesShowcase() {
 I am interested in ${service}.
 Please contact me with details.`;
 
-    const url = `https://wa.me/${ownerNumber}?text=${encodeURIComponent(
-      message
-    )}`;
+    const url = `https://wa.me/${ownerNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
   };
 
   useEffect(() => {
+
+    /* ===== SCROLL ANIMATION ===== */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("sps-service-visible");
+        }
+      });
+    }, { threshold: 0.2 });
+
+    sectionRef.current.forEach(el => el && observer.observe(el));
+
     const css = `
-/* ===== SERVICES OFFER ===== */
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+/* ===== SECTION ===== */
 .sps-service-wrap{
-  padding:90px 6vw;
+  padding: 6vw;
+  padding-top: 20px;
   font-family:Inter,system-ui;
-  background:#FDFCFC;
+  // background:#FDFCFC;
 }
 
-/* ROW */
+/* ===== ROW ===== */
 .sps-service-row{
   display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap:60px;
+  grid-template-columns:1fr 1fr;
+  gap:70px;
   align-items:center;
-  margin-bottom:90px;
+  margin-bottom:120px;
+  opacity:0;
+  transform:translateY(60px);
+  transition:all .9s cubic-bezier(.22,.61,.36,1);
 }
 
-/* IMAGE */
+.sps-service-visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Alternate layout */
+.sps-service-row:nth-child(even) .sps-service-img{
+  order:2;
+}
+.sps-service-row:nth-child(even) .sps-service-content{
+  order:1;
+}
+
+/* ===== IMAGE ===== */
+.sps-service-img{
+  overflow:hidden;
+  border-radius:22px;
+}
+
 .sps-service-img img{
-  width:550px;
-  height:500px;
-  // border-radius:22px;
-  // box-shadow:0 25px 60px rgba(6,34,66,0.25); /* BLUE SHADOW */
+  width:100%;
+  height:100%;
+  max-height:480px;
+  object-fit:cover;
+  border-radius:22px;
+  transition:transform .7s ease;
 }
 
-.sps-service-row.reverse{
-  direction: rtl;
+.sps-service-row:hover .sps-service-img img{
+  transform:scale(1.08);
 }
 
-.sps-service-row.reverse > *{
-  direction: ltr;
-}
-
-/* CONTENT */
+/* ===== CONTENT ===== */
 .sps-service-content h3{
-  font-size:36px;
+  font-size:38px;
   font-weight:900;
-  color:#062242; /* BLUE */
-  margin-bottom:16px;
+  color:#062242;
+  margin-bottom:18px;
 }
 
 .sps-service-content p{
-  font-size:16px;
-  line-height:1.75;
-  color:#062242; /* BLUE */
+  font-size:16.5px;
+  line-height:1.8;
+  color:#062242;
   max-width:520px;
 }
 
-/* BUTTONS */
+/* ===== BUTTONS ===== */
 .sps-btns{
   display:flex;
   gap:18px;
-  margin-top:28px;
+  margin-top:30px;
+  flex-wrap:wrap;
 }
 
 .sps-btn{
-  padding:14px 28px;
-  font-size:16px;
+  padding:15px 30px;
+  font-size:15px;
   font-weight:800;
-  border-radius:10px;
+  border-radius:12px;
   border:none;
   cursor:pointer;
-  transition:all .25s ease;
+  transition:all .3s ease;
 }
 
-/* PRIMARY BLUE BUTTON */
+/* Primary */
 .sps-btn-primary{
-  background:linear-gradient(90deg,#062242,#3F6C87); /* BLUE GRADIENT */
+  background:linear-gradient(90deg,#062242,#3F6C87);
   color:#fff;
 }
 
 .sps-btn-primary:hover{
-  background:linear-gradient(90deg,#04172e,#34556f);
+  transform:translateY(-3px);
+  box-shadow:0 12px 25px rgba(6,34,66,0.35);
 }
 
-/* WHATSAPP BUTTON */
+/* WhatsApp */
 .sps-btn-whatsapp{
   background:#25D366;
   color:#fff;
 }
 
 .sps-btn-whatsapp:hover{
-  background:#1ebe5d;
+  transform:translateY(-3px);
+  box-shadow:0 12px 25px rgba(37,211,102,0.4);
 }
 
-/* MOBILE */
-@media(max-width:900px){
-  .sps-service-row,
-  .sps-service-row.reverse{
+/* ===== TABLET ===== */
+@media(max-width:1000px){
+  .sps-service-row{
+    gap:40px;
+  }
+
+  .sps-service-content h3{
+    font-size:30px;
+  }
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+
+  .sps-service-row{
     grid-template-columns:1fr;
+    margin-bottom:80px;
   }
 
-  .sps-service-row.reverse{
-    direction:ltr;
+  .sps-service-content h3{
+    font-size:26px;
+  }
+
+  .sps-service-content p{
+    font-size:15px;
+  }
+
+  .sps-service-img img{
+    max-height:300px;
+  }
+
+  .sps-btn{
+    width:100%;
+    text-align:center;
   }
 }
-    `;
+`;
 
     const style = document.createElement("style");
     style.innerHTML = css;
     document.head.appendChild(style);
+
+    return () => observer.disconnect();
+
   }, []);
 
+  const services = [
+    {
+      title: "House Shifting",
+      img: "/images/bgserv/bghousemini.png",
+      desc: "We make home relocation seamless and stress-free using high-quality packing materials and modern equipment."
+    },
+    {
+      title: "Office Shifting",
+      img: "/images/bgserv/offs.png",
+      desc: "Professional office relocation ensuring minimal downtime and safe IT equipment handling."
+    },
+    {
+      title: "Transportation",
+      img: "/images/bgserv/transmini.png",
+      desc: "Fast and reliable GPS-enabled transportation for safe and timely delivery."
+    },
+    {
+      title: "AC Installation",
+      img: "/images/bgserv/bgacmini.png",
+      desc: "Expert AC dismantling, shifting and re-installation with complete safety."
+    },
+    {
+      title: "Godown Shifting",
+      img: "/images/bgserv/godownmin.png",
+      desc: "Complete warehouse and inventory relocation with heavy equipment handling."
+    },
+    {
+      title: "Commercial Moves",
+      img: "/images/bgserv/bgcommmini.png",
+      desc: "End-to-end commercial relocation solutions for businesses and industries."
+    }
+  ];
+
   return (
-   <section className="sps-service-wrap">
+    <section className="sps-service-wrap">
 
-  {/* HOUSE SHIFTING */}
-  <div className="sps-service-row">
-    <div className="sps-service-img">
-      <img src="/images/bgserv/bghousemini.png" alt="House Shifting" />
-    </div>
+      {services.map((service, index) => (
+        <div
+          className="sps-service-row"
+          key={index}
+          ref={(el) => (sectionRef.current[index] = el)}
+        >
+          <div className="sps-service-img">
+            <img src={service.img} alt={service.title} />
+          </div>
 
-    <div className="sps-service-content">
-      <h3>House Shifting</h3>
-      <p>
-        We make home relocation seamless and stress-free. Our team uses high-quality
-        packing materials and modern equipment to safely move furniture, appliances,
-        kitchen items, and valuables with utmost care.
-      </p>
+          <div className="sps-service-content">
+            <h3>{service.title}</h3>
+            <p>{service.desc}</p>
 
-      <div className="sps-btns">
-        <button className="sps-btn sps-btn-primary" onClick={() => navigate("/contact")}>
-          Contact Us
-        </button>
-        <button className="sps-btn sps-btn-whatsapp" onClick={() => openWhatsApp("House Shifting")}>
-          WhatsApp Now
-        </button>
-      </div>
-    </div>
-  </div>
+            <div className="sps-btns">
+              <button
+                className="sps-btn sps-btn-primary"
+                onClick={() => navigate("/contact")}
+              >
+                Contact Us
+              </button>
 
-  {/* OFFICE SHIFTING */}
-  <div className="sps-service-row">
+              <button
+                className="sps-btn sps-btn-whatsapp"
+                onClick={() => openWhatsApp(service.title)}
+              >
+                WhatsApp Now
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
 
-    <div className="sps-service-content">
-      <h3>Office Shifting</h3>
-      <p>
-        Our office relocation services ensure minimal downtime. We handle workstations,
-        computers, files, furniture, and IT equipment with professional planning and 
-        timely execution.
-      </p>
-
-      <div className="sps-btns">
-        <button className="sps-btn sps-btn-primary" onClick={() => navigate("/contact")}>
-          Contact Us
-        </button>
-        <button className="sps-btn sps-btn-whatsapp" onClick={() => openWhatsApp("Office Shifting")}>
-          WhatsApp Now
-        </button>
-      </div>
-    </div>
-
-    <div className="sps-service-img">
-      <img src="/images/bgserv/offs.png" alt="Office Shifting" />
-    </div>
-  </div>
-
-  {/* TRANSPORTATION */}
-  <div className="sps-service-row">
-    <div className="sps-service-img">
-      <img src="/images/bgserv/transmini.png" alt="Transportation" />
-    </div>
-
-    <div className="sps-service-content">
-      <h3>Transportation</h3>
-      <p>
-        We provide fast and reliable transportation services with GPS-enabled vehicles. 
-        Whether it’s local or long-distance movement, your goods reach the destination 
-        safely and on time.
-      </p>
-
-      <div className="sps-btns">
-        <button className="sps-btn sps-btn-primary" onClick={() => navigate("/contact")}>
-          Contact Us
-        </button>
-        <button className="sps-btn sps-btn-whatsapp" onClick={() => openWhatsApp("Transportation")}>
-          WhatsApp Now
-        </button>
-      </div>
-    </div>
-  </div>
-
-  {/* AC INSTALLATION */}
-  <div className="sps-service-row">
-
-    <div className="sps-service-content">
-      <h3>AC Installation</h3>
-      <p>
-        Our trained technicians professionally handle AC dismantling, packing, shifting, 
-        and re-installation. We ensure 100% damage-free handling of pipes, units, and wiring.
-      </p>
-
-      <div className="sps-btns">
-        <button className="sps-btn sps-btn-primary" onClick={() => navigate("/contact")}>
-          Contact Us
-        </button>
-        <button className="sps-btn sps-btn-whatsapp" onClick={() => openWhatsApp("AC Installation")}>
-          WhatsApp Now
-        </button>
-      </div>
-    </div>
-
-    <div className="sps-service-img">
-      <img src="/images/bgserv/bgacmini.png" alt="AC Installation" />
-    </div>
-  </div>
-
-  {/* GODOWN SHIFTING */}
-  <div className="sps-service-row">
-    <div className="sps-service-img">
-      <img src="/images/bgserv/godownmin.png" alt="Godown Shifting" />
-    </div>
-
-    <div className="sps-service-content">
-      <h3>Godown Shifting</h3>
-      <p>
-        We specialize in warehouse and godown relocation with proper inventory handling,
-        pallet movement, heavy equipment shifting, and organized loading/unloading.
-      </p>
-
-      <div className="sps-btns">
-        <button className="sps-btn sps-btn-primary" onClick={() => navigate("/contact")}>
-          Contact Us
-        </button>
-        <button className="sps-btn sps-btn-whatsapp" onClick={() => openWhatsApp("Godown Shifting")}>
-          WhatsApp Now
-        </button>
-      </div>
-    </div>
-  </div>
-
-  {/* COMMERCIAL MOVES */}
-  <div className="sps-service-row">
-
-    <div className="sps-service-content">
-      <h3>Commercial Moves</h3>
-      <p>
-        From small businesses to large industries, we provide complete commercial relocation 
-        solutions including machinery shifting, inventory movement, and industrial packing.
-      </p>
-
-      <div className="sps-btns">
-        <button className="sps-btn sps-btn-primary" onClick={() => navigate("/contact")}>
-          Contact Us
-        </button>
-        <button className="sps-btn sps-btn-whatsapp" onClick={() => openWhatsApp("Commercial Moves")}>
-          WhatsApp Now
-        </button>
-      </div>
-    </div>
-
-    <div className="sps-service-img">
-      <img src="/images/bgserv/bgcommmini.png" alt="Commercial Moves" />
-    </div>
-  </div>
-
-</section>
+    </section>
   );
 }
 
 
 
 
-
-
 function ServicesIntro() {
+
+  const sectionRef = useRef(null);
+
   useEffect(() => {
+
+    /* ===== SCROLL REVEAL ===== */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("sps-services-visible");
+        }
+      });
+    }, { threshold: 0.2 });
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
     const css = `
-/* ===== SERVICES INTRO ===== */
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+/* ===== SECTION ===== */
 .sps-services-intro{
-  padding:90px 6vw;
-  background:#FDFCFC;
+  padding:20px 6vw;
+  // background:#FDFCFC;
   font-family:Inter,system-ui;
+  overflow:hidden;
 }
 
 /* GRID */
@@ -299,19 +298,32 @@ function ServicesIntro() {
   margin:auto;
   display:grid;
   grid-template-columns:1.05fr 0.95fr;
-  gap:60px;
+  gap:70px;
   align-items:center;
 }
 
-/* IMAGE SIDE */
+/* ===== IMAGE SIDE ===== */
 .sps-services-image{
   position:relative;
+  opacity:0;
+  transform:translateX(-60px);
+  transition:all .9s cubic-bezier(.22,.61,.36,1);
+}
+
+.sps-services-visible .sps-services-image{
+  opacity:1;
+  transform:translateX(0);
 }
 
 .sps-services-image img{
   width:100%;
-  border-radius:18px;
+  border-radius:22px;
   box-shadow:0 30px 60px rgba(0,0,0,0.18);
+  transition:transform .8s ease;
+}
+
+.sps-services-image:hover img{
+  transform:scale(1.05);
 }
 
 /* EXPERIENCE BADGE */
@@ -320,86 +332,118 @@ function ServicesIntro() {
   top:-30px;
   left:-30px;
   background:#ffffff;
-  border-radius:14px;
-  padding:18px 22px;
-  box-shadow:0 20px 40px rgba(6,34,66,0.25); /* BLUE SHADOW */
+  border-radius:16px;
+  padding-top: 30px;          
+  padding:50px 26px;
+  box-shadow:0 25px 50px rgba(6,34,66,0.25);
   text-align:center;
+  animation:floatBadge 4s ease-in-out infinite;
+}
+
+@keyframes floatBadge{
+  0%{ transform:translateY(0); }
+  50%{ transform:translateY(-10px); }
+  100%{ transform:translateY(0); }
 }
 
 .sps-exp-badge h3{
-  font-size:42px;
+  font-size:44px;
   font-weight:900;
-  color:#062242; /* BLUE */
+  color:#062242;
   line-height:1;
 }
 
 .sps-exp-badge p{
   font-size:14px;
   font-weight:700;
-  color:#062242; /* BLUE */
+  color:#062242;
   margin-top:6px;
 }
 
-/* CONTENT SIDE */
+/* ===== CONTENT SIDE ===== */
+.sps-services-content{
+  opacity:0;
+  transform:translateX(60px);
+  transition:all .9s cubic-bezier(.22,.61,.36,1);
+}
+
+.sps-services-visible .sps-services-content{
+  opacity:1;
+  transform:translateX(0);
+}
+
 .sps-services-content small{
   display:block;
   font-size:13px;
   letter-spacing:0.18em;
   font-weight:800;
-  color:#062242; /* BLUE */
+  color:#062242;
   margin-bottom:14px;
 }
 
 .sps-services-content h2{
   font-size:42px;
   font-weight:900;
-  color:#062242; /* BLUE */
+  color:#062242;
   line-height:1.25;
   margin-bottom:18px;
 }
 
-.sps-services-content h2 span{
-  color:#062242; /* BLUE */
-}
-
 .sps-services-content p{
   font-size:16px;
-  color:#062242; /* BLUE */
+  color:#062242;
   line-height:1.75;
-  margin-bottom:26px;
+  margin-bottom:30px;
 }
 
-/* SERVICES LIST */
+/* ===== SERVICES LIST ===== */
 .sps-services-list{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:14px 28px;
+  gap:16px 30px;
 }
 
 .sps-service-item{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:12px;
   font-size:15px;
   font-weight:600;
-  color:#062242; /* BLUE */
+  color:#062242;
+  opacity:0;
+  transform:translateY(20px);
+  transition:all .6s ease;
 }
 
+.sps-services-visible .sps-service-item{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Stagger animation */
+.sps-services-visible .sps-service-item:nth-child(1){ transition-delay:.2s; }
+.sps-services-visible .sps-service-item:nth-child(2){ transition-delay:.3s; }
+.sps-services-visible .sps-service-item:nth-child(3){ transition-delay:.4s; }
+.sps-services-visible .sps-service-item:nth-child(4){ transition-delay:.5s; }
+.sps-services-visible .sps-service-item:nth-child(5){ transition-delay:.6s; }
+.sps-services-visible .sps-service-item:nth-child(6){ transition-delay:.7s; }
+
 .sps-service-icon{
-  width:22px;
-  height:22px;
+  width:24px;
+  height:24px;
   border-radius:50%;
-  background:linear-gradient(135deg,#062242,#3F6C87); /* BLUE GRADIENT */
+  background:linear-gradient(135deg,#062242,#3F6C87);
   color:#fff;
   display:grid;
   place-items:center;
   font-size:13px;
 }
 
-/* ===== MOBILE ===== */
+/* ===== TABLET ===== */
 @media(max-width:1000px){
   .sps-services-wrap{
     grid-template-columns:1fr;
+    gap:50px;
   }
 
   .sps-exp-badge{
@@ -416,19 +460,39 @@ function ServicesIntro() {
     grid-template-columns:1fr;
   }
 }
-    `;
+
+/* ===== MOBILE ===== */
+@media(max-width:600px){
+  .sps-services-intro{
+    padding:0px 5vw;
+  }
+
+  .sps-services-content h2{
+    font-size:26px;
+  }
+
+  .sps-services-content p{
+    font-size:15px;
+  }
+}
+`;
+
     const style = document.createElement("style");
     style.innerHTML = css;
     document.head.appendChild(style);
+
+    return () => observer.disconnect();
+
   }, []);
 
   return (
-    <section className="sps-services-intro">
+    <section className="sps-services-intro" ref={sectionRef}>
       <div className="sps-services-wrap">
+
         {/* LEFT IMAGE */}
         <div className="sps-services-image">
           <div className="sps-exp-badge">
-            <h3>10+</h3>
+            <h3>5</h3>
             <p>Years Experience</p>
           </div>
 
@@ -450,18 +514,17 @@ function ServicesIntro() {
           <p>
             Discover our complete moving solutions at CHENNAI LAL Packers & Movers.
             From local to long-distance moves, packing, unpacking, and storage
-            options, we’ve got you covered. Our experienced team ensures a
-            smooth relocation process tailored to your needs.
+            options, we ensure smooth and secure relocation tailored to your needs.
           </p>
 
           <div className="sps-services-list">
             {[
               "House Relocations",
               "Corporate Relocations",
-              "Premium Moving Service",
-              "Warehousing / Storage",
-              "Car Transportation",
-              "Insurance"
+              "AC Installtion",
+              "Warehousing Shifting",
+              "Transportation",
+              "Commercial Moves"
             ].map((service, i) => (
               <div key={i} className="sps-service-item">
                 <div className="sps-service-icon">➜</div>
@@ -469,84 +532,100 @@ function ServicesIntro() {
               </div>
             ))}
           </div>
+
         </div>
       </div>
     </section>
   );
 }
- 
+
+
+
+
 
 function SkillSection() {
+
+  const sectionRef = useRef(null);
+  const navigate = useNavigate();   // ✅ navigation added
+
   useEffect(() => {
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+
+          const fills = entry.target.querySelectorAll(".progress-fill");
+          fills.forEach((bar) => {
+            const width = bar.dataset.width;
+            bar.style.width = width;
+          });
+        }
+      });
+    }, { threshold: 0.25 });
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
     const css = `
-/* ================================
-   WRAPPER
-================================ */
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+/* ================================ WRAPPER ================================ */
 .skill-section {
-  padding: 80px 6vw;
+  padding: 0px 6vw;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  gap: 70px;
   align-items: center;
-  background: #ffffff;
   font-family: Inter, system-ui;
+  overflow:hidden;
 }
 
-/* ================================
-   LEFT IMAGES
-================================ */
+/* LEFT IMAGES */
 .skill-images {
   position: relative;
+  opacity:0;
+  transform:translateX(-60px);
+  transition: all 0.9s cubic-bezier(.22,.61,.36,1);
+}
+
+.skill-section.show .skill-images {
+  opacity:1;
+  transform:translateX(0);
 }
 
 .skill-img-1 {
   width: 100%;
-  border-radius: 20px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  border-radius: 22px;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.18);
+  transition: transform .8s ease;
 }
 
-.skill-img-2 {
-  width: 70%;
-  position: absolute;
-  bottom: -40px;
-  left: 40px;
-  border-radius: 20px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+.skill-images:hover .skill-img-1 {
+  transform: scale(1.05);
 }
 
-/* Floating circle badge */
-.skill-badge {
-  position: absolute;
-  left: -20px;
-  bottom: 60px;
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #062242, #3F6C87);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  font-size: 22px;
-  font-weight: 700;
-  text-align: center;
-  transform: rotate(-15deg);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+/* RIGHT CONTENT */
+.skill-content {
+  opacity:0;
+  transform:translateX(60px);
+  transition: all 0.9s cubic-bezier(.22,.61,.36,1);
 }
 
-/* ================================
-   RIGHT CONTENT
-================================ */
+.skill-section.show .skill-content {
+  opacity:1;
+  transform:translateX(0);
+}
+
 .skill-tag {
   font-size: 14px;
   font-weight: 700;
   color: #3F6C87;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .skill-title {
-  font-size: 40px;
+  font-size: 42px;
   font-weight: 900;
   color: #062242;
   line-height: 1.3;
@@ -563,21 +642,17 @@ function SkillSection() {
   font-size: 16px;
   color: #3F6C87;
   line-height: 1.8;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
 }
 
-/* ================================
-   PROGRESS BARS
-================================ */
-.progress-box {
-  margin-bottom: 22px;
-}
+/* PROGRESS BARS */
+.progress-box { margin-bottom: 24px; }
 
 .progress-title {
   font-size: 14px;
   font-weight: 700;
   color: #062242;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
 .progress-track {
@@ -590,19 +665,19 @@ function SkillSection() {
 
 .progress-fill {
   height: 100%;
+  width: 0;
   background: linear-gradient(135deg, #062242, #3F6C87);
   border-radius: 8px;
+  transition: width 1.6s cubic-bezier(.22,.61,.36,1);
 }
 
-/* ================================
-   BUTTON
-================================ */
+/* BUTTON */
 .skill-btn {
-  margin-top: 20px;
+  margin-top: 25px;
   background: linear-gradient(135deg, #062242, #3F6C87);
-  padding: 14px 28px;
+  padding: 15px 30px;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 16px;
   font-weight: 700;
   color: #fff;
@@ -611,32 +686,23 @@ function SkillSection() {
 }
 
 .skill-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 18px rgba(6,34,66,0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(6,34,66,0.35);
 }
 
-/* =============================
-   ANIMATIONS
-============================== */
-.reveal { opacity:0; transform:translateY(40px); transition:0.8s ease; }
-.reveal.show { opacity:1; transform:translateY(0); }
-
-/* =============================
-   RESPONSIVE
-============================== */
+/* RESPONSIVE */
 @media(max-width: 950px) {
   .skill-section {
     grid-template-columns: 1fr;
+    gap: 50px;
   }
-  .skill-img-2 {
-    display: none;
-  }
-  .skill-badge {
-    left: 10px;
-    bottom: 10px;
-    width: 90px;
-    height: 90px;
-  }
+  .skill-title { font-size: 32px; }
+}
+
+@media(max-width: 600px){
+  .skill-section{ padding:0px 5vw; }
+  .skill-title{ font-size:26px; }
+  .skill-desc{ font-size:15px; }
 }
 `;
 
@@ -644,27 +710,20 @@ function SkillSection() {
     style.innerHTML = css;
     document.head.appendChild(style);
 
-    const obs = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((e) => e.isIntersecting && e.target.classList.add("show")),
-      { threshold: 0.2 }
-    );
+    return () => observer.disconnect();
 
-    document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
   }, []);
 
   return (
-    <section className="skill-section">
+    <section className="skill-section" ref={sectionRef}>
 
-      {/* LEFT IMAGES */}
-      <div className="skill-images reveal">
-        <img src="/images/truck.png" className="skill-img-1" alt="Packing Process" />
-        <img src="/images/truck.png" className="skill-img-2" alt="Safe Handling" />
-        <div className="skill-badge">🚚</div>
+      {/* LEFT */}
+      <div className="skill-images">
+        <img src="/images/expr.png" className="skill-img-1" alt="Packing Process" />
       </div>
 
-      {/* RIGHT CONTENT */}
-      <div className="skill-content reveal">
+      {/* RIGHT */}
+      <div className="skill-content">
 
         <div className="skill-tag">Our Expertise</div>
 
@@ -676,32 +735,37 @@ function SkillSection() {
           At Chennai Lal Packers & Movers, we combine decades of moving experience  
           with professional precision. Whether it’s household shifting, commercial  
           relocation, or long-distance moves — we ensure every task is handled with  
-          care, planning, and complete responsibility.
+          care and responsibility.
         </p>
 
-        {/* PROGRESS BARS */}
         <div className="progress-box">
           <div className="progress-title">Real-Time Tracking</div>
           <div className="progress-track">
-            <div className="progress-fill" style={{ width: "85%" }}></div>
+            <div className="progress-fill" data-width="85%"></div>
           </div>
         </div>
 
         <div className="progress-box">
           <div className="progress-title">Specialized Handling</div>
           <div className="progress-track">
-            <div className="progress-fill" style={{ width: "92%" }}></div>
+            <div className="progress-fill" data-width="92%"></div>
           </div>
         </div>
 
         <div className="progress-box">
           <div className="progress-title">Customer-First Approach</div>
           <div className="progress-track">
-            <div className="progress-fill" style={{ width: "95%" }}></div>
+            <div className="progress-fill" data-width="95%"></div>
           </div>
         </div>
 
-        <button className="skill-btn">Book Your Move Now →</button>
+        {/* ✅ BUTTON NAVIGATION ADDED */}
+        <button 
+          className="skill-btn"
+          onClick={() => navigate("/contact")}
+        >
+          Book Your Move Now →
+        </button>
 
       </div>
     </section>
@@ -709,32 +773,63 @@ function SkillSection() {
 }
 
 
- function TamilNaduCitySearch() {
+
+
+function TamilNaduCitySearch() {
 
   const navigate = useNavigate();
+  const sectionRef = useRef(null);
   const goContact = () => navigate("/contact");
-
   const [search, setSearch] = useState("");
 
   useEffect(() => {
+
+    /* ===== SCROLL REVEAL ===== */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+
+          // stagger animation for city boxes
+          const boxes = entry.target.querySelectorAll(".city-box");
+          boxes.forEach((box, i) => {
+            setTimeout(() => box.classList.add("show"), i * 120);
+          });
+        }
+      });
+    }, { threshold: 0.15 });
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
     const css = `
+*{ margin:0; padding:0; box-sizing:border-box; }
+
 /* ===============================
    SECTION
 ================================ */
 .tn-city-section {
   width: 100%;
-  padding: 70px 5vw;
-  background: #062242;
+  padding: 0px 5vw;
+  background: linear-gradient(135deg,#062242,#0A304F);
   font-family: Inter, system-ui;
   color: white;
   text-align: center;
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(50px);
+  transition:0.9s cubic-bezier(.22,.61,.36,1);
+}
+
+.tn-city-section.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
 /* TITLE */
 .tn-title {
-  font-size: 30px;
+  font-size: 34px;
   font-weight: 900;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
 }
 
 /* ===============================
@@ -744,45 +839,55 @@ function SkillSection() {
   width: 55%;
   max-width: 600px;
   min-width: 260px;
-  margin: 0 auto 40px auto;
-  padding: 14px 18px;
-  border-radius: 12px;
+  margin: 0 auto 50px auto;
+  padding: 15px 20px;
+  border-radius: 14px;
   border: none;
   font-size: 16px;
   outline: none;
   color: #062242;
   background: #ffffff;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: 0.4s ease;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.2);
 }
 
 .city-search:focus {
-  box-shadow: 0 12px 26px rgba(255,255,255,0.25);
+  transform: scale(1.03);
+  box-shadow: 0 18px 40px rgba(255,255,255,0.25);
 }
 
 /* ===============================
-   GRID (Desktop = 3 columns)
+   GRID
 ================================ */
 .city-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 35px;
+  gap: 40px;
 }
 
 /* ===============================
    CITY BOX
 ================================ */
 .city-box {
-  background: #0A304F;
-  border: 2px solid #3F6C87;
-  border-radius: 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 18px;
   padding: 30px 25px;
   text-align: left;
-  transition: 0.35s ease;
+  backdrop-filter: blur(10px);
+  transition: all .4s ease;
+  opacity:0;
+  transform:translateY(40px);
+}
+
+.city-box.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
 .city-box:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 26px rgba(63,108,135,0.35);
+  transform: translateY(-8px);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.35);
 }
 
 /* ===============================
@@ -792,9 +897,9 @@ function SkillSection() {
   font-size: 18px;
   font-weight: 800;
   color: #A7D4EE;
-  margin-bottom: 14px;
-  border-bottom: 1px solid #3F6C87;
-  padding-bottom: 6px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 8px;
 }
 
 /* ===============================
@@ -805,134 +910,113 @@ function SkillSection() {
   font-size: 15px;
   cursor: pointer;
   color: #DCEBFF;
-  transition: 0.25s ease;
-  padding: 4px 0;
+  transition: 0.3s ease;
+  padding: 6px 0;
 }
 
 .city-item:hover {
   color: #A7D4EE;
-  padding-left: 6px;
+  padding-left: 8px;
   text-decoration: underline;
 }
 
-/* Highlight for search results */
 .city-highlight {
-  color: #A7D4EE;
+  color: #FFD166;
   font-weight: 800;
 }
 
 /* ===============================
-      RESPONSIVE BREAKPOINTS
+   RESPONSIVE
 ================================ */
 
-/* TABLET — 2 Columns */
-@media(max-width: 1000px) {
-  .city-grid {
-    grid-template-columns: repeat(2, 1fr);
+/* Tablet */
+@media(max-width:1000px){
+  .city-grid{
+    grid-template-columns: repeat(2,1fr);
   }
-  .city-search {
-    width: 75%;
-  }
-}
-
-/* MOBILE — Perfectly Responsive Fix */
-@media(max-width: 650px) {
-
-  html, body {
-    overflow-x: hidden !important;
-  }
-
-  .tn-city-section {
-    padding: 50px 4vw;
-  }
-
-  .tn-title {
-    font-size: 24px;
-    margin-bottom: 25px;
-    padding: 0 10px;
-  }
-
-  .city-search {
-    width: 100%;
-    padding: 14px 16px;
-    margin-bottom: 30px;
-    box-sizing: border-box;
-  }
-
-  .city-grid {
-    grid-template-columns: 1fr;   /* Single column */
-    gap: 20px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .city-box {
-    width: 100%;
-    padding: 22px 18px;
-    border-radius: 14px;
-    box-sizing: border-box;        /* Prevent overflow */
-  }
-
-  .city-title {
-    font-size: 16px;
-    padding-bottom: 6px;
-  }
-
-  .city-item {
-    font-size: 14px;
-    padding: 6px 0;
+  .city-search{
+    width:75%;
   }
 }
 
+/* Mobile */
+@media(max-width:650px){
+
+  .tn-city-section{
+    padding:0px 5vw;
+  }
+
+  .tn-title{
+    font-size:24px;
+  }
+
+  .city-search{
+    width:100%;
+    margin-bottom:35px;
+  }
+
+  .city-grid{
+    grid-template-columns:1fr;
+    gap:25px;
+  }
+
+  .city-box{
+    padding:22px 20px;
+  }
+
+  .city-item{
+    font-size:14px;
+  }
+}
 `;
 
     const style = document.createElement("style");
     style.innerHTML = css;
     document.head.appendChild(style);
 
-    const obs = new IntersectionObserver(
-      entries => entries.forEach(e => e.isIntersecting && e.target.classList.add("show")),
-      { threshold: 0.15 }
-    );
-    document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
+    return () => observer.disconnect();
+
   }, []);
 
   /* ====== CITY LISTS ====== */
   const cities = {
     "Major Cities": [
-      "Chennai", "Coimbatore", "Madurai", "Trichy", "Salem",
-      "Tirunelveli", "Erode", "Tiruppur", "Vellore",
-      "Thanjavur", "Kanchipuram", "Thiruvarur"
+      "Chennai","Coimbatore","Madurai","Trichy","Salem",
+      "Tirunelveli","Erode","Tiruppur","Vellore",
+      "Thanjavur","Kanchipuram","Thiruvarur"
     ],
     "Tier 2 & Tier 3 Cities": [
-      "Dindigul", "Karur", "Namakkal", "Ariyalur", "Nagapattinam",
-      "Ramanathapuram", "Cuddalore", "Thoothukudi", "Sivagangai",
-      "Virudhunagar", "Krishnagiri", "Dharmapuri"
+      "Dindigul","Karur","Namakkal","Ariyalur","Nagapattinam",
+      "Ramanathapuram","Cuddalore","Thoothukudi","Sivagangai",
+      "Virudhunagar","Krishnagiri","Dharmapuri"
     ],
     "All Tamil Nadu Service": [
-      "Kanyakumari", "Tenkasi", "Nilgiris", "Ranipet",
-      "Chengalpattu", "Kallakurichi", "Villupuram",
-      "Mayiladuthurai", "Perambalur", "Tiruvannamalai", "Tirupattur"
+      "Kanyakumari","Tenkasi","Nilgiris","Ranipet",
+      "Chengalpattu","Kallakurichi","Villupuram",
+      "Mayiladuthurai","Perambalur","Tiruvannamalai","Tirupattur"
     ]
   };
 
-  /* ====== SEARCH MATCH HIGHLIGHT ====== */
   const highlight = (text) => {
     if (!search) return text;
     const regex = new RegExp(search, "gi");
-    return text.replace(regex, match => `<span class="city-highlight">${match}</span>`);
+    return text.replace(regex, match => 
+      `<span class="city-highlight">${match}</span>`
+    );
   };
 
-  /* ====== SEARCH FILTER ====== */
   const filterCities = (list) =>
-    list.filter((city) => city.toLowerCase().includes(search.toLowerCase()));
+    list.filter(city =>
+      city.toLowerCase().includes(search.toLowerCase())
+    );
 
   return (
-    <section className="tn-city-section reveal">
+    <section className="tn-city-section" ref={sectionRef}>
       
-      <h2 className="tn-title">Citywise Services — Chennai Lal Packers & Movers</h2>
+      <h2 className="tn-title">
+        Citywise Services — Chennai Lal Packers & Movers
+      </h2>
 
-      {/* SEARCH BAR */}
       <input
         type="text"
         className="city-search"
@@ -941,7 +1025,7 @@ function SkillSection() {
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      <div className="city-grid reveal">
+      <div className="city-grid">
         {Object.keys(cities).map((group, index) => (
           <div key={index} className="city-box">
             <div className="city-title">{group}</div>
@@ -962,82 +1046,118 @@ function SkillSection() {
                 No matching cities
               </div>
             )}
-
           </div>
         ))}
       </div>
+
     </section>
   );
 }
 
-
 export default function Services() {
+
+  const heroRef = useRef(null);
+
   useEffect(() => {
+
+    /* ===== HERO REVEAL ===== */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.3 });
+
+    if (heroRef.current) observer.observe(heroRef.current);
+
     const css = `
-/* ===== EXCELLENCE HEADING ===== */
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+/* ===== EXCELLENCE HERO ===== */
 .sps-excellence {
-  padding:120px 6vw;
-  
-  /* KEEP SAME BACKGROUND IMAGE */
+  min-height:90vh;
+  padding:0px 6vw;
+  position:relative;
+  overflow:hidden;
+
   background:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(255, 254, 255, 0.35),
-      transparent 45%
-    ),
-    radial-gradient(
-      circle at 80% 80%,
-      rgba(6,34,66,0.45),     /* UPDATED BLUE SHADE */
-      transparent 50%
-    ),
-    linear-gradient(
-      135deg,
-      rgba(6,34,66,0.92),     /* BLUE */
-      rgba(63,108,135,0.92)   /* BLUE LIGHT */
-    ),
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.35), transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(6,34,66,0.45), transparent 50%),
+    linear-gradient(135deg, rgba(6,34,66,0.92), rgba(63,108,135,0.92)),
     url("/images/truck.png") center/cover no-repeat;
 
-  display:grid;
-  grid-template-columns:1.1fr 0.9fr;
+  display:flex;
   align-items:center;
-  gap:40px;
+  justify-content:center;
+  text-align:center;
   font-family:Inter,system-ui;
+
+  opacity:0;
+  transform:translateY(60px);
+  transition:1s cubic-bezier(.22,.61,.36,1);
 }
 
-/* MAIN TITLE UPDATED TO BLUE */
+/* Reveal */
+.sps-excellence.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Subtle background zoom */
+.sps-excellence::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url("/images/truck.png") center/cover no-repeat;
+  opacity:0.08;
+  animation: zoomBg 20s ease-in-out infinite alternate;
+}
+
+@keyframes zoomBg{
+  from{ transform:scale(1); }
+  to{ transform:scale(1.08); }
+}
+
+/* MAIN TITLE */
 .sps-excellence h1 {
   font-size:64px;
   font-weight:900;
-  margin:0;
-  color:#062242; /* BLUE TEXT */
+  color:#ffffff;
   letter-spacing:-0.02em;
+  position:relative;
+  z-index:2;
+  animation: fadeUp 1s ease forwards;
 }
 
-/* HIGHLIGHT WORD UPDATED */
+@keyframes fadeUp{
+  from{ opacity:0; transform:translateY(40px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+
+/* Highlight word */
 .sps-excellence h1 span {
-  background: linear-gradient(135deg,#062242,#3F6C87); /* BLUE GRADIENT */
+  background: linear-gradient(90deg,#ffffff,#A7D4EE,#ffffff);
+  background-size:200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  position:relative;
+  animation: shimmer 4s linear infinite;
 }
 
-/* SOFT SHADOW UPDATED BLUE */
-.sps-excellence h1 span::after {
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-6px;
-  width:100%;
-  height:6px;
-  background:#062242;
-  opacity:0.15;
-  filter:blur(6px);
+/* Animated shimmer */
+@keyframes shimmer{
+  from{ background-position:0% center; }
+  to{ background-position:200% center; }
 }
 
-/* RESPONSIVE */
+/* ===== RESPONSIVE ===== */
+
+/* Tablet */
 @media(max-width:900px){
+
   .sps-excellence{
     padding:90px 5vw;
+    min-height:70vh;
   }
 
   .sps-excellence h1{
@@ -1045,34 +1165,38 @@ export default function Services() {
   }
 }
 
+/* Mobile */
 @media(max-width:480px){
-  .sps-excellence h1{
-    font-size:34px;
-    line-height:1.25;
-  }
-}
 
-@media(max-width:900px){
-  .heroq-section{
-    grid-template-columns:1fr;
-    padding:90px 5vw 40px;
+  .sps-excellence{
+    padding:80px 6vw;
+    min-height:60vh;
+  }
+
+  .sps-excellence h1{
+    font-size:32px;
+    line-height:1.3;
   }
 }
-    `;
+`;
+
     const style = document.createElement("style");
     style.innerHTML = css;
     document.head.appendChild(style);
+
+    return () => observer.disconnect();
+
   }, []);
 
   return (
     <>
-      <section className="sps-excellence">
+      <section className="sps-excellence" ref={heroRef}>
         <h1>
-          Delivering Excellence <span>Across India.</span>
+          Delivering Excellence <br />
+          <span>Across India.</span>
         </h1>
       </section>
 
-{/* <FeaturesDiamond /> */}
       <ServicesIntro />
       <ServicesShowcase />
       <SkillSection />

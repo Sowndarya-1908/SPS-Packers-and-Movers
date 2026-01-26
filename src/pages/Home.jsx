@@ -1,163 +1,204 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
-
 import { useNavigate } from "react-router-dom";
+
 
 
 function AboutSlide() {
   const stat1Ref = useRef(null);
   const stat2Ref = useRef(null);
+  const sectionRef = useRef(null);
   const started = useRef(false);
 
   useEffect(() => {
-    /* ===== COUNTER FUNCTION ===== */
+    /* ===== COUNTER ANIMATION (SMOOTHER) ===== */
     const animateCount = (el, target, suffix = "") => {
       let start = 0;
-      const duration = 1500;
-      const stepTime = 16;
-      const increment = target / (duration / stepTime);
+      const duration = 1800;
+      const startTime = performance.now();
 
-      const counter = setInterval(() => {
-        start += increment;
-        if (start >= target) {
-          el.innerText = Math.floor(target) + suffix;
-          clearInterval(counter);
-        } else {
-          el.innerText = Math.floor(start) + suffix;
+      const updateCounter = (currentTime) => {
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        const value = Math.floor(progress * target);
+        el.innerText = value + suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
         }
-      }, stepTime);
+      };
+
+      requestAnimationFrame(updateCounter);
     };
 
-    /* ===== OBSERVER ===== */
+    /* ===== INTERSECTION OBSERVER ===== */
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !started.current) {
             started.current = true;
+
+            sectionRef.current.classList.add("sps-visible");
+
             animateCount(stat1Ref.current, 92, "%");
             animateCount(stat2Ref.current, 50000, "+");
           }
         });
       },
-      { threshold: 0.4 }
+      { threshold: 0.3 }
     );
 
-    observer.observe(stat1Ref.current);
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
     /* ===== STYLES ===== */
-const css = `
-/* ===== ABOUT SLIDE ===== */
-.sps-about{
-  padding:70px 6vw;
-  background:#F6F1F8; /* NOT CHANGED */
-  font-family:Inter,system-ui;
+    const css = `
+/* ===== SECTION ===== */
+.sps-about {
+  padding: 0px 6vw;
+  // background: #F6F1F8;
+  font-family: Inter, system-ui;
+  overflow: hidden;
 }
 
-/* LAYOUT */
-.sps-about-wrap{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  align-items:center;
-  gap:50px;
+/* ANIMATION BASE */
+.sps-about-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 1s ease;
+}
+
+.sps-visible .sps-about-wrap {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* IMAGE */
-.sps-about-img img{
-  width:100%;
-  height:500px;
-  border-radius:18px;
-  box-shadow:0 12px 30px rgba(21,48,77,0.25);
+.sps-about-img img {
+  width: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  border-radius: 22px;
+  box-shadow: 0 20px 50px rgba(21, 48, 77, 0.25);
+  transition: transform 0.6s ease;
+}
+
+.sps-about-img img:hover {
+  transform: scale(1.05);
 }
 
 /* CONTENT */
-.sps-about-content small{
-  display:inline-block;
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:0.08em;
-  color:#486C85;  /* blue accent */
-  margin-bottom:14px;
+.sps-about-content small {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #486C85;
+  display: inline-block;
+  margin-bottom: 18px;
 }
 
-.sps-about-content h2{
-  font-size:42px;
-  font-weight:900;
-  line-height:1.2;
-  margin-bottom:18px;
-  color:#15304D; /* dark blue */
+.sps-about-content h2 {
+  font-size: 44px;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  color: #15304D;
 }
 
-.sps-about-content h2 span{
-  background:linear-gradient(90deg,#15304D,#486C85);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+.sps-about-content h2 span {
+  background: linear-gradient(90deg,#15304D,#486C85);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.sps-about-content p{
-  font-size:16px;
-  line-height:1.75;
-  color:#486C85;
-  max-width:520px;
+.sps-about-content p {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #486C85;
+  max-width: 540px;
 }
 
 /* STATS */
-.sps-about-stats{
-  display:flex;
-  gap:46px;
-  margin:32px 0 34px;
+.sps-about-stats {
+  display: flex;
+  gap: 50px;
+  margin: 40px 0;
+  flex-wrap: wrap;
 }
 
-.sps-stat h3{
-  font-size:38px;
-  font-weight:900;
-  background:linear-gradient(90deg,#15304D,#486C85);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  margin-bottom:6px;
+.sps-stat h3 {
+  font-size: 40px;
+  font-weight: 900;
+  background: linear-gradient(90deg,#15304D,#486C85);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 6px;
 }
 
-.sps-stat p{
-  font-size:14px;
-  color:#486C85;
-  max-width:210px;
+.sps-stat p {
+  font-size: 14px;
+  color: #486C85;
+  max-width: 220px;
 }
 
 /* BUTTON */
-.sps-about-btn{
-  display:inline-block;
-  padding:14px 30px;
-  background:linear-gradient(90deg,#15304D,#486C85);
-  color:white;
-  font-weight:800;
-  border-radius:14px;
-  text-decoration:none;
-  transition:0.3s;
-  border:none;
+.sps-about-btn {
+  display: inline-block;
+  padding: 15px 34px;
+  background: linear-gradient(90deg,#15304D,#486C85);
+  color: white;
+  font-weight: 800;
+  border-radius: 16px;
+  text-decoration: none;
+  transition: all 0.4s ease;
 }
 
-.sps-about-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 12px 30px rgba(72,108,133,0.45);
+.sps-about-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(72,108,133,0.4);
 }
 
-/* MOBILE */
-@media(max-width:900px){
-  .sps-about{
-    padding:50px 5vw;
+/* ===== TABLET ===== */
+@media (max-width: 1024px) {
+  .sps-about-wrap {
+    gap: 40px;
   }
 
-  .sps-about-wrap{
-    grid-template-columns:1fr;
+  .sps-about-content h2 {
+    font-size: 36px;
+  }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .sps-about {
+    padding: 60px 5vw;
   }
 
-  .sps-about-content h2{
-    font-size:32px;
+  .sps-about-wrap {
+    grid-template-columns: 1fr;
+    text-align: center;
   }
 
-  .sps-about-stats{
-    flex-direction:column;
-    gap:22px;
+  .sps-about-content p {
+    margin: 0 auto;
+  }
+
+  .sps-about-stats {
+    justify-content: center;
+  }
+
+  .sps-about-content h2 {
+    font-size: 28px;
+  }
+
+  .sps-about-img img {
+    max-height: 380px;
   }
 }
 `;
@@ -170,18 +211,16 @@ const css = `
   }, []);
 
   return (
-    <section className="sps-about">
+    <section className="sps-about" ref={sectionRef}>
       <div className="sps-about-wrap">
 
-        {/* IMAGE */}
         <div className="sps-about-img">
           <img
             src="/images/bgserv/setting.png"
-            alt="SPS Packers and Movers Team"
+            alt="Chennai Lal Packers and Movers Team"
           />
         </div>
 
-        {/* CONTENT */}
         <div className="sps-about-content">
           <small>ABOUT CHENNAI LAL PACKERS & MOVERS</small>
 
@@ -191,8 +230,8 @@ const css = `
 
           <p>
             CHENNAI LAL Packers and Movers is committed to delivering reliable,
-            secure, and professional relocation services. With a strong
-            focus on customer satisfaction, we handle every move with care,
+            secure, and professional relocation services. With a strong focus
+            on customer satisfaction, we handle every move with care,
             precision, and responsibility.
           </p>
 
@@ -219,10 +258,6 @@ const css = `
 }
 
 
-
-
-
-
 function Testimonials() {
 
   const testimonials = [
@@ -244,69 +279,91 @@ function Testimonials() {
   ];
 
   const [index, setIndex] = useState(0);
+  const intervalRef = useRef(null);
 
-  const next = () => setIndex((index + 1) % testimonials.length);
-  const prev = () => setIndex((index - 1 + testimonials.length) % testimonials.length);
+  const next = () => {
+    setIndex((prev) => (prev + 1) % testimonials.length);
+  };
 
+  const prev = () => {
+    setIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  /* ===== AUTO SLIDE ===== */
+  useEffect(() => {
+    intervalRef.current = setInterval(next, 5000);
+    return () => clearInterval(intervalRef.current);
+  }, []);
+
+  /* ===== CSS ===== */
   useEffect(() => {
     const css = `
-/* ================== WRAPPER ================== */
+/* ================= SECTION ================= */
 .sps-testimonial-section {
-  padding: 80px 6vw;
-  text-align: center;
+  // padding: 90px 6vw;
   font-family: Inter, system-ui;
+  // background: #f8fbff;
+  text-align: center;
+  overflow: hidden;
 }
 
 .sps-testimonial-title {
-  font-size: 40px;
+  font-size: 44px;
   font-weight: 900;
-  color: #062242; /* BLUE */
-  margin-bottom: 40px;
+  color: #062242;
+  margin-bottom: 60px;
 }
 
+/* ================= SLIDER ================= */
 .sps-testimonial-slider {
-  max-width: 750px;
+  max-width: 800px;
   margin: auto;
   position: relative;
 }
 
-/* ================== CARD ================== */
+/* ================= CARD ================= */
 .sps-testimonial-card {
-  border-radius: 18px;
-  padding: 50px 35px;
   position: relative;
-  color: #062242; /* BLUE TEXT */
   background: white;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-  transition: 0.5s;
-  opacity: 0;
-  transform: translateY(20px);
+  border-radius: 24px;
+  padding: 60px 40px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.08);
+  transition: all 0.6s ease;
+  animation: fadeSlide 0.7s ease;
 }
 
-.sps-testimonial-card.active {
-  opacity: 1;
-  transform: translateY(0);
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* bubble shape */
-.sps-testimonial-bubble {
+/* QUOTE ICON BACKGROUND */
+.sps-testimonial-card::before {
+  content: "“";
   position: absolute;
-  inset: 0;
-  border-radius: 30px;
-  background: linear-gradient(135deg, #062242, #3F6C87); /* BLUE GRADIENT */
-  z-index: -1;
-  clip-path: polygon(0 0, 92% 0, 100% 50%, 92% 100%, 0 100%);
+  font-size: 120px;
+  color: rgba(6,34,66,0.05);
+  top: 20px;
+  left: 30px;
+  font-weight: 900;
 }
 
-/* ================== IMAGE ================== */
+/* ================= IMAGE ================= */
 .sps-testimonial-img {
-  width: 90px;
-  height: 90px;
+  width: 95px;
+  height: 95px;
   border-radius: 50%;
-  border: 4px solid #fff;
   overflow: hidden;
   margin: auto;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  border: 5px solid #062242;
+  transition: transform 0.4s ease;
 }
 
 .sps-testimonial-img img {
@@ -315,54 +372,86 @@ function Testimonials() {
   object-fit: cover;
 }
 
-/* ================== TEXT ================== */
+.sps-testimonial-img:hover {
+  transform: scale(1.1);
+}
+
+/* ================= TEXT ================= */
 .sps-testimonial-text {
-  font-size: 16px;
-  line-height: 1.7;
-  margin-bottom: 20px;
-  color: #062242; /* BLUE */
+  font-size: 17px;
+  line-height: 1.8;
+  color: #062242;
+  margin-bottom: 25px;
   padding: 0 10px;
   font-weight: 500;
 }
 
 .sps-testimonial-name {
   font-size: 18px;
-  color: #062242; /* BLUE */
-  font-weight: 700;
+  font-weight: 800;
+  color: #062242;
 }
 
-/* ================== SLIDER BUTTONS ================== */
+/* ================= CONTROLS ================= */
 .sps-testimonial-controls {
-  margin-top: 25px;
+  margin-top: 35px;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 25px;
 }
 
 .sps-testimonial-btn {
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   border: none;
-  background: linear-gradient(135deg,#062242,#3F6C87); /* BLUE GRADIENT */
-  color: #fff;
-  font-size: 20px;
   cursor: pointer;
-  box-shadow: 0 10px 20px rgba(6,34,66,0.3);
-  transition: 0.3s;
+  font-size: 22px;
+  color: white;
+  background: linear-gradient(135deg,#062242,#3F6C87);
+  box-shadow: 0 12px 25px rgba(6,34,66,0.3);
+  transition: all 0.3s ease;
 }
 
 .sps-testimonial-btn:hover {
-  opacity: 0.9;
+  transform: translateY(-4px);
+  box-shadow: 0 18px 35px rgba(6,34,66,0.4);
 }
 
-/* ================== MOBILE ================== */
-@media(max-width: 600px) {
+/* ================= TABLET ================= */
+@media (max-width: 992px) {
   .sps-testimonial-title {
-    font-size: 32px;
+    font-size: 36px;
   }
+
+  .sps-testimonial-card {
+    padding: 50px 30px;
+  }
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 600px) {
+  .sps-testimonial-section {
+    padding: 60px 5vw;
+  }
+
+  .sps-testimonial-title {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+
   .sps-testimonial-card {
     padding: 40px 20px;
+  }
+
+  .sps-testimonial-text {
+    font-size: 15px;
+  }
+
+  .sps-testimonial-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
   }
 }
 `;
@@ -374,25 +463,25 @@ function Testimonials() {
 
   return (
     <section className="sps-testimonial-section">
-      
-      <h2 className="sps-testimonial-title">What Our Clients Say</h2>
+
+      <h2 className="sps-testimonial-title">
+        What Our Clients Say
+      </h2>
 
       <div className="sps-testimonial-slider">
 
-        <div className="sps-testimonial-card active">
-          <div
-            className="sps-testimonial-bubble"
-            style={{ 
-              background: "linear-gradient(135deg, #062242, #3F6C87)" 
-            }}
-          ></div>
-
+        <div className="sps-testimonial-card" key={index}>
           <div className="sps-testimonial-img">
             <img src={testimonials[index].img} alt="client" />
           </div>
 
-          <p className="sps-testimonial-text">“{testimonials[index].text}”</p>
-          <div className="sps-testimonial-name">— {testimonials[index].name}</div>
+          <p className="sps-testimonial-text">
+            “{testimonials[index].text}”
+          </p>
+
+          <div className="sps-testimonial-name">
+            — {testimonials[index].name}
+          </div>
         </div>
 
         <div className="sps-testimonial-controls">
@@ -404,7 +493,6 @@ function Testimonials() {
     </section>
   );
 }
-
 
 
 function WorkProcess() {
@@ -423,7 +511,6 @@ function WorkProcess() {
   text-align:center;
   margin-bottom:70px;
 }
-
 .sps-process-head small{
   display:block;
   font-size:13px;
@@ -432,7 +519,6 @@ function WorkProcess() {
   color:#2F5D78;
   margin-bottom:14px;
 }
-
 .sps-process-head h2{
   font-size:42px;
   font-weight:900;
@@ -440,7 +526,6 @@ function WorkProcess() {
   margin:0;
   color:#102A3A;
 }
-
 .sps-process-head h2 span{
   color:#0E2A44;
 }
@@ -459,14 +544,12 @@ function WorkProcess() {
 
 /* CIRCLE */
 .sps-step-circle{
-  display:inline-block;
   position:relative;
   width:120px;
   height:120px;
   margin:0 auto 22px;
   border-radius:50%;
   border:10px solid rgba(14,42,68,0.35);
-
   background-color:#0E2A44;
   background-image:
     repeating-radial-gradient(
@@ -477,12 +560,10 @@ function WorkProcess() {
       rgba(47,93,120,1) 12%,
       rgba(255,255,255,1) 24px
     );
-
   box-shadow:
     inset 0 12px 18px rgba(255,255,255,0.25),
     inset 0 -8px 14px rgba(0,0,0,0.45),
     0 14px 30px rgba(14,42,68,0.45);
-
   display:grid;
   place-items:center;
   transform:scale(0.85);
@@ -522,7 +603,7 @@ function WorkProcess() {
   z-index:3;
 }
 
-/* JELLY */
+/* JELLY ANIMATION */
 @keyframes jelly {
   from {
     background-size:60px 60px, 24px 24px;
@@ -542,7 +623,6 @@ function WorkProcess() {
   margin-bottom:10px;
   color:#0E2A44;
 }
-
 .sps-step p{
   font-size:14px;
   line-height:1.6;
@@ -558,7 +638,6 @@ function WorkProcess() {
     gap:50px;
   }
 }
-
 @media(max-width:600px){
   .sps-process{
     padding:60px 5vw;
@@ -571,6 +650,7 @@ function WorkProcess() {
   }
 }
     `;
+
     const style = document.createElement("style");
     style.innerHTML = css;
     document.head.appendChild(style);
@@ -627,84 +707,187 @@ function WorkProcess() {
   );
 }
 
+
+
+
 function CustomerSatisfactionTimeline() {
+  const sectionRef = useRef(null);
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("sps-cust3-visible");
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
     const css = `
 
 /* ================== SECTION ================== */
 .sps-cust3-section {
-  padding: 90px 6vw;
+  // padding: 100px 6vw;
   font-family: Inter, system-ui;
-  background: #ffffff;
+  // background: #ffffff;
+  overflow: hidden;
 }
 
+/* TITLE */
 .sps-cust3-title {
   text-align: center;
-  font-size: 42px;
+  font-size: 44px;
   font-weight: 900;
   color: #1E1B4B;
   margin-bottom: 25px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s ease;
+}
+
+.sps-cust3-visible .sps-cust3-title {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .sps-cust3-sub {
   max-width: 780px;
-  margin: 0 auto 55px auto;
+  margin: 0 auto 70px auto;
   text-align: center;
   font-size: 17px;
   color: #555;
   line-height: 1.8;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s ease 0.2s;
+}
+
+.sps-cust3-visible .sps-cust3-sub {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ================= TIMELINE ================= */
 .sps-cust3-timeline {
-  border-left: 5px solid #062242; /* BLUE */
-  padding-left: 35px;
-  max-width: 780px;
+  position: relative;
+  max-width: 800px;
   margin: auto;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 45px;
+  padding-left: 45px;
+}
+
+/* ANIMATED LINE */
+.sps-cust3-timeline::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 0;
+  width: 4px;
+  height: 0;
+  background: linear-gradient(to bottom,#062242,#3F6C87);
+  transition: height 1.2s ease;
+}
+
+.sps-cust3-visible .sps-cust3-timeline::before {
+  height: 100%;
 }
 
 /* ITEM */
 .sps-cust3-item {
   position: relative;
-  padding-bottom: 5px;
-  animation: fadeSlide 0.7s ease;
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: 0.7s ease;
 }
+
+.sps-cust3-visible .sps-cust3-item {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* STAGGER */
+.sps-cust3-visible .sps-cust3-item:nth-child(1){ transition-delay:0.3s; }
+.sps-cust3-visible .sps-cust3-item:nth-child(2){ transition-delay:0.5s; }
+.sps-cust3-visible .sps-cust3-item:nth-child(3){ transition-delay:0.7s; }
+.sps-cust3-visible .sps-cust3-item:nth-child(4){ transition-delay:0.9s; }
+.sps-cust3-visible .sps-cust3-item:nth-child(5){ transition-delay:1.1s; }
 
 /* DOT */
 .sps-cust3-item::before {
   content: "";
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  border: 4px solid #062242; /* BLUE OUTLINE */
-  background: linear-gradient(90deg, #062242, #3F6C87); /* BLUE GRADIENT */
   position: absolute;
-  left: -47px;
-  top: 4px;
+  left: -33px;
+  top: 5px;
+  background: linear-gradient(135deg,#062242,#3F6C87);
+  box-shadow: 0 0 0 6px rgba(6,34,66,0.1);
+  transition: 0.3s ease;
 }
 
-/* TEXT */
+.sps-cust3-item:hover::before {
+  transform: scale(1.2);
+}
+
+/* TEXT CARD */
 .sps-cust3-text {
   font-size: 18px;
   font-weight: 600;
   color: #2a2a2a;
+  background: #f9fbff;
+  padding: 18px 22px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  transition: 0.3s ease;
 }
 
-/* ANIMATION */
-@keyframes fadeSlide {
-  from { opacity: 0; transform: translateX(-15px); }
-  to { opacity: 1; transform: translateX(0); }
+.sps-cust3-item:hover .sps-cust3-text {
+  transform: translateX(6px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
 }
 
-/* MOBILE */
-@media(max-width: 700px) {
-  .sps-cust3-title { font-size: 34px; }
-  .sps-cust3-timeline { padding-left: 25px; }
-  .sps-cust3-item::before { left: -35px; }
+/* ================= TABLET ================= */
+@media(max-width:900px){
+  .sps-cust3-title {
+    font-size: 36px;
+  }
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:600px){
+  .sps-cust3-section {
+    padding: 70px 5vw;
+  }
+
+  .sps-cust3-title {
+    font-size: 28px;
+  }
+
+  .sps-cust3-sub {
+    font-size: 15px;
+  }
+
+  .sps-cust3-timeline {
+    padding-left: 35px;
+    gap: 35px;
+  }
+
+  .sps-cust3-item::before {
+    left: -28px;
+  }
+
+  .sps-cust3-text {
+    font-size: 15px;
+  }
 }
 
     `;
@@ -712,16 +895,20 @@ function CustomerSatisfactionTimeline() {
     const style = document.createElement("style");
     style.innerHTML = css;
     document.head.appendChild(style);
+
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <section className="sps-cust3-section">
+    <section className="sps-cust3-section" ref={sectionRef}>
 
-      <h2 className="sps-cust3-title">⭐ Customer Satisfaction Guaranteed</h2>
+      <h2 className="sps-cust3-title">
+        ⭐ Customer Satisfaction Guaranteed
+      </h2>
 
       <p className="sps-cust3-sub">
-        We prioritize safety, speed, and service quality, making us one of the 
-        most preferred packers and movers in Tamilnadu  
+        We prioritize safety, speed, and service quality, making us one of the
+        most preferred packers and movers in Tamilnadu.
         <br /><br />
         Thousands of customers trust us because of:
       </p>
@@ -755,415 +942,224 @@ function CustomerSatisfactionTimeline() {
 }
 
 
-function PopularServices() {
 
-  const navigate = useNavigate();
-
-  const openService = (path) => {
-    navigate(`/services/${path}`);
-  };
-
-  useEffect(() => {
-
-    const css = `
-*{ box-sizing:border-box; margin:0; padding:0; }
-
-.popular-wrap{
-  width:100%;
-  padding:60px 8vw;
-  background:#FFFFFF;
-}
-
-.popular-wrap h2{
-  text-align:center;
-  font-size:32px;
-  font-weight:900;
-  color:#062242; /* UPDATED BLUE */
-  margin-bottom:40px;
-}
-
-/******** GRID ********/
-.popular-grid{
-  display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:28px;
-}
-
-/******** CARD ********/
-.service-card{
-  background:#F6F1F8;
-  border:1px solid #E7D8EF;
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 10px 26px rgba(0,0,0,0.08);
-  cursor:pointer;
-  transition:0.25s ease;
-}
-
-.service-card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 16px 32px rgba(0,0,0,0.12);
-}
-
-.card-img{
-  width:100%;
-  height:200px;
-  background:#eee;
-}
-.card-img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.card-body{
-  padding:22px 20px;
-}
-
-.card-body h3{
-  font-size:20px;
-  font-weight:800;
-  color:#062242; /* UPDATED BLUE */
-  margin-bottom:8px;
-}
-
-.card-body p{
-  font-size:15px;
-  color:#062242; /* UPDATED BLUE */
-  line-height:1.4;
-  margin-bottom:16px;
-}
-
-/******** BUTTON — BLUE GRADIENT ********/
-.card-btn{
-  padding:10px 20px;
-  background:linear-gradient(90deg,#062242,#3F6C87);
-  color:white;
-  border:none;
-  border-radius:10px;
-  font-weight:700;
-  cursor:pointer;
-  font-size:15px;
-}
-
-/******** MOBILE ********/
-@media(max-width:900px){
-  .popular-grid{
-    grid-template-columns:1fr 1fr;
-  }
-}
-@media(max-width:600px){
-  .popular-grid{
-    grid-template-columns:1fr;
-  }
-  .card-img{
-    height:180px;
-  }
-}
-`;
-
-    const style = document.createElement("style");
-    style.innerHTML = css;
-    document.head.appendChild(style);
-
-  }, []);
-
-  return (
-    <section className="popular-wrap">
-
-      <h2>Popular Moving Services</h2>
-
-      <div className="popular-grid">
-
-        {/* CARD 1 */}
-        <div className="service-card" onClick={() => openService("house-shifting")}>
-          <div className="card-img">
-            <img src="/images/services/house.jpg" alt="House Shifting" />
-          </div>
-          <div className="card-body">
-            <h3>House Shifting</h3>
-            <p>Safe & reliable home relocation with premium packing materials.</p>
-            <button className="card-btn">Learn More</button>
-          </div>
-        </div>
-
-        {/* CARD 2 */}
-        <div className="service-card" onClick={() => openService("office-shifting")}>
-          <div className="card-img">
-            <img src="/images/services/office.jpg" alt="Office Shifting" />
-          </div>
-          <div className="card-body">
-            <h3>Office Shifting</h3>
-            <p>Professional office moves with zero downtime and secure handling.</p>
-            <button className="card-btn">Learn More</button>
-          </div>
-        </div>
-
-        {/* CARD 3 */}
-        <div className="service-card" onClick={() => openService("transportation")}>
-          <div className="card-img">
-            <img src="/images/services/transport.jpg" alt="Transportation" />
-          </div>
-          <div className="card-body">
-            <h3>Transportation</h3>
-            <p>Fast, safe & affordable vehicle and goods transportation services.</p>
-            <button className="card-btn">Learn More</button>
-          </div>
-        </div>
-
-      </div>
-
-    </section>
-  );
-}
-
-
-
-
- function TopServices() {
-
-  const navigate = useNavigate();
-
-  const goTo = (path) => {
-    navigate(`/services/${path}`);
-  };
-
-  useEffect(() => {
-
-    const css = `
-*{ box-sizing:border-box; margin:0; padding:0; }
-
-/* ================= SECTION WRAPPER ================= */
-.top-services{
-  width:100%;
-  padding:50px 8vw;
-  background:white;
-}
-
-.top-services h2{
-  text-align:center;
-  font-size:32px;
-  font-weight:800;
-  color:#062242; /* BLUE */
-  margin-bottom:30px;
-}
-
-/* ================= GRID ================= */
-.services-grid{
-  display:grid;
-  grid-template-columns:repeat(6, 1fr);
-  gap:16px;
-}
-
-.service-box{
-  background:white;
-  padding:20px;
-  border-radius:18px;
-  text-align:center;
-  border:1px solid #E7D8EF;
-  box-shadow:0 6px 14px rgba(0,0,0,0.06);
-  cursor:pointer;
-  transition:0.25s ease;
-}
-
-.service-box:hover{
-  transform:translateY(-4px);
-  box-shadow:0 10px 20px rgba(0,0,0,0.10);
-}
-
-/* ICON */
-.service-icon{
-  width:60px;
-  height:60px;
-  border-radius:14px;
-  margin:0 auto 12px;
-  display:grid;
-  place-items:center;
-  font-size:26px;
-  font-weight:800;
-  color:white;
-  background:linear-gradient(135deg,#062242,#3F6C87);
-}
-
-/* PARAGRAPH / TEXT */
-.service-box p{
-  font-size:16px;
-  font-weight:600;
-  color:#062242; /* BLUE */
-}
-
-/* ================= RESPONSIVE ================= */
-@media(max-width:1100px){
-  .services-grid{
-    grid-template-columns:repeat(3, 1fr);
-  }
-}
-@media(max-width:700px){
-  .services-grid{
-    grid-template-columns:repeat(2, 1fr);
-  }
-}
-@media(max-width:450px){
-  .services-grid{
-    grid-template-columns:1fr;
-  }
-}
-`;
-
-    const style = document.createElement("style");
-    style.innerHTML = css;
-    document.head.appendChild(style);
-
-  }, []);
-
-  return (
-    <section className="top-services">
-
-      <h2>Our Quick Moving Services</h2>
-
-      <div className="services-grid">
-
-        <div className="service-box" onClick={() => goTo("house-shifting")}>
-          <div className="service-icon">🏠</div>
-          <p>House Shifting</p>
-        </div>
-
-        <div className="service-box" onClick={() => goTo("transportation")}>
-          <div className="service-icon">🚚</div>
-          <p>Transportation</p>
-        </div>
-
-        <div className="service-box" onClick={() => goTo("godown-shifting")}>
-          <div className="service-icon">📦</div>
-          <p>Godown Shifting</p>
-        </div>
-
-        <div className="service-box" onClick={() => goTo("ac-installation")}>
-          <div className="service-icon">❄️</div>
-          <p>AC Installation</p>
-        </div>
-
-        <div className="service-box" onClick={() => goTo("office-shifting")}>
-          <div className="service-icon">🏢</div>
-          <p>Office Shifting</p>
-        </div>
-
-        <div className="service-box" onClick={() => goTo("commercial-moves")}>
-          <div className="service-icon">🏭</div>
-          <p>Commercial Moves</p>
-        </div>
-
-      </div>
-
-    </section>
-  );
-}
 
 
 
 function WhyyChooseUs() {
-  
+  const sectionRef = useRef(null);
+
   useEffect(() => {
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("why-visible");
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
     const css = `
 *{ box-sizing:border-box; margin:0; padding:0; }
 
+/* ===== SECTION ===== */
 .why-wrapper{
   width:100%;
-  padding:60px 8vw;
-  background:#FFFFFF;
+  padding:0px 8vw;
+  // background:#FFFFFF;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:40px;
+  gap:60px;
   align-items:center;
+  overflow:hidden;
 }
 
 /* LEFT CONTENT */
+.why-left{
+  opacity:0;
+  transform:translateX(-60px);
+  transition:0.9s ease;
+}
+
+.why-visible .why-left{
+  opacity:1;
+  transform:translateX(0);
+}
+
 .why-left h2{
-  font-size:34px;
+  font-size:40px;
   font-weight:900;
-  color:#062242; /* UPDATED BLUE */
-  margin-bottom:20px;
+  color:#062242;
+  margin-bottom:24px;
+  line-height:1.3;
 }
 
 .why-left p.sub{
-  font-size:17px;
-  color:#062242; /* UPDATED BLUE */
-  margin-bottom:26px;
-  max-width:480px;
+  font-size:18px;
+  color:#3F6C87;
+  margin-bottom:36px;
+  max-width:520px;
+  line-height:1.7;
 }
 
+/* BENEFITS LIST */
 .why-list{
   display:flex;
   flex-direction:column;
-  gap:18px;
+  gap:22px;
 }
 
-/* Each benefit item */
+/* EACH ITEM */
 .why-item{
   display:flex;
-  gap:14px;
-  padding:14px 18px;
+  gap:18px;
+  padding:18px 22px;
   background:#F6F1F8;
-  border-radius:14px;
+  border-radius:16px;
   border:1px solid #E7D8EF;
+  transition:all 0.4s ease;
+  opacity:0;
+  transform:translateY(40px);
 }
 
-/* ICON UPDATED */
+.why-visible .why-item{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* STAGGER */
+.why-visible .why-item:nth-child(1){ transition-delay:0.2s; }
+.why-visible .why-item:nth-child(2){ transition-delay:0.4s; }
+.why-visible .why-item:nth-child(3){ transition-delay:0.6s; }
+.why-visible .why-item:nth-child(4){ transition-delay:0.8s; }
+
+/* HOVER EFFECT */
+.why-item:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 35px rgba(6,34,66,0.15);
+}
+
+/* ICON */
 .why-icon{
-  min-width:46px;
-  height:46px;
+  min-width:50px;
+  height:50px;
   border-radius:14px;
-  background:linear-gradient(135deg,#062242,#3F6C87); /* BLUE GRADIENT */
+  background:linear-gradient(135deg,#062242,#3F6C87);
   color:white;
   display:grid;
   place-items:center;
   font-size:22px;
   font-weight:800;
+  transition:0.3s;
 }
 
-/* TEXT UPDATED */
+.why-item:hover .why-icon{
+  transform:scale(1.1);
+}
+
+/* TEXT */
 .why-text h4{
   font-size:18px;
-  font-weight:700;
-  color:#062242; /* UPDATED BLUE */
+  font-weight:800;
+  color:#062242;
+  margin-bottom:4px;
 }
 
 .why-text p{
   font-size:14px;
-  color:#062242; /* UPDATED BLUE */
+  color:#486C85;
+  line-height:1.6;
 }
 
 /* RIGHT IMAGE */
 .why-img{
   display:flex;
   justify-content:center;
-}
-.why-img img{
-  width:100%;
-  max-width:500px;
-  border-radius:24px;
-  box-shadow:0 12px 30px rgba(0,0,0,0.12);
+  opacity:0;
+  transform:translateX(60px);
+  transition:0.9s ease;
 }
 
-/* RESPONSIVE */
-@media(max-width:900px){
+.why-visible .why-img{
+  opacity:1;
+  transform:translateX(0);
+}
+
+.why-img img{
+  width:100%;
+  max-width:520px;
+  border-radius:28px;
+  box-shadow:0 25px 50px rgba(0,0,0,0.12);
+  transition:transform 0.5s ease;
+}
+
+.why-img img:hover{
+  transform:scale(1.05);
+}
+
+/* ===== TABLET ===== */
+@media(max-width:1000px){
+  .why-wrapper{
+    gap:40px;
+  }
+
+  .why-left h2{
+    font-size:32px;
+  }
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
   .why-wrapper{
     grid-template-columns:1fr;
+    padding:0px 5vw;
     text-align:center;
   }
-  .why-left h2{
-    font-size:28px;
+
+  .why-left{
+    transform:translateY(40px);
   }
+
+  .why-visible .why-left{
+    transform:translateY(0);
+  }
+
+  .why-img{
+    transform:translateY(40px);
+  }
+
+  .why-visible .why-img{
+    transform:translateY(0);
+  }
+
+  .why-left h2{
+    font-size:26px;
+  }
+
+  .why-left p.sub{
+    font-size:16px;
+    margin:auto;
+    margin-bottom:30px;
+  }
+
   .why-list{
     align-items:center;
   }
+
   .why-item{
-    max-width:380px;
+    max-width:420px;
     text-align:left;
   }
+
   .why-img img{
-    max-width:350px;
+    max-width:360px;
   }
 }
 `;
@@ -1172,17 +1168,18 @@ function WhyyChooseUs() {
     style.innerHTML = css;
     document.head.appendChild(style);
 
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <section className="why-wrapper">
+    <section className="why-wrapper" ref={sectionRef}>
 
-      {/* LEFT CONTENT */}
       <div className="why-left">
         <h2>Why Choose Chennai Lal Packers & Movers?</h2>
 
         <p className="sub">
-          We make every move safe, smooth and stress-free with our professional packing, expert handling and on-time delivery.
+          We make every move safe, smooth and stress-free with our professional 
+          packing, expert handling and on-time delivery.
         </p>
 
         <div className="why-list">
@@ -1222,85 +1219,199 @@ function WhyyChooseUs() {
         </div>
       </div>
 
-      {/* RIGHT IMAGE */}
       <div className="why-img">
-        <img src="/images/bgserv/whymini.png" alt="Why Choose Chennai Lal Packers & Movers" />
+        <img 
+          src="/images/bgserv/whymini.png" 
+          alt="Why Choose Chennai Lal Packers & Movers" 
+        />
       </div>
 
     </section>
   );
 }
 
+
+
+
 function StrengthsSection() {
 
+  const sectionRef = useRef(null);
+  const numberRefs = useRef([]);
+
   useEffect(() => {
+
+    const animateCount = (el, target) => {
+      let start = 0;
+      const duration = 1800;
+      const startTime = performance.now();
+
+      const update = (currentTime) => {
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        const value = Math.floor(progress * target);
+        el.innerText = value + "+";
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        }
+      };
+
+      requestAnimationFrame(update);
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+
+          entry.target.classList.add("strengths-visible");
+
+          numberRefs.current.forEach((el) => {
+            const value = parseInt(el.getAttribute("data-target"));
+            animateCount(el, value);
+          });
+
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
     const css = `
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* WRAPPER */
+/* ===== SECTION ===== */
 .strengths-section {
   width: 100%;
-  padding: 70px 6vw;
-  background: #F6F1F8;
+  // padding: 100px 6vw;
+  // background: #F6F1F8;
   text-align: center;
   font-family: Inter, system-ui;
+  overflow: hidden;
 }
 
 /* TITLE */
 .strengths-title {
-  font-size: 34px;
+  font-size: 40px;
   font-weight: 900;
-  color: #062242; /* UPDATED BLUE */
-  margin-bottom: 8px;
+  color: #062242;
+  margin-bottom: 10px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s ease;
 }
 
 .strengths-sub {
-  font-size: 17px;
-  color: #062242; /* UPDATED BLUE */
-  margin-bottom: 50px;
+  font-size: 18px;
+  color: #486C85;
+  margin-bottom: 70px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s ease 0.2s;
+}
+
+.strengths-visible .strengths-title,
+.strengths-visible .strengths-sub {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* GRID */
 .strengths-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 50px 40px;
+  gap: 60px 40px;
 }
 
-/* ITEM */
+/* CARD ITEM */
+.strength-item {
+  background: #fff;
+  padding: 35px 20px;
+  border-radius: 18px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  transition: 0.4s ease;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.strengths-visible .strength-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* STAGGER */
+.strengths-visible .strength-item:nth-child(1){ transition-delay:0.2s; }
+.strengths-visible .strength-item:nth-child(2){ transition-delay:0.4s; }
+.strengths-visible .strength-item:nth-child(3){ transition-delay:0.6s; }
+.strengths-visible .strength-item:nth-child(4){ transition-delay:0.8s; }
+.strengths-visible .strength-item:nth-child(5){ transition-delay:1s; }
+.strengths-visible .strength-item:nth-child(6){ transition-delay:1.2s; }
+
+/* HOVER */
+.strength-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 45px rgba(6,34,66,0.15);
+}
+
+/* NUMBER */
 .strength-item h3 {
-  font-size: 38px;
+  font-size: 42px;
   font-weight: 900;
-  background: linear-gradient(90deg, #062242, #3F6C87); /* UPDATED BLUE GRADIENT */
+  background: linear-gradient(90deg, #062242, #3F6C87);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
+/* TITLE */
 .strength-item h4 {
   font-size: 20px;
   font-weight: 800;
-  color: #062242; /* UPDATED BLUE */
+  color: #062242;
   margin-bottom: 6px;
 }
 
 .strength-item p {
   font-size: 14px;
-  color: #062242; /* UPDATED BLUE */
+  color: #486C85;
 }
 
-/* RESPONSIVE */
+/* ===== TABLET ===== */
 @media(max-width: 900px) {
   .strengths-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 30px 20px;
+    gap: 40px 25px;
   }
 }
 
+/* ===== MOBILE ===== */
 @media(max-width: 600px) {
+
+  .strengths-section {
+    padding: 0px 5vw;
+  }
+
+  .strengths-title {
+    font-size: 28px;
+  }
+
+  .strengths-sub {
+    font-size: 15px;
+    margin-bottom: 40px;
+  }
+
   .strengths-grid {
     grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .strength-item {
+    padding: 25px 15px;
+  }
+
+  .strength-item h3 {
+    font-size: 34px;
   }
 }
 `;
@@ -1312,48 +1423,32 @@ function StrengthsSection() {
   }, []);
 
   return (
-    <section className="strengths-section">
+    <section className="strengths-section" ref={sectionRef}>
 
       <h2 className="strengths-title">Our Strengths, Which Makes Us</h2>
       <p className="strengths-sub">The Most Preferred Moving Brand</p>
 
       <div className="strengths-grid">
 
-        <div className="strength-item">
-          <h3>10+</h3>
-          <h4>Years Of Trust</h4>
-          <p>Delivering safe moves since 2025</p>
-        </div>
-
-        <div className="strength-item">
-          <h3>98+</h3>
-          <h4>Moves Annually</h4>
-          <p>Across Chennai & all major cities</p>
-        </div>
-
-        <div className="strength-item">
-          <h3>2+</h3>
-          <h4>Million Sq.Ft</h4>
-          <p>Secure warehousing space</p>
-        </div>
-
-        <div className="strength-item">
-          <h3>60+</h3>
-          <h4>Trained Manpower</h4>
-          <p>Professional team for safe moves</p>
-        </div>
-
-        <div className="strength-item">
-          <h3>100+</h3>
-          <h4>Branches PAN India</h4>
-          <p>Serving 100+ locations</p>
-        </div>
-
-        <div className="strength-item">
-          <h3>100+</h3>
-          <h4>Vehicles</h4>
-          <p>Fleet for every move requirement</p>
-        </div>
+        {[
+          { num: 10, title: "Years Of Trust", desc: "Delivering safe moves since 2025" },
+          { num: 98, title: "Moves Annually", desc: "Across Chennai & all major cities" },
+          { num: 2, title: "Million Sq.Ft", desc: "Secure warehousing space" },
+          { num: 60, title: "Trained Manpower", desc: "Professional team for safe moves" },
+          { num: 100, title: "Branches PAN India", desc: "Serving 100+ locations" },
+          { num: 100, title: "Vehicles", desc: "Fleet for every move requirement" },
+        ].map((item, i) => (
+          <div className="strength-item" key={i}>
+            <h3
+              ref={el => numberRefs.current[i] = el}
+              data-target={item.num}
+            >
+              0+
+            </h3>
+            <h4>{item.title}</h4>
+            <p>{item.desc}</p>
+          </div>
+        ))}
 
       </div>
     </section>
@@ -1361,50 +1456,97 @@ function StrengthsSection() {
 }
 
 
- function MovingRoutesStrip() {
+
+function MovingRoutesStrip() {
+
+  const stripRef = useRef(null);
 
   useEffect(() => {
 
     const css = `
 *{ margin:0; padding:0; box-sizing:border-box; }
 
-/* WRAPPER */
+/* ===== WRAPPER ===== */
 .routes-strip {
   width:100%;
-  background: linear-gradient(90deg, #062242, #3F6C87); /* UPDATED BLUE GRADIENT */
+  background: linear-gradient(90deg, #062242, #3F6C87);
   overflow:hidden;
-  padding:12px 0;
-  white-space: nowrap;
+  padding:16px 0;
   position:relative;
 }
 
-/* MOVING TEXT */
-.routes-track {
-  display:inline-block;
-  white-space:nowrap;
-  animation: scrollText 130s linear infinite; /* SLOW SPEED */
+/* FADE EDGES (Premium Look) */
+.routes-strip::before,
+.routes-strip::after {
+  content:"";
+  position:absolute;
+  top:0;
+  width:80px;
+  height:100%;
+  z-index:2;
+  pointer-events:none;
 }
 
+.routes-strip::before {
+  left:0;
+  background:linear-gradient(to right,#062242,transparent);
+}
+
+.routes-strip::after {
+  right:0;
+  background:linear-gradient(to left,#3F6C87,transparent);
+}
+
+/* TRACK */
+.routes-track {
+  display:flex;
+  width:max-content;
+  animation: scrollLeft 120s linear infinite;
+}
+
+/* PAUSE ON HOVER */
+.routes-strip:hover .routes-track {
+  animation-play-state: paused;
+}
+
+/* ITEM */
 .routes-item {
-  display:inline-block;
-  margin:0 55px;
+  flex-shrink:0;
+  margin:0 45px;
   font-size:18px;
   font-weight:700;
-  color:#ffffff; /* WHITE TEXT (BEST FOR DARK BLUE) */
-  text-shadow:0px 1px 3px rgba(0,0,0,0.25);
+  color:#ffffff;
+  letter-spacing:0.5px;
+  transition: transform 0.3s ease;
 }
 
-/* SCROLL ANIMATION */
-@keyframes scrollText {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+/* HOVER EFFECT */
+.routes-item:hover {
+  transform: scale(1.1);
 }
 
-/* MOBILE */
+/* ANIMATION */
+@keyframes scrollLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ===== TABLET ===== */
+@media(max-width:900px){
+  .routes-track {
+    animation: scrollLeft 45s linear infinite;
+  }
+}
+
+/* ===== MOBILE ===== */
 @media(max-width:600px){
   .routes-item {
     font-size:15px;
-    margin:0 28px;
+    margin:0 25px;
+  }
+
+  .routes-track {
+    animation: scrollLeft 120s linear infinite;
   }
 }
 `;
@@ -1424,18 +1566,11 @@ function StrengthsSection() {
   ];
 
   return (
-    <div className="routes-strip">
+    <div className="routes-strip" ref={stripRef}>
       <div className="routes-track">
 
-        {districts.map((d, i) => (
+        {[...districts, ...districts].map((d, i) => (
           <span key={i} className="routes-item">
-            Packers & Movers in {d}
-          </span>
-        ))}
-
-        {/* Duplicate for infinite scroll */}
-        {districts.map((d, i) => (
-          <span key={"loop"+i} className="routes-item">
             Packers & Movers in {d}
           </span>
         ))}
@@ -1446,25 +1581,49 @@ function StrengthsSection() {
 }
 
 
+
 function WhatWeProvide() {
+  const sectionRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("services-visible");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
     const css = `
-/* ===========================================
-   WHAT WE PROVIDE — SECTION
-=========================================== */
+* { box-sizing:border-box; margin:0; padding:0; }
+
+/* ================= SECTION ================= */
 .services-section {
-  padding: 90px 6vw;
+  padding: 6vw;
+  padding-top:10px;
   text-align: center;
-  background: #ffffff;
+  // background: #ffffff;
+  overflow: hidden;
 }
 
 /* TITLE */
 .services-title {
-  font-size: 36px;
+  font-size: 42px;
   font-weight: 900;
   color: #062242;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s ease;
 }
 
 .services-title span {
@@ -1474,187 +1633,184 @@ function WhatWeProvide() {
 }
 
 .services-subtitle {
-  max-width: 640px;
-  margin: 0 auto 40px auto;
-  color: #3F6C87;
-  font-size: 16px;
+  max-width: 680px;
+  margin: 0 auto 60px auto;
+  color: #486C85;
+  font-size: 17px;
+  line-height: 1.7;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s ease 0.2s;
+}
+
+.services-visible .services-title,
+.services-visible .services-subtitle {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* GRID */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 28px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
 }
 
 /* CARD */
 .service-card2 {
   position: relative;
-  height: 240px;
-  border-radius: 12px;
+  height: 260px;
+  border-radius: 18px;
   overflow: hidden;
   cursor: pointer;
   background-size: cover;
   background-position: center;
-  transition: all 0.4s ease;
-}
-
-.service-card2::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(6, 34, 66, 0.78);
-  transition: 0.35s ease;
-}
-
-.service-card2:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 26px rgba(0,0,0,0.25);
-}
-
-.service-card2:hover::before {
-  background: rgba(6, 34, 66, 0.55);
-}
-
-/* CARD CONTENT */
-.service-inner {
-  position: absolute;
-  z-index: 5;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  text-align: center;
-}
-
-.service-icon {
-  font-size: 38px;
-  margin-bottom: 12px;
-  color: #ffffff;
-}
-
-.service-text {
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-
-/* RESPONSIVE */
-@media(max-width:1100px){
-  .services-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media(max-width:600px){
-  .services-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ===========================================
-   GLOBAL REVEAL ANIMATIONS
-=========================================== */
-.reveal {
+  transition: 0.5s ease;
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.9s ease;
+  transform: translateY(40px);
 }
-.reveal.show {
+
+.services-visible .service-card2 {
   opacity: 1;
   transform: translateY(0);
 }
 
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-40px);
-  transition: all 0.9s ease;
-}
-.reveal-left.show {
-  opacity: 1;
-  transform: translateX(0);
+/* ACTIVE (MOBILE TOUCH FEEDBACK) */
+.service-card2:active {
+  transform: scale(0.98);
 }
 
-.reveal-right {
-  opacity: 0;
-  transform: translateX(40px);
-  transition: all 0.9s ease;
-}
-.reveal-right.show {
-  opacity: 1;
-  transform: translateX(0);
+/* STAGGER */
+.services-visible .service-card2:nth-child(1){ transition-delay:0.2s; }
+.services-visible .service-card2:nth-child(2){ transition-delay:0.4s; }
+.services-visible .service-card2:nth-child(3){ transition-delay:0.6s; }
+.services-visible .service-card2:nth-child(4){ transition-delay:0.8s; }
+.services-visible .service-card2:nth-child(5){ transition-delay:1s; }
+.services-visible .service-card2:nth-child(6){ transition-delay:1.2s; }
+
+/* OVERLAY */
+.service-card2::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(6,34,66,0.75);
+  transition: 0.4s ease;
 }
 
-.reveal-zoom {
-  opacity: 0;
-  transform: scale(0.88);
-  transition: all 0.9s ease;
-}
-.reveal-zoom.show {
-  opacity: 1;
-  transform: scale(1);
+.service-card2:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.25);
 }
 
-.reveal-delay-1 { transition-delay: .15s; }
-.reveal-delay-2 { transition-delay: .30s; }
-.reveal-delay-3 { transition-delay: .45s; }
+.service-card2:hover::before {
+  background: rgba(6,34,66,0.5);
+}
+
+/* INNER CONTENT */
+.service-inner {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.service-text {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+/* TABLET */
+@media(max-width:1100px){
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .services-title {
+    font-size: 34px;
+  }
+}
+
+/* MOBILE */
+@media(max-width:600px){
+
+  .services-section {
+    padding: 0px 5vw;
+  }
+
+  .services-title {
+    font-size: 26px;
+  }
+
+  .services-subtitle {
+    font-size: 15px;
+    margin-bottom: 40px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .service-card2 {
+    height: 220px;
+  }
+
+  .service-text {
+    font-size: 18px;
+  }
+}
 `;
 
     const style = document.createElement("style");
     style.innerHTML = css;
     document.head.appendChild(style);
 
-    /* GLOBAL OBSERVER FOR REVEAL ANIMATION */
-    const elements = document.querySelectorAll(
-      ".reveal, .reveal-left, .reveal-right, .reveal-zoom"
-    );
+    return () => observer.disconnect();
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-
-    elements.forEach((el) => observer.observe(el));
   }, []);
 
   const services = [
-    { title: "House Shiffting", img: "/images/bgserv/bghousemini.png", icon: "📦" },
-    { title: "Transportation", img: "/images/bgserv/transmini.png", icon: "🚚" },
-    { title: "Commercial Moves", img: "/images/bgserv/bgcommmini.png", icon: "🏢" },
-    { title: "Gowdown Shiffting", img: "/images/bgserv/godownmin.png", icon: "💼" },
-    { title: "Office Shiffting", img: "/images/bgserv/offs.png", icon: "🅿️" },
-    { title: "AC Installation", img: "/images/bgserv/bgacmini.png", icon: "📦" },
-
+    { title: "House Shifting", img: "/images/bgserv/bghousemini.png" },
+    { title: "Transportation", img: "/images/bgserv/transmini.png" },
+    { title: "Commercial Moves", img: "/images/bgserv/bgcommmini.png" },
+    { title: "Godown Shifting", img: "/images/bgserv/godownmin.png" },
+    { title: "Office Shifting", img: "/images/bgserv/offs.png" },
+    { title: "AC Installation", img: "/images/bgserv/bgacmini.png" },
   ];
 
-  return (
-    <section className="services-section reveal">
+  /* 🔥 Navigate Function */
+  const handleNavigate = () => {
+    navigate("/services"); // Change this if your route is different
+  };
 
-      <h2 className="services-title reveal-left">
+  return (
+    <section className="services-section" ref={sectionRef}>
+
+      <h2 className="services-title">
         What We <span>Provide</span>
       </h2>
 
-      <p className="services-subtitle reveal">
+      <p className="services-subtitle">
         We ensure reliable, safe and professional moving solutions for homes,
         offices and businesses with 100% satisfaction.
       </p>
 
-      <div className="services-grid reveal">
+      <div className="services-grid">
         {services.map((s, i) => (
           <div
             key={i}
-            className={"service-card2 reveal-zoom reveal-delay-" + ((i % 3) + 1)}
+            className="service-card2"
             style={{ backgroundImage: `url(${s.img})` }}
+            onClick={handleNavigate}
           >
             <div className="service-inner">
-              {/* <div className="service-icon">{s.icon}</div> */}
               <div className="service-text">{s.title}</div>
             </div>
           </div>
@@ -1665,74 +1821,115 @@ function WhatWeProvide() {
   );
 }
 
+function FeaturesDiamond() {
 
-
-
- function FeaturesDiamond() {
+  const sectionRef = useRef(null);
 
   useEffect(() => {
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("features-visible");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
     const css = `
-/* ===========================================
-   SECTION WRAPPER
-=========================================== */
+* { box-sizing:border-box; margin:0; padding:0; }
+
+/* ================= SECTION ================= */
 .features-section {
   width: 100%;
-  // padding: 90px ;
-  background: #ffffff;
+  // padding: 110px 6vw;
+  // background: #ffffff;
+   padding-bottom:10px;
   text-align: center;
   font-family: Inter, system-ui;
+  overflow:hidden;
 }
 
 /* TITLE */
 .features-title {
-  font-size: 38px;
+  font-size: 42px;
   font-weight: 900;
   color: #062242;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  opacity:0;
+  transform:translateY(40px);
+  transition:0.8s ease;
 }
+
 .features-title span {
   background: linear-gradient(135deg, #062242, #3F6C87);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 .features-sub {
-  max-width: 650px;
+  max-width: 700px;
   margin: 0 auto 70px auto;
-  font-size: 16px;
-  color: #3F6C87;
+  font-size: 17px;
+  color: #486C85;
   line-height: 1.7;
+  opacity:0;
+  transform:translateY(40px);
+  transition:0.8s ease 0.2s;
 }
 
-/* ===========================================
-   GRID WRAPPER (4 in a row)
-=========================================== */
+.features-visible .features-title,
+.features-visible .features-sub {
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ================= GRID ================= */
 .features-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 50px;
-  justify-items: center;
+  gap: 60px;
 }
 
-/* ===========================================
-   DIAMOND BOX (SVG Icon)
-=========================================== */
+/* CARD */
 .feature-card {
   text-align: center;
-  width: 100%;
+  opacity:0;
+  transform:translateY(50px);
+  transition:0.8s ease;
 }
 
+.features-visible .feature-card {
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* STAGGER */
+.features-visible .feature-card:nth-child(1){ transition-delay:0.2s; }
+.features-visible .feature-card:nth-child(2){ transition-delay:0.4s; }
+.features-visible .feature-card:nth-child(3){ transition-delay:0.6s; }
+.features-visible .feature-card:nth-child(4){ transition-delay:0.8s; }
+
+/* ================= DIAMOND ================= */
 .diamond-box {
   width: 150px;
   height: 150px;
   margin: 0 auto 25px auto;
   transform: rotate(45deg);
   background: linear-gradient(135deg, #062242, #3F6C87);
-  border-radius: 14px;
+  border-radius: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: 0.4s ease;
-  box-shadow: 0 12px 26px rgba(0,0,0,0.15);
+  transition: 0.5s ease;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  animation: float 4s ease-in-out infinite;
 }
 
 .diamond-box svg {
@@ -1742,137 +1939,158 @@ function WhatWeProvide() {
   fill: #ffffff;
 }
 
-/* HOVER EFFECT */
-.diamond-box:hover {
-  transform: rotate(45deg) translateY(-12px) scale(1.08);
-  box-shadow: 0 18px 32px rgba(6,34,66,0.35);
+/* FLOAT ANIMATION */
+@keyframes float {
+  0% { transform: rotate(45deg) translateY(0); }
+  50% { transform: rotate(45deg) translateY(-10px); }
+  100% { transform: rotate(45deg) translateY(0); }
 }
 
-/* TEXTS */
+/* HOVER */
+.diamond-box:hover {
+  transform: rotate(45deg) translateY(-14px) scale(1.1);
+  box-shadow: 0 30px 55px rgba(6,34,66,0.4);
+}
+
+/* TEXT */
 .feature-card h3 {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 800;
   color: #062242;
   margin-bottom: 10px;
 }
 
 .feature-card p {
-  font-size: 14px;
-  color: #3F6C87;
+  font-size: 15px;
+  color: #486C85;
   max-width: 260px;
   margin: 0 auto;
   line-height: 1.6;
 }
 
-/* ===========================================
-   RESPONSIVE
-=========================================== */
+/* ================= TABLET ================= */
 @media(max-width:1000px){
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 45px;
+    gap: 50px;
   }
 }
+
+/* ================= MOBILE ================= */
 @media(max-width:600px){
+
+  .features-section {
+    // padding: 70px 5vw;
+    padding-bottom:10px;
+  }
+
+  .features-title {
+    font-size: 28px;
+  }
+
+  .features-sub {
+    font-size: 15px;
+    margin-bottom: 40px;
+  }
+
   .features-grid {
     grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .diamond-box {
+    width: 120px;
+    height: 120px;
+  }
+
+  .diamond-box svg {
+    width: 55px;
+    height: 55px;
   }
 }
-
-/* ===========================================
-   GLOBAL REVEAL ANIMATION
-=========================================== */
-.reveal { opacity:0; transform:translateY(30px); transition:0.9s ease; }
-.reveal.show { opacity:1; transform:translateY(0); }
-
-.reveal-zoom { opacity:0; transform:scale(0.85); transition:0.9s ease; }
-.reveal-zoom.show { opacity:1; transform:scale(1); }
-
-.reveal-delay-1 { transition-delay:.15s; }
-.reveal-delay-2 { transition-delay:.30s; }
-.reveal-delay-3 { transition-delay:.45s; }
-.reveal-delay-4 { transition-delay:.60s; }
 `;
 
     const style = document.createElement("style");
     style.innerHTML = css;
     document.head.appendChild(style);
 
-    /* GLOBAL OBSERVER */
-    const elements = document.querySelectorAll(".reveal, .reveal-zoom");
-    const obs = new IntersectionObserver(
-      (entries) => entries.forEach(e => e.isIntersecting && e.target.classList.add("show")),
-      { threshold: 0.15 }
-    );
-    elements.forEach(el => obs.observe(el));
+    return () => observer.disconnect();
+
   }, []);
 
   const features = [
     {
       title: "Fully Insured",
       desc: "Full insurance coverage for total protection during your move.",
-      icon: (
-        `<svg viewBox="0 0 24 24"><path d="M12 1l8 4v6c0 5.25-3.75 10-8 12-4.25-2-8-6.75-8-12V5l8-4z"></path></svg>`
-      )
+      icon: `<svg viewBox="0 0 24 24"><path d="M12 1l8 4v6c0 5.25-3.75 10-8 12-4.25-2-8-6.75-8-12V5l8-4z"/></svg>`
     },
     {
       title: "On-Time Delivery",
       desc: "On-time delivery with real-time tracking and planned execution.",
-      icon: (
-        `<svg viewBox="0 0 24 24"><path d="M12 8V12L15 14M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10z"></path></svg>`
-      )
+      icon: `<svg viewBox="0 0 24 24"><path d="M12 8V12L15 14M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10z"/></svg>`
     },
     {
       title: "24/7 Support",
       desc: "Round-the-clock assistance to help you at every stage.",
-      icon: (
-        `<svg viewBox="0 0 24 24"><path d="M12 1a11 11 0 0111 11 11 11 0 01-11 11A11 11 0 011 12 11 11 0 0112 1zm0 5a2 2 0 100 4 2 2 0 000-4zm0 6c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>`
-      )
+      icon: `<svg viewBox="0 0 24 24"><path d="M12 1a11 11 0 0111 11 11 11 0 01-11 11A11 11 0 011 12 11 11 0 0112 1z"/></svg>`
     },
     {
       title: "Transparent Pricing",
       desc: "Clear, honest quotations with no hidden charges.",
-      icon: (
-        `<svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.25 3.75 10 9 12 5.25-2 9-6.75 9-12V5l-9-4zm1 7h4l-5 5-5-5h4V4h2v4z"></path></svg>`
-      )
+      icon: `<svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.25 3.75 10 9 12 5.25-2 9-6.75 9-12V5l-9-4z"/></svg>`
     }
   ];
 
   return (
-    <section className="features-section reveal">
+    <section className="features-section" ref={sectionRef}>
 
-      <h2 className="features-title reveal">
+      <h2 className="features-title">
         Our <span>Features</span>
       </h2>
 
-      <p className="features-sub reveal">
+      <p className="features-sub">
         The most trusted packers & movers services designed for safety, speed, and reliability.
       </p>
 
-      <div className="features-grid reveal">
+      <div className="features-grid">
 
         {features.map((f, i) => (
-          <div key={i} className="feature-card reveal-zoom reveal-delay-1">
-
+          <div key={i} className="feature-card">
             <div
               className="diamond-box"
               dangerouslySetInnerHTML={{ __html: f.icon }}
             />
-
             <h3>{f.title}</h3>
             <p>{f.desc}</p>
           </div>
         ))}
 
       </div>
+
     </section>
   );
 }
+
+
+
+
+
 export default function Home() {
 
   const navigate = useNavigate();
+  const heroRef = useRef(null);
 
   useEffect(() => {
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("hero-visible");
+        }
+      });
+    }, { threshold: 0.2 });
+
+    if (heroRef.current) observer.observe(heroRef.current);
 
     const css = `
 *{ box-sizing:border-box; margin:0; padding:0; }
@@ -1881,13 +2099,14 @@ body{ font-family:Inter, system-ui; }
 /* ================= HERO SECTION ================= */
 .hero-container{
   width:100%;
-  min-height:90vh;
-  padding:70px 8vw;
+  min-height:95vh;
+  padding:100px 8vw;
   display:grid;
   grid-template-columns:1fr 1fr;
   align-items:center;
-  background:#F6F1F8; /* NOT CHANGED */
-  gap:40px;
+  background:linear-gradient(180deg,#F6F1F8,#ffffff);
+  gap:60px;
+  overflow:hidden;
 }
 
 /* LEFT IMAGE */
@@ -1895,19 +2114,49 @@ body{ font-family:Inter, system-ui; }
   display:flex;
   justify-content:center;
   align-items:center;
+  opacity:0;
+  transform:translateX(-60px);
+  transition:1s ease;
+   border-radius:20px;
 }
+
+.hero-visible .hero-img{
+  opacity:1;
+  transform:translateX(0);
+}
+
 .hero-img img{
   width:100%;
   max-width:520px;
+  animation: floatHero 4s ease-in-out infinite;
+   border-radius:20px;
+}
+
+/* FLOAT */
+@keyframes floatHero{
+  0%{ transform:translateY(0); }
+  50%{ transform:translateY(-15px); }
+  100%{ transform:translateY(0); }
 }
 
 /* RIGHT CONTENT */
+.hero-content{
+  opacity:0;
+  transform:translateX(60px);
+  transition:1s ease;
+}
+
+.hero-visible .hero-content{
+  opacity:1;
+  transform:translateX(0);
+}
+
 .hero-content h1{
-  font-size:46px;
+  font-size:52px;
   font-weight:900;
   color:#15304D;
   line-height:1.2;
-  margin-bottom:12px;
+  margin-bottom:18px;
 }
 
 .hero-content h1 span{
@@ -1917,25 +2166,27 @@ body{ font-family:Inter, system-ui; }
 }
 
 .hero-content p{
-  font-size:17px;
+  font-size:18px;
   color:#486C85;
-  max-width:480px;
-  margin-bottom:22px;
+  max-width:520px;
+  margin-bottom:28px;
 }
 
-/* Buttons */
+/* BUTTONS */
 .hero-btns{
   display:flex;
-  gap:14px;
-  margin-bottom:24px;
+  gap:18px;
+  margin-bottom:30px;
 }
+
 .hero-btn{
-  padding:12px 24px;
-  border-radius:10px;
+  padding:14px 28px;
+  border-radius:12px;
   font-weight:700;
   cursor:pointer;
   border:none;
-  transition:0.3s ease;
+  transition:all 0.3s ease;
+  font-size:15px;
 }
 
 .hero-primary{
@@ -1944,25 +2195,29 @@ body{ font-family:Inter, system-ui; }
 }
 
 .hero-primary:hover{
-  box-shadow:0 0 18px rgba(72,108,133,0.6);
+  transform:translateY(-4px);
+  box-shadow:0 15px 30px rgba(72,108,133,0.5);
 }
 
 .hero-outline{
-  background:white;
+  // background:white;
+  padding-top:10px;
   border:2px solid #486C85;
-  color:#15304D;
+  // color:#15304D;
 }
 
 .hero-outline:hover{
   background:#eef4f8;
+  transform:translateY(-4px);
 }
 
-/* Badges */
+/* BADGES */
 .hero-badges{
   display:flex;
   gap:16px;
   flex-wrap:wrap;
 }
+
 .hero-badge{
   background:white;
   padding:10px 18px;
@@ -1970,8 +2225,20 @@ body{ font-family:Inter, system-ui; }
   font-size:14px;
   font-weight:600;
   color:#15304D;
-  box-shadow:0 4px 10px rgba(0,0,0,0.08);
-  border:1px solid #c7dfff;
+  box-shadow:0 8px 18px rgba(0,0,0,0.08);
+  border:1px solid #d6e4f2;
+  transition:0.3s ease;
+}
+
+.hero-badge:hover{
+  transform:translateY(-3px);
+}
+
+/* ================= TABLET ================= */
+@media(max-width:1000px){
+  .hero-content h1{
+    font-size:42px;
+  }
 }
 
 /* ================= MOBILE ================= */
@@ -1979,11 +2246,34 @@ body{ font-family:Inter, system-ui; }
   .hero-container{
     grid-template-columns:1fr;
     text-align:center;
-    padding:50px 6vw;
+    padding:70px 6vw;
+    gap:40px;
   }
 
-  .hero-img img{
-    max-width:340px;
+  .hero-img{
+    transform:translateY(40px);
+  }
+
+  .hero-visible .hero-img{
+    transform:translateY(0);
+  }
+
+  .hero-content{
+    transform:translateY(40px);
+  }
+
+  .hero-visible .hero-content{
+    transform:translateY(0);
+  }
+
+  .hero-content h1{
+    font-size:30px;
+  }
+
+  .hero-content p{
+    font-size:16px;
+    margin:auto;
+    margin-bottom:22px;
   }
 
   .hero-btns{
@@ -1994,8 +2284,9 @@ body{ font-family:Inter, system-ui; }
     justify-content:center;
   }
 
-  .hero-content h1{
-    font-size:34px;
+  .hero-img img{
+    max-width:340px;
+    border-radius:20px;
   }
 }
 `;
@@ -2004,9 +2295,9 @@ body{ font-family:Inter, system-ui; }
     style.innerHTML = css;
     document.head.appendChild(style);
 
-  }, []);
+    return () => observer.disconnect();
 
-  /* =================== BUTTON ACTIONS ==================== */
+  }, []);
 
   const handleFreeQuote = () => {
     navigate("/contact");
@@ -2018,14 +2309,12 @@ body{ font-family:Inter, system-ui; }
 
   return (
     <>
-      <section className="hero-container">
+      <section className="hero-container" ref={heroRef}>
 
-        {/* LEFT IMAGE */}
         <div className="hero-img">
-          <img src="/images/ggrgl.png" alt="Chennai Lal Packers & Movers" />
+          <img src="/images/ggrgll.png" alt="Chennai Lal Packers & Movers" />
         </div>
 
-        {/* RIGHT CONTENT */}
         <div className="hero-content">
 
           <h1>
@@ -2037,7 +2326,6 @@ body{ font-family:Inter, system-ui; }
             solutions across Chennai & all major cities.
           </p>
 
-          {/* BUTTONS */}
           <div className="hero-btns">
             <button className="hero-btn hero-primary" onClick={handleFreeQuote}>
               Get Free Quote
@@ -2058,344 +2346,15 @@ body{ font-family:Inter, system-ui; }
 
       </section>
 
-  <AboutSlide /> 
-    {/* <TopServices /> */}
-    <WhatWeProvide />
-  <WorkProcess />
-  <WhyyChooseUs />
-  {/* <PopularServices /> */}
-  <CustomerSatisfactionTimeline />
-  <FeaturesDiamond />
- <StrengthsSection />
- <MovingRoutesStrip />
- <Testimonials />
-
-
+      <AboutSlide />
+      <WhatWeProvide />
+      <WorkProcess />
+      <WhyyChooseUs />
+      <CustomerSatisfactionTimeline />
+      <FeaturesDiamond />
+      <StrengthsSection />
+      <MovingRoutesStrip />
+      <Testimonials />
     </>
   );
 }
-
-
-
-// export default function Home() {
-//   const [form, setForm] = useState({
-//     name: "",
-//     phone: "",
-//     from: "",
-//     to: "",
-//     service: ""
-//   });
-
-//   const heroLeftRef = useRef(null);
-//   const cardRef = useRef(null);
-//   const featureRefs = useRef([]);
-
-//   const handleHeroSubmit = (e) => {
-//     e.preventDefault();
-
-//     const message = `
-// New Moving Enquiry
-
-// Name: ${form.name}
-// Phone: ${form.phone}
-// From City: ${form.from}
-// To City: ${form.to}
-// Service Type: ${form.service}
-//     `;
-
-//     const ownerNumber = "917550057453";
-//     const whatsappURL = `https://wa.me/${ownerNumber}?text=${encodeURIComponent(
-//       message
-//     )}`;
-
-//     window.open(whatsappURL, "_blank");
-//   };
-
-//   useEffect(() => {
-//     const observer = new IntersectionObserver(
-//       (entries) => {
-//         entries.forEach((entry) => {
-//           if (entry.isIntersecting) entry.target.classList.add("show");
-//         });
-//       },
-//       { threshold: 0.25 }
-//     );
-
-//     // Trigger immediately on visit
-// setTimeout(() => {
-//   heroLeftRef.current?.classList.add("show");
-//   cardRef.current?.classList.add("show");
-
-//   featureRefs.current.forEach((el, i) => {
-//     if (el) {
-//       setTimeout(() => el.classList.add("show"), i * 150);
-//     }
-//   });
-// }, 200);
-
-//     featureRefs.current.forEach((el) => el && observer.observe(el));
-
-//     const css = `
-// *{ box-sizing:border-box; }
-// html,body{
-//   margin:0;
-//   padding:0;
-//   overflow-x:hidden;
-//   background:#FDFCFC;
-// }
-
-// /* ================= HERO SECTION WITH IMAGE BG ================= */
-// .heroq-section{
-//   min-height:100vh;
-
-//   /* IMAGE + BRAND OVERLAY (like screenshot) */
-//   background:
-//     linear-gradient(
-//       rgba(30,20,40,0.70),
-//       rgba(30,20,40,0.70)
-//     ),
-//     linear-gradient(
-//       120deg,
-//       rgba(150,5,70,0.55),
-//       rgba(126,49,75,0.55)
-//     ),
-//     url("/images/truck.png") center/cover no-repeat;
-
-//   display:grid;
-//   grid-template-columns:1.1fr 0.9fr;
-//   align-items:center;
-//   padding:80px 6vw 40px;
-//   gap:40px;
-//   font-family:Inter,system-ui;
-// }
-
-// /* ===== ANIMATION ===== */
-// .fade-left,.fade-right,.fade-up{
-//   opacity:0;
-//   transform:translateY(40px);
-//   transition:all 0.9s cubic-bezier(.22,.61,.36,1);
-// }
-// .fade-left{   opacity:0;
-//   transform:translateX(-80px);}
-// .fade-right{ opacity:0;
-//   transform:translateX(80px); }
-// .show{ opacity:1; transform:translate(0); }
-
-// /* ===== LEFT CONTENT ===== */
-// .heroq-left h1{
-//   font-size:46px;
-//   font-weight:900;
-//   line-height:1.2;
-//   color:#ffffff;
-// }
-
-// .heroq-left h1 span{
-//   color:#EED3D6;
-// }
-
-// .heroq-left p.sub{
-//   margin:16px 0 26px;
-//   font-size:17px;
-//   color:#FDFCFC;
-//   max-width:520px;
-// }
-
-// .heroq-features{
-//   display:flex;
-//   flex-direction:column;
-//   gap:18px;
-// }
-
-// .heroq-feature{
-//   display:flex;
-//   gap:14px;
-//   color:#fff;
-// }
-
-// .heroq-icon{
-//   min-width:42px;
-//   height:42px;
-//   border-radius:50%;
-//   background:#960546;
-//   color:#fff;
-//   display:grid;
-//   place-items:center;
-//   font-weight:800;
-// }
-
-// /* ===== CARD (UNCHANGED STYLE) ===== */
-// .heroq-card{
-//   // background:#ffffff;
-//     // background: rgba(255, 255, 255, 0.55);   glass
-//      backdrop-filter: blur(18px);
-//   -webkit-backdrop-filter: blur(18px); /* glass */
-//   border-radius:22px;
-//   padding:28px;
-//   max-width:520px;
-//   width:100%;
-//   justify-self:end;
-//   // box-shadow:0 22px 50px rgba(0,0,0,0.35);
-//   border: 1.5px solid rgba(183, 87, 120, 0.35); /* soft rose border */
-
-//   box-shadow:
-//     0 30px 60px rgba(150, 5, 70, 0.25),
-//     inset 0 1px 0 rgba(81, 4, 67, 0.55);
-
-//   transition: all 0.35s ease;
-// }
-
-// .heroq-card h3{
-//   margin-bottom:16px;
-//   color:#960546;
-// }
-
-// /* ===== FORM ===== */
-// .heroq-card form{
-//   display:flex;
-//   flex-direction:column;
-//   gap:14px;
-// }
-
-// .heroq-card input,
-// .heroq-card select{
-//   width:100%;
-//   padding:16px;
-//   border-radius:12px;
-//   border:1.5px solid #EED3D6;
-//   font-size:16px;
-//   background:#FDFCFC;
-// }
-
-// .heroq-card input:focus,
-// .heroq-card select:focus{
-//   outline:none;
-//   border-color:#B95778;
-// }
-
-// .heroq-btn{
-//   margin-top:10px;
-//   padding:16px;
-//   border:none;
-//   border-radius:12px;
-//   background:linear-gradient(90deg,#960546,#B95778);
-//   color:#fff;
-//   font-weight:800;
-//   font-size:17px;
-//   cursor:pointer;
-//   transition:all .25s ease;
-// }
-
-// .heroq-btn:hover{
-//   transform:translateY(-2px);
-//   box-shadow:0 12px 25px rgba(150,5,70,0.45);
-// }
-
-// /* ===== MOBILE ===== */
-// @media(max-width:900px){
-//   .heroq-section{
-//     grid-template-columns:1fr;
-//     padding:90px 5vw 40px;
-//   }
-
-//   .heroq-card{
-//     max-width:100%;
-//     margin-top:30px;
-//   }
-
-//   .heroq-left h1{
-//     font-size:34px;
-//   }
-// }
-//     `;
-
-//     const style = document.createElement("style");
-//     style.innerHTML = css;
-//     document.head.appendChild(style);
-
-//     return () => observer.disconnect();
-//   }, []);
-
-//   return (
-
-//     <>
-//     <section className="heroq-section">
-//       <div className="heroq-left fade-left" ref={heroLeftRef}>
-//         <h1>
-//           Reliable Packers & Movers <span>Across India</span>
-//         </h1>
-
-//         <p className="sub">
-//           Safe, affordable, and professional relocation services you can trust.
-//         </p>
-
-//         <div className="heroq-features">
-//           {[
-//             ["₹", "Free Quotes", "No hidden charges"],
-//             ["✓", "Verified Experts", "Trained professionals"],
-//             ["★", "On-Time Delivery", "Damage-free shifting"]
-//           ].map((item, i) => (
-//             <div
-//               key={i}
-//               className="heroq-feature fade-up"
-//               ref={(el) => (featureRefs.current[i] = el)}
-//               style={{ transitionDelay: `${i * 0.15}s` }}
-//             >
-//               <div className="heroq-icon">{item[0]}</div>
-//               <div>
-//                 <h4>{item[1]}</h4>
-//                 <p>{item[2]}</p>
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-
-//       <div className="heroq-card fade-right" ref={cardRef}>
-//         <h3>Get Free Moving Quote</h3>
-
-//         <form onSubmit={handleHeroSubmit}>
-//           <input placeholder="Full Name" required
-//             value={form.name}
-//             onChange={(e) => setForm({ ...form, name: e.target.value })}
-//           />
-//           <input placeholder="Mobile Number" required
-//             value={form.phone}
-//             onChange={(e) => setForm({ ...form, phone: e.target.value })}
-//           />
-//           <input placeholder="From City" required
-//             value={form.from}
-//             onChange={(e) => setForm({ ...form, from: e.target.value })}
-//           />
-//           <input placeholder="To City" required
-//             value={form.to}
-//             onChange={(e) => setForm({ ...form, to: e.target.value })}
-//           />
-
-//           <select required
-//             value={form.service}
-//             onChange={(e) => setForm({ ...form, service: e.target.value })}
-//           >
-//             <option value="">Select Service</option>
-//             <option>House Shifting</option>
-//             <option>Office Shifting</option>
-//             <option>Commercial Moves</option>
-//           </select>
-
-//           <button className="heroq-btn">Get Free Quote</button>
-//         </form>
-//       </div>
-//     </section>
-
-//  <AboutSlide /> 
-//  <ServicesOptions />
-//  <StatsWaveStrip />
-
-//  <WorkProcess />
-//  <CustomerSatisfactionTimeline />
-//  <PeopleShowcase />
-// <Testimonials />
-// </>
-//   );
-// }
-
-
