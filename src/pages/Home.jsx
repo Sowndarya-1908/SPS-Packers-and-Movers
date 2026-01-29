@@ -40,8 +40,8 @@ function AboutSlide() {
 
             sectionRef.current.classList.add("sps-visible");
 
-            animateCount(stat1Ref.current, 92, "%");
-            animateCount(stat2Ref.current, 50000, "+");
+            animateCount(stat1Ref.current, 0, "%");
+            animateCount(stat2Ref.current, 0, "+");
           }
         });
       },
@@ -238,12 +238,12 @@ function AboutSlide() {
           <div className="sps-about-stats">
             <div className="sps-stat">
               <h3 ref={stat1Ref}>0%</h3>
-              <p>Customer satisfaction across all relocation services</p>
+              <p>Customer Satisfaction across all relocation services.</p>
             </div>
 
             <div className="sps-stat">
               <h3 ref={stat2Ref}>0+</h3>
-              <p>Successful home, office & commercial relocations</p>
+              <p>Successful Home, Office & Commercial Relocations completed.</p>
             </div>
           </div>
 
@@ -659,7 +659,7 @@ function WorkProcess() {
   return (
     <section className="sps-process">
       <div className="sps-process-head">
-        <small>OUR WORK PROCESS</small>
+        <small>OUR WORK PROFESSIONAL PROCESS</small>
         <h2>
           Reliable moving services built <br />
           <span>around you</span>
@@ -682,7 +682,7 @@ function WorkProcess() {
             <div className="sps-step-num">2</div>
           </div>
           <h4>Plan Your Move</h4>
-          <p>We plan schedules, packing and transport logistics.</p>
+          <p>We plan schedules, packing, and transport logistics.</p>
         </div>
 
         <div className="sps-step">
@@ -691,7 +691,7 @@ function WorkProcess() {
             <div className="sps-step-num">3</div>
           </div>
           <h4>Safe & Secure Moving</h4>
-          <p>High-quality packing and trained professionals.</p>
+          <p>High-quality packing and trained professionals execute the move.</p>
         </div>
 
         <div className="sps-step">
@@ -700,7 +700,7 @@ function WorkProcess() {
             <div className="sps-step-num">4</div>
           </div>
           <h4>Unpack & Settle In</h4>
-          <p>We help you unload and settle comfortably.</p>
+          <p>We help you unload and settle comfortably in your new space.</p>
         </div>
       </div>
     </section>
@@ -912,6 +912,7 @@ function CustomerSatisfactionTimeline() {
         <br /><br />
         Thousands of customers trust us because of:
       </p>
+
 
       <div className="sps-cust3-timeline">
 
@@ -1178,9 +1179,9 @@ function WhyyChooseUs() {
         <h2>Why Choose Chennai Lal Packers & Movers?</h2>
 
         <p className="sub">
-          We make every move safe, smooth and stress-free with our professional 
-          packing, expert handling and on-time delivery.
+          We make every move safe, smooth, and stress-free.
         </p>
+
 
         <div className="why-list">
 
@@ -1286,6 +1287,7 @@ function StrengthsSection() {
   width: 100%;
   // padding: 100px 6vw;
   // background: #F6F1F8;
+  padding-bottom:20px;
   text-align: center;
   font-family: Inter, system-ui;
   overflow: hidden;
@@ -1425,18 +1427,20 @@ function StrengthsSection() {
   return (
     <section className="strengths-section" ref={sectionRef}>
 
-      <h2 className="strengths-title">Our Strengths, Which Makes Us</h2>
+      <h2 className="strengths-title">Our Strengths</h2>
       <p className="strengths-sub">The Most Preferred Moving Brand</p>
 
       <div className="strengths-grid">
 
+
+
         {[
-          { num: 10, title: "Years Of Trust", desc: "Delivering safe moves since 2025" },
-          { num: 98, title: "Moves Annually", desc: "Across Chennai & all major cities" },
-          { num: 2, title: "Million Sq.Ft", desc: "Secure warehousing space" },
-          { num: 60, title: "Trained Manpower", desc: "Professional team for safe moves" },
-          { num: 100, title: "Branches PAN India", desc: "Serving 100+ locations" },
-          { num: 100, title: "Vehicles", desc: "Fleet for every move requirement" },
+          { num: 0, title: "Years Of Trust", desc: "Delivering safe moves since 2025" },
+          { num: 0, title: "Moves Annually", desc: "Across Chennai & all major cities" },
+          { num: 0, title: "Million Sq.Ft", desc: "Secure warehousing space" },
+          { num: 0, title: "Trained Manpower", desc: "Professional team for safe moves" },
+          { num: 0, title: "Branches PAN India", desc: "Serving 100+ locations" },
+          { num: 0, title: "Vehicles", desc: "Fleet for every move requirement" },
         ].map((item, i) => (
           <div className="strength-item" key={i}>
             <h3
@@ -1778,11 +1782,15 @@ function WhatWeProvide() {
 
   const services = [
     { title: "House Shifting", img: "/images/bgserv/bghousemini.png" },
+     { title: "Commercial Moves", img: "/images/bgserv/bgcommmini.png" },
+         { title: "Office Shifting", img: "/images/bgserv/offs.png" },
     { title: "Transportation", img: "/images/bgserv/transmini.png" },
-    { title: "Commercial Moves", img: "/images/bgserv/bgcommmini.png" },
     { title: "Godown Shifting", img: "/images/bgserv/godownmin.png" },
-    { title: "Office Shifting", img: "/images/bgserv/offs.png" },
     { title: "AC Installation", img: "/images/bgserv/bgacmini.png" },
+
+
+
+
   ];
 
   /* 🔥 Navigate Function */
@@ -1798,8 +1806,7 @@ function WhatWeProvide() {
       </h2>
 
       <p className="services-subtitle">
-        We ensure reliable, safe and professional moving solutions for homes,
-        offices and businesses with 100% satisfaction.
+        We ensure reliable, safe, and professional moving solutions for homes, offices, and businesses with 100% satisfaction.
       </p>
 
       <div className="services-grid">
@@ -2020,13 +2027,14 @@ function FeaturesDiamond() {
 
   const features = [
     {
+
       title: "Fully Insured",
       desc: "Full insurance coverage for total protection during your move.",
       icon: `<svg viewBox="0 0 24 24"><path d="M12 1l8 4v6c0 5.25-3.75 10-8 12-4.25-2-8-6.75-8-12V5l8-4z"/></svg>`
     },
     {
       title: "On-Time Delivery",
-      desc: "On-time delivery with real-time tracking and planned execution.",
+      desc: "Real-time tracking and planned execution.",
       icon: `<svg viewBox="0 0 24 24"><path d="M12 8V12L15 14M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10z"/></svg>`
     },
     {
@@ -2036,7 +2044,7 @@ function FeaturesDiamond() {
     },
     {
       title: "Transparent Pricing",
-      desc: "Clear, honest quotations with no hidden charges.",
+      desc: "Clear, honest quotations.",
       icon: `<svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.25 3.75 10 9 12 5.25-2 9-6.75 9-12V5l-9-4z"/></svg>`
     }
   ];
@@ -2091,8 +2099,7 @@ export default function Home() {
     }, { threshold: 0.2 });
 
     if (heroRef.current) observer.observe(heroRef.current);
-
-    const css = `
+const css = `
 *{ box-sizing:border-box; margin:0; padding:0; }
 body{ font-family:Inter, system-ui; }
 

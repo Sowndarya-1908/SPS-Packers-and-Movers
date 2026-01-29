@@ -416,11 +416,15 @@ function ChooseWe() {
 }
 
 
+
 function AboutHero() {
 
   const sectionRef = useRef(null);
 
   useEffect(() => {
+
+    /* ===== SAFE SCROLL REVEAL ===== */
+    const section = sectionRef.current;
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -428,18 +432,21 @@ function AboutHero() {
           entry.target.classList.add("sps-about-visible");
         }
       });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.25 });
 
-    if (sectionRef.current) observer.observe(sectionRef.current);
+    if (section) observer.observe(section);
 
-    const css = `
-*{ box-sizing:border-box; margin:0; padding:0; }
+    /* ===== ADD CSS ONLY ONCE ===== */
+    const styleId = "sps-about-hero-style";
+
+    if (!document.getElementById(styleId)) {
+
+      const css = `
 
 /* ===== SECTION ===== */
 .sps-about-hero{
-  padding:10px 6vw;
+  padding:80px 6vw;
   font-family:Inter,system-ui;
-  // background:#ffffff;
   overflow:hidden;
 }
 
@@ -488,7 +495,6 @@ function AboutHero() {
   animation:floatImg 5s ease-in-out infinite;
 }
 
-/* Floating animation */
 @keyframes floatImg{
   0%{ transform:translateY(0); }
   50%{ transform:translateY(-15px); }
@@ -564,7 +570,6 @@ function AboutHero() {
   transition:0.6s ease;
 }
 
-/* Stagger */
 .sps-about-visible .sps-check:nth-child(1){ transition-delay:0.3s; opacity:1; transform:translateY(0);}
 .sps-about-visible .sps-check:nth-child(2){ transition-delay:0.5s; opacity:1; transform:translateY(0);}
 .sps-about-visible .sps-check:nth-child(3){ transition-delay:0.7s; opacity:1; transform:translateY(0);}
@@ -637,7 +642,6 @@ function AboutHero() {
 
 /* ===== MOBILE ===== */
 @media(max-width:600px){
-
   .sps-about-hero{
     padding:70px 5vw;
   }
@@ -656,9 +660,11 @@ function AboutHero() {
 }
 `;
 
-    const style = document.createElement("style");
-    style.innerHTML = css;
-    document.head.appendChild(style);
+      const style = document.createElement("style");
+      style.id = styleId;
+      style.innerHTML = css;
+      document.head.appendChild(style);
+    }
 
     return () => observer.disconnect();
 
@@ -668,7 +674,6 @@ function AboutHero() {
     <section className="sps-about-hero" ref={sectionRef}>
       <div className="sps-about-wrap">
 
-        {/* LEFT */}
         <div className="sps-about-images">
           <img
             src="/images/ser/house.png"
@@ -682,7 +687,6 @@ function AboutHero() {
           />
         </div>
 
-        {/* RIGHT */}
         <div className="sps-about-content">
           <small>CHENNAI LAL PACKERS & MOVERS</small>
 
@@ -697,8 +701,6 @@ function AboutHero() {
           <p>
             CHENNAI LAL Packers & Movers is a leading relocation service provider in
             South India, offering safe, reliable, and cost-effective moving
-            solutions. With years of industry experience, we specialize in home
-            shifting, office relocation, vehicle transportation, and storage
             solutions.
           </p>
 
@@ -730,6 +732,11 @@ function AboutHero() {
     </section>
   );
 }
+
+
+
+
+
 
 
 
@@ -2658,13 +2665,13 @@ function Testimonials() {
 }
 
 
+
 function KeynoteTeamSection() {
 
   const sectionRef = useRef(null);
 
   useEffect(() => {
 
-    /* ===== SCROLL REVEAL ===== */
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -2678,43 +2685,44 @@ function KeynoteTeamSection() {
     const css = `
 *{margin:0;padding:0;box-sizing:border-box;}
 
-/* ================= SECTION ================= */
 .sps-team-section{
-  padding:110px 6vw;
-  background:#ffffff;
+  padding:0px 6vw;
+  padding-top: 10px; 
+   padding-bottom: 30px;
+    // background:#ffffff;
   font-family:Inter,system-ui;
   text-align:center;
   overflow:hidden;
 }
 
-/* TITLE */
 .sps-team-title{
-  font-size:52px;
+  font-size:48px;
   font-weight:900;
   color:#062242;
   margin-bottom:80px;
 }
 
-.sps-team-title span{
-  background:linear-gradient(135deg,#062242,#3F6C87);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-/* GRID — 4 IN ONE ROW */
+/* GRID */
 .sps-team-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:40px;
-  max-width:1400px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:60px;
+  max-width:1200px;
   margin:auto;
 }
 
 /* CARD */
 .sps-team-card{
+  width:320px;
+  background:#062242;
+  padding:40px 25px 45px;
+  border-radius:20px;
+  box-shadow:0 25px 60px rgba(6,34,66,0.3);
+  transition:all .6s cubic-bezier(.22,.61,.36,1);
   opacity:0;
   transform:translateY(60px);
-  transition:all .9s cubic-bezier(.22,.61,.36,1);
+  color:#ffffff;
 }
 
 .sps-team-section.show .sps-team-card{
@@ -2722,25 +2730,27 @@ function KeynoteTeamSection() {
   transform:translateY(0);
 }
 
-/* HOVER LIFT */
 .sps-team-card:hover{
   transform:translateY(-10px);
 }
 
-/* OCTAGON IMAGE */
+/* ===== ANGLED CORNER IMAGE ===== */
 .sps-team-img{
   width:220px;
   height:220px;
   margin:auto;
-  clip-path:polygon(
-    30% 0%, 70% 0%,
-    100% 30%, 100% 70%,
-    70% 100%, 30% 100%,
-    0% 70%, 0% 30%
-  );
   overflow:hidden;
+
+  /* OCTAGON CUT CORNERS */
+  clip-path:polygon(
+    20% 0%, 80% 0%,
+    100% 20%, 100% 80%,
+    80% 100%, 20% 100%,
+    0% 80%, 0% 20%
+  );
+
+  box-shadow:0 25px 50px rgba(0,0,0,0.4);
   transition:transform .5s ease;
-  box-shadow:0 25px 60px rgba(6,34,66,0.25);
 }
 
 .sps-team-img img{
@@ -2750,55 +2760,59 @@ function KeynoteTeamSection() {
 }
 
 .sps-team-card:hover .sps-team-img{
-  transform:scale(1.07);
+  transform:scale(1.05);
 }
 
 /* NAME */
 .sps-team-name{
-  font-size:20px;
+  font-size:22px;
   font-weight:900;
-  color:#062242;
-  margin-top:25px;
+  margin-top:28px;
+  color:#ffffff;
 }
 
 /* ROLE */
 .sps-team-role{
   font-size:13px;
   font-weight:700;
-  color:#3F6C87;
   margin:10px 0 15px;
-  letter-spacing:1px;
+  letter-spacing:2px;
+  color:#A7D4EE;
 }
 
 /* DESCRIPTION */
 .sps-team-desc{
   font-size:14px;
-  line-height:1.6;
-  color:#3F6C87;
-  max-width:260px;
-  margin:auto;
+  line-height:1.7;
+  color:#ffffff;
+  opacity:0.9;
 }
 
-/* ================= TABLET ================= */
-@media(max-width:1100px){
-  .sps-team-grid{
-    grid-template-columns:repeat(2,1fr);
+/* RESPONSIVE */
+@media(max-width:1000px){
+  .sps-team-card{
+    width:280px;
   }
 }
 
-/* ================= MOBILE ================= */
-@media(max-width:600px){
+@media(max-width:768px){
   .sps-team-grid{
-    grid-template-columns:1fr;
+    flex-direction:column;
+    align-items:center;
   }
 
-  .sps-team-title{
-    font-size:32px;
+  .sps-team-card{
+    width:100%;
+    max-width:350px;
   }
 
   .sps-team-img{
     width:180px;
     height:180px;
+  }
+
+  .sps-team-title{
+    font-size:32px;
   }
 }
 `;
@@ -2813,28 +2827,34 @@ function KeynoteTeamSection() {
 
   const team = [
     {
-      name: "Operations Head",
-      role: "LOGISTICS EXPERT",
-      img: "/images/services/office.png",
+      name: "Prasanth V",
+      role: "PROJECT MANAGER",
+      img: "/images/about/m.jpeg",
       desc: "Managing relocation projects across Tamil Nadu with efficiency and precision."
     },
     {
-      name: "Shifting Manager",
-      role: "PACKING SPECIALIST",
-       img: "/images/services/office.png",
+      name: "Ramya",
+      role: "PROJECT MANAGER",
+      img: "/images/about/r.jpeg",
       desc: "Ensuring safe packing and damage-free transport every time."
     },
     {
-      name: "Client Relations",
-      role: "CUSTOMER SUPPORT",
-       img: "/images/services/office.png",
+      name: "Sowndarya S",
+      role: "WEB DEVELOPER",
+      img: "/images/about/s.png",
       desc: "Transparent communication from booking to final delivery."
     },
     {
-      name: "Fleet Supervisor",
-      role: "TRANSPORT HEAD",
-       img: "/images/services/office.png",
+      name: "Gayathri S",
+      role: "TEAM LEAD",
+      img: "/images/about/gaya2.jpeg",
       desc: "Overseeing GPS-enabled fleet operations across India."
+    },
+    {
+      name: "Sathish Kumar",
+      role: "MANAGEMENT",
+      img: "/images/about/sathish.png",
+      desc: "Strategic planning and operational excellence leadership."
     }
   ];
 
@@ -2842,7 +2862,7 @@ function KeynoteTeamSection() {
     <section className="sps-team-section" ref={sectionRef}>
 
       <h2 className="sps-team-title">
-        Meet Our <span>Expert Team</span>
+        Meet Our Expert Team
       </h2>
 
       <div className="sps-team-grid">
@@ -2864,6 +2884,13 @@ function KeynoteTeamSection() {
     </section>
   );
 }
+
+
+
+
+
+
+
 
 
 
