@@ -14,7 +14,7 @@ const navigate = useNavigate();
       id: "id1",
       title: "Best Packers and Movers in Chennai – Chennai Lal Packers & Movers",
       image: "/images/blog221.png",
-      date : "14 Feb 2026",
+      date : "5 Jan 2026",
       content: `
       <h2>Best Packers and Movers in Chennai – Chennai Lal Packers & Movers</h2>
 
@@ -84,7 +84,8 @@ const navigate = useNavigate();
    {
   id: "id2",
   title: "Trusted Home & Office Shifting Services in Chennai – Chennai Lal Packers & Movers",
-  image: "/images/blog221.png",
+  image: "/images/blog 2222.png",
+  date : "28 Jan 2026",
   content: `
     <h2>Trusted Home & Office Shifting Services in Chennai – Chennai Lal Packers & Movers</h2>
 
@@ -136,7 +137,7 @@ const navigate = useNavigate();
     {
   id: "id3",
   title: "Affordable & Secure Shifting Services in Chennai – Chennai Lal Packers & Movers",
-  image: "/images/blog221.png",
+  image: "/images/blog123.png",
   date : "14 Feb 2026",
   content: `
     <h2>Affordable & Secure Shifting Services in Chennai – Chennai Lal Packers & Movers</h2>
@@ -197,20 +198,7 @@ const navigate = useNavigate();
 }
 
   
-    // {
-    //   id: "id4",
-    //   title: "What Is Google AI Mode and How Does It Work?",
-    //   image: "/images/bgserv/hiremini.png",
-    //   content: `
-    //     <h2>What Is Google AI Mode?</h2>
-    //     <p>Google AI Mode enhances search results using generative intelligence.</p>
-    //     <ul>
-    //       <li>Context-aware answers</li>
-    //       <li>Conversational search</li>
-    //       <li>Predictive results</li>
-    //     </ul>
-    //   `
-    // }
+  
   ];
 
   /* ================= ANIMATION ================= */

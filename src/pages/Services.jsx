@@ -564,7 +564,7 @@ function ServicesIntro() {
           </div>
 
           <img
-            src="/images/ser/house.png"
+            src="/images/ser/twopersons.jpg"
             alt="Professional Moving Services"
           />
         </div>

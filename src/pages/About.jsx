@@ -627,13 +627,13 @@ function WhyChooseUsSection() {
       
       <div className="why-left">
         <img
-          src="/images/ser/house.png"
+          src="/images/tow.jpg"
           alt="Relocation team"
           className="why-main-img"
         />
 
         <img
-          src="/images/truck.png"
+          src="/images/LEFTTRUCK.jpg"
           alt="Safe Transportation"
           className="why-small-img"
         />
@@ -2092,16 +2092,16 @@ function AboutSection() {
 .about-main-img img {
   width: 100%;
   border-radius: 26px;
-  height: 520px;
+  height: 420px;
   object-fit:cover;
   box-shadow:0 25px 60px rgba(6,34,66,0.15);
 }
 
 .about-small-img {
   position: absolute;
-  bottom: -50px;
+  bottom: -60px;
   right: 20px;
-  width: 60%;
+  width: 40%;
   border-radius: 22px;
   border: 6px solid #062242;
   box-shadow:0 25px 60px rgba(6,34,66,0.25);
@@ -2273,14 +2273,14 @@ function AboutSection() {
       <div className="about-left">
         <div className="about-main-img">
           <img
-            src="https://images.pexels.com/photos/4246110/pexels-photo-4246110.jpeg"
+            src="images/about/best2.jpg"
             alt="Relocation team"
           />
         </div>
 
         <div className="about-small-img">
           <img
-            src="https://images.pexels.com/photos/7464660/pexels-photo-7464660.jpeg"
+            src="images/about/aboutbest.jpg"
             alt="Packing service"
           />
         </div>
@@ -2767,31 +2767,31 @@ function KeynoteTeamSection() {
     {
       name: "Prasanth V",
       role: "PROJECT MANAGER",
-      img: "/images/about/m.jpeg",
+      img: "/images/about/prasanth.jpg",
       desc: "Managing relocation projects across Tamil Nadu with efficiency and precision."
     },
     {
       name: "Ramya",
       role: "PROJECT MANAGER",
-      img: "/images/about/r.jpeg",
+      img: "/images/about/ramya.jpg",
       desc: "Ensuring safe packing and damage-free transport every time."
     },
     {
       name: "Sowndarya S",
       role: "WEB DEVELOPER",
-      img: "/images/about/s.png",
+      img: "/images/about/SOW.jpg",
       desc: "Transparent communication from booking to final delivery."
     },
     {
       name: "Gayathri S",
       role: "TEAM LEAD",
-      img: "/images/about/gaya2.jpeg",
+      img: "/images/about/gaya.jpg",
       desc: "Overseeing GPS-enabled fleet operations across India."
     },
     {
       name: "Sathish Kumar",
       role: "MANAGEMENT",
-      img: "/images/about/sathish.png",
+      img: "/images/about/sk.jpg",
       desc: "Strategic planning and operational excellence leadership."
     }
   ];
