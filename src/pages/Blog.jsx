@@ -1,10 +1,10 @@
-
+import { useNavigate } from "react-router-dom";
 
 
 import { useEffect, useState } from "react";
 
 export default function MasonryBlog() {
-
+const navigate = useNavigate();
   const [selectedBlog, setSelectedBlog] = useState(null);
 
   /* ================= BLOG DATA (ID BASED) ================= */
@@ -13,7 +13,8 @@ export default function MasonryBlog() {
     {
       id: "id1",
       title: "Best Packers and Movers in Chennai – Chennai Lal Packers & Movers",
-      image: "/images/blog11.jpg",
+      image: "/images/blog221.png",
+      date : "14 Feb 2026",
       content: `
       <h2>Best Packers and Movers in Chennai – Chennai Lal Packers & Movers</h2>
 
@@ -78,37 +79,124 @@ export default function MasonryBlog() {
       <h2>Conclusion</h2>
       <p>Relocation doesn’t have to be stressful when you choose the right partner. Chennai Lal Packers & Movers delivers professional, reliable, and safe shifting services across Chennai and other cities.</p>
       `
-    }
-    // {
-    //   id: "id2",
-    //   title: "AI-Powered Functionality in Google's SEO Tools",
-    //   image: "/images/bgserv/hiremini.png",
-    //   content: `
-    //     <h2>AI-Powered Functionality in Google's SEO Tools</h2>
-    //     <p>Artificial Intelligence is transforming SEO and digital marketing strategies.</p>
-    //     <ul>
-    //       <li>AI keyword clustering</li>
-    //       <li>Search intent prediction</li>
-    //       <li>Automated content suggestions</li>
-    //       <li>Performance forecasting</li>
-    //     </ul>
-    //     <p>Businesses leveraging AI tools gain a competitive edge.</p>
-    //   `
-    // },
-    // {
-    //   id: "id3",
-    //   title: "Discord as an Engagement and Digital PR Platform",
-    //   image: "/images/bgserv/hiremini.png",
-    //   content: `
-    //     <h2>Discord as an Engagement Platform</h2>
-    //     <p>Discord is evolving beyond gaming into a powerful community platform.</p>
-    //     <ul>
-    //       <li>Community building</li>
-    //       <li>Real-time engagement</li>
-    //       <li>Brand loyalty growth</li>
-    //     </ul>
-    //   `
-    // },
+    },
+
+   {
+  id: "id2",
+  title: "Trusted Home & Office Shifting Services in Chennai – Chennai Lal Packers & Movers",
+  image: "/images/blog221.png",
+  content: `
+    <h2>Trusted Home & Office Shifting Services in Chennai – Chennai Lal Packers & Movers</h2>
+
+    <p>Relocating your home or office requires proper planning and professional support. Chennai Lal Packers & Movers is a trusted name offering safe, efficient, and reliable shifting services across Chennai.</p>
+
+    <p>From careful packing to secure transportation and timely delivery, our team ensures a smooth and stress-free moving experience for every customer.</p>
+
+    <h2>Complete Relocation Solutions in Chennai</h2>
+
+    <p>We provide end-to-end relocation services designed to meet your specific needs. Our systematic approach ensures safety, transparency, and customer satisfaction at every step.</p>
+
+    <h3>Our Core Strengths</h3>
+    <ul>
+      <li>Well-trained and professional moving team</li>
+      <li>Modern tools and advanced packing techniques</li>
+      <li>Transparent pricing with no hidden charges</li>
+      <li>Dedicated move coordinator support</li>
+      <li>Fast response and customer assistance</li>
+    </ul>
+
+    <h3>Residential Relocation Services</h3>
+    <p>We make home shifting simple and organized with careful planning and secure handling of all household items.</p>
+
+    <h4>Secure Household Packing Process</h4>
+    <ul>
+      <li>Premium quality carton boxes</li>
+      <li>Bubble wrap for fragile items</li>
+      <li>Special packaging for glass and electronics</li>
+      <li>Systematic labeling for easy unpacking</li>
+      <li>Safe loading and unloading procedures</li>
+    </ul>
+
+    <h3>Corporate & Commercial Moving Services</h3>
+    <p>Our office relocation services ensure minimal disruption to your business operations.</p>
+
+    <ul>
+      <li>Pre-move consultation and site inspection</li>
+      <li>Organized document and file handling</li>
+      <li>Secure packing of IT systems and servers</li>
+      <li>Workstation dismantling and reinstallation</li>
+      <li>Timely transport and setup support</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>Chennai Lal Packers & Movers is committed to delivering trusted, safe, and efficient home and office shifting services in Chennai. Choose us for a smooth relocation experience backed by professionalism and customer satisfaction.</p>
+  `
+},
+
+    {
+  id: "id3",
+  title: "Affordable & Secure Shifting Services in Chennai – Chennai Lal Packers & Movers",
+  image: "/images/blog221.png",
+  date : "14 Feb 2026",
+  content: `
+    <h2>Affordable & Secure Shifting Services in Chennai – Chennai Lal Packers & Movers</h2>
+
+    <p>When it comes to relocating your home or office in Chennai, choosing affordable & secure shifting services makes all the difference. At Chennai Lal Packers & Movers, we take pride in being one of the most trusted and efficient relocation service providers in the city.</p>
+
+    <p>Our services include home shifting, office relocation, vehicle transport, loading and unloading, and safe warehousing solutions. Every item is packed using high-quality materials and delivered safely and on time, ensuring complete peace of mind.</p>
+
+    <h2>Top Home, Vehicle & Office Shifting Services in Chennai</h2>
+
+    <p>Relocation can be stressful, but with the right moving partner, it becomes simple and hassle-free. Chennai Lal Packers & Movers stands out as a reliable name offering professional and secure shifting services tailored to customer needs and budgets.</p>
+
+    <h3>Why Choose Chennai Lal Packers & Movers?</h3>
+    <ul>
+      <li>Experienced Professionals</li>
+      <li>High-Quality Packing Materials</li>
+      <li>Affordable & Transparent Pricing</li>
+      <li>Door-to-Door Relocation Support</li>
+      <li>GPS Tracking Facility</li>
+      <li>On-Time Delivery Commitment</li>
+      <li>Customer-Centric Service</li>
+    </ul>
+
+    <h3>Vehicle Shifting Services in Chennai</h3>
+    <p>We ensure safe and efficient vehicle shifting for two-wheelers and four-wheelers across Chennai and other cities.</p>
+
+    <h4>Safe & Professional Packaging</h4>
+    <ul>
+      <li>High-quality wrapping sheets</li>
+      <li>Foam padding</li>
+      <li>Protective covers</li>
+      <li>Tyre blocks & wheel locks</li>
+      <li>Rope and belt fasteners</li>
+    </ul>
+
+    <h4>Specialized Vehicle Carriers</h4>
+    <ul>
+      <li>Enclosed carriers</li>
+      <li>Open carriers</li>
+      <li>Multi-vehicle carriers</li>
+      <li>Premium single-car carriers</li>
+    </ul>
+
+    <h3>Office Shifting Services in Chennai</h3>
+    <p>We provide complete office shifting solutions designed to minimize downtime and ensure smooth business transitions.</p>
+
+    <ul>
+      <li>Initial site survey & asset evaluation</li>
+      <li>Customized packing strategy</li>
+      <li>Timeline planning & logistics coordination</li>
+      <li>Secure IT equipment handling</li>
+      <li>Furniture dismantling & reinstallation</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>Relocation doesn’t have to be stressful when you choose the right partner. Chennai Lal Packers & Movers delivers professional, affordable, and secure shifting services across Chennai and other cities with a strong commitment to safety and customer satisfaction.</p>
+  `
+}
+
+  
     // {
     //   id: "id4",
     //   title: "What Is Google AI Mode and How Does It Work?",
@@ -128,6 +216,7 @@ export default function MasonryBlog() {
   /* ================= ANIMATION ================= */
 
   useEffect(() => {
+    
     const cards = document.querySelectorAll(".blog-card");
 
     const observer = new IntersectionObserver((entries) => {
@@ -151,11 +240,11 @@ export default function MasonryBlog() {
 
             <div className="single-main">
               <button
-                className="back-btn"
-                onClick={() => setSelectedBlog(null)}
-              >
-                ← Back to Blogs
-              </button>
+  className="back-btn"
+  onClick={() => navigate("/blog")}
+>
+  ← Back to Blogs
+</button>
 
               <h1>{selectedBlog.title}</h1>
 
@@ -224,6 +313,7 @@ export default function MasonryBlog() {
               </div>
               <div className="blog-content">
                 <h2>{blog.title}</h2>
+                <h1>{blog.date}</h1>
               </div>
             </div>
           ))}
@@ -241,7 +331,7 @@ export default function MasonryBlog() {
 const styles = `
 .blog-section{
   padding:100px 0;
-  background:#fafafa;
+  // background:#fafafa;
 }
 
 .blog-container{
@@ -299,6 +389,10 @@ const styles = `
   font-weight:700;
 }
 
+.blog-content h1{
+  font-size:15px;
+  font-weight:500;
+}
 .single-layout{
   width:85%;
   margin:auto;
@@ -435,496 +529,120 @@ const styles = `
   }
 }
 
+/* ================= MOBILE IMPROVEMENTS ================= */
+
+@media(max-width:768px){
+
+  .blog-section{
+    padding:60px 0;
+  }
+
+  .blog-container{
+    width:92%;
+    column-count:1;
+    column-gap:0;
+  }
+
+  .blog-card{
+    margin-bottom:10px;
+    transform:none;   /* prevent hover shift jump */
+  }
+
+  .blog-content{
+    padding:25px 20px 30px;
+  }
+
+   .blog-container{
+    column-count:1;
+  }
+
+  .blog-card{
+    margin-bottom:35px;
+  }
+
+  .blog-content h2{
+    font-size:18px;
+    line-height:1.4;
+  }
+
+  .blog-content h1{
+    font-size:13px;
+  }
+
+  /* ===== SINGLE BLOG MOBILE ===== */
+
+  .single-layout{
+    width:92%;
+    gap:30px;
+  }
+
+  .single-content{
+    font-size:16px;
+    line-height:1.7;
+  }
+
+  .featured-image{
+    margin:20px 0;
+  }
+
+  /* ===== SIDEBAR MOBILE ===== */
+
+  .single-sidebar{
+    position:relative;
+    top:0;
+    flex:1;
+  }
+
+  .sidebar-cta{
+    padding:25px;
+  }
+
+  .sidebar-cta h2{
+    font-size:20px;
+  }
+
+  .sidebar-cta p{
+    font-size:14px;
+  }
+
+  .sidebar-box{
+    padding:20px;
+  }
+
+  .contact-btn{
+    width:100%;
+    padding:12px;
+  }
+}
+
+/* ================= SMALL MOBILE ================= */
+
+@media(max-width:480px){
+
+  .blog-content{
+    padding:20px 18px 5px;
+  }
+
+  .blog-content h2{
+    font-size:16px;
+  }
+
+  .single-content{
+    font-size:15px;
+  }
+
+  .sidebar-cta h2{
+    font-size:18px;
+  }
+}
+
+
 `;
 
-// import { useEffect, useState } from "react";
 
-// export default function MasonryBlog() {
 
-//   const [selectedBlog, setSelectedBlog] = useState(null);
 
-//   useEffect(() => {
-//     const cards = document.querySelectorAll(".blog-card");
 
-//     const observer = new IntersectionObserver((entries) => {
-//       entries.forEach(entry => {
-//         if (entry.isIntersecting) {
-//           entry.target.classList.add("show");
-//         }
-//       });
-//     }, { threshold: 0.2 });
 
-//     cards.forEach(card => observer.observe(card));
-//   }, []);
 
-//   /* ================= SINGLE BLOG VIEW ================= */
 
-//   if (selectedBlog) {
-//     return (
-//       <>
-//         <section className="single-blog-wrapper">
-//           <div className="single-layout">
-
-//             {/* LEFT CONTENT */}
-//             <div className="single-main">
-
-//               <button
-//                 className="back-btn"
-//                 onClick={() => setSelectedBlog(null)}
-//               >
-//                 ← Back to Blogs
-//               </button>
-
-//               <h1>{selectedBlog.title}</h1>
-
-//               <img
-//                 src={selectedBlog.image}
-//                 alt="blog"
-//                 className="featured-image"
-//               />
-
-// <div
-//   className="single-content"
-//   dangerouslySetInnerHTML={{ __html: selectedBlog.content }}
-// ></div>
-
-//             </div>
-
-//             {/* RIGHT SIDEBAR */}
-//            <aside className="single-sidebar">
-
-//   {/* Sticky CTA */}
-//   <div className="sidebar-box">
-//     <h3>Get Free Moving Quote</h3>
-//     <p>Safe, Fast & Affordable Relocation Services</p>
-//     <button className="contact-btn">Call Now</button>
-//   </div>
-
-//   {/* Trust Box */}
-//   <div className="sidebar-box trust-sidebar">
-//     <h3>Why Customers Trust Us</h3>
-//     <ul>
-//       <li>✔ 5000+ Successful Moves</li>
-//       <li>✔ 10+ Years Experience</li>
-//       <li>✔ GPS Tracking Available</li>
-//       <li>✔ 100% Safe Handling</li>
-//     </ul>
-//   </div>
-
-//   {/* Services List */}
-//   <div className="sidebar-box">
-//     <h3>Our Services</h3>
-//     <ul>
-//       <li>Home Shifting</li>
-//       <li>Office Relocation</li>
-//       <li>Vehicle Transport</li>
-//       <li>Warehousing</li>
-//       <li>Loading & Unloading</li>
-//     </ul>
-//   </div>
-
-//   {/* Emergency Contact */}
-//   <div className="sidebar-box highlight-sidebar">
-//     <h3>Need Urgent Shifting?</h3>
-//     <p>We offer same-day relocation services.</p>
-//     <button className="contact-btn">Book Today</button>
-//   </div>
-
-// </aside>
-
-
-//           </div>
-//         </section>
-
-//         <style>{styles}</style>
-//       </>
-//     );
-//   }
-
-//   /* ================= MASONRY GRID VIEW ================= */
-
-//   return (
-//     <>
-//       <section className="blog-section">
-//         <div className="blog-container">
-
-//           {/* Card 1 */}
-//          {/* Card 1 */}
-// <div
-//   className="blog-card"
-//   onClick={() =>
-//     setSelectedBlog({
-//       title: "Best Packers and Movers in Chennai – Chennai Lal Packers & Movers",
-//       image: "/images/bgserv/hiremini.png",
-//       content: `
-//       <h2>Best Packers and Movers in Chennai – Chennai Lal Packers & Movers</h2>
-
-//       <p>When it comes to relocating your home or office in Chennai, choosing the right packers and movers makes all the difference. At Chennai Lal Packers & Movers, we take pride in being one of the most trusted and efficient relocation service providers in the city.</p>
-
-//       <p>Our services include home shifting, office relocation, vehicle transport, loading and unloading, and safe warehousing solutions. Every item is packed using high-quality materials and delivered on time.</p>
-
-//       <hr/>
-
-//       <h2>Top Vehicle Shifting & Office Shifting Services in Chennai</h2>
-
-//       <p>Relocation is one of the most stressful tasks. Chennai Lal Packers & Movers stands out as a trusted name offering premium vehicle shifting and office shifting services tailored to customer needs.</p>
-
-//       <hr/>
-
-//       <h3>Why Choose Chennai Lal Packers & Movers?</h3>
-//       <ul>
-//         <li>Experienced Professionals</li>
-//         <li>High-Quality Packing Materials</li>
-//         <li>Affordable & Transparent Pricing</li>
-//         <li>Door-to-Door Relocation Support</li>
-//         <li>GPS Tracking Facility</li>
-//         <li>On-Time Delivery Commitment</li>
-//         <li>Customer-Centric Service</li>
-//       </ul>
-
-//       <hr/>
-
-//       <h3>Vehicle Shifting Services in Chennai</h3>
-//       <p>We ensure safe and efficient vehicle shifting for two-wheelers and four-wheelers.</p>
-
-//       <h4>Safe & Professional Packaging</h4>
-//       <ul>
-//         <li>High-quality wrapping sheets</li>
-//         <li>Foam padding</li>
-//         <li>Protective covers</li>
-//         <li>Tyre blocks & wheel locks</li>
-//         <li>Rope and belt fasteners</li>
-//       </ul>
-
-//       <h4>Specialized Vehicle Carriers</h4>
-//       <ul>
-//         <li>Enclosed carriers</li>
-//         <li>Open carriers</li>
-//         <li>Multi-vehicle carriers</li>
-//         <li>Premium single-car carriers</li>
-//       </ul>
-
-//       <hr/>
-
-//       <h3>Office Shifting Services in Chennai</h3>
-//       <p>We provide complete office shifting solutions designed to minimize downtime.</p>
-
-//       <ul>
-//         <li>Initial site survey & asset evaluation</li>
-//         <li>Customized packing strategy</li>
-//         <li>Timeline planning & logistics coordination</li>
-//         <li>Secure IT equipment handling</li>
-//         <li>Furniture dismantling & reinstallation</li>
-//       </ul>
-
-//       <hr/>
-
-//       <h2>Conclusion</h2>
-//       <p>Relocation doesn’t have to be stressful when you choose the right partner. Chennai Lal Packers & Movers delivers professional, reliable, and safe shifting services across Chennai and other cities.</p>
-//       `
-//     })
-//   }
-// >
-
-//             <div className="card-image">
-//               <img src="/images/bgserv/hiremini.png" alt="Blog 1" />
-//             </div>
-//             <div className="blog-content">
-//               <h2>Best Packers and Movers in Chennai</h2>
-//             </div>
-//           </div>
-
-//           {/* Card 2 */}
-//           <div
-//             className="blog-card tall"
-//             onClick={() =>
-//               setSelectedBlog({
-//                 title: "AI-Powered Functionality in Google's SEO Tools",
-//                 image: "/images/bgserv/hiremini.png"
-//               })
-//             }
-//           >
-//             <div className="card-image">
-//               <img src="/images/bgserv/hiremini.png" alt="Blog 2" />
-//             </div>
-//             <div className="blog-content">
-//               <h2>AI-Powered Functionality in Google's SEO Tools</h2>
-//             </div>
-//           </div>
-
-//           {/* Card 3 */}
-//           <div
-//             className="blog-card medium"
-//             onClick={() =>
-//               setSelectedBlog({
-//                 title: "Discord as an Engagement and Digital PR Platform",
-//                 image: "/images/bgserv/hiremini.png"
-//               })
-//             }
-//           >
-//             <div className="card-image">
-//               <img src="/images/bgserv/hiremini.png" alt="Blog 3" />
-//             </div>
-//             <div className="blog-content">
-//               <h2>Discord as an Engagement and Digital PR Platform</h2>
-//             </div>
-//           </div>
-
-//           {/* Card 4 */}
-//           <div
-//             className="blog-card"
-//             onClick={() =>
-//               setSelectedBlog({
-//                 title: "What Is Google AI Mode and How Does It Work?",
-//                 image: "/images/bgserv/hiremini.png"
-//               })
-//             }
-//           >
-//             <div className="card-image">
-//               <img src="/images/bgserv/hiremini.png" alt="Blog 4" />
-//             </div>
-//             <div className="blog-content">
-//               <h2>What Is Google AI Mode and How Does It Work?</h2>
-//             </div>
-//           </div>
-
-//         </div>
-//       </section>
-
-//       <style>{styles}</style>
-//     </>
-//   );
-// }
-
-
-// /* ================= CSS ================= */
-
-// const styles = `
-
-// .blog-section{
-//   padding:100px 0;
-//   background:#fafafa;
-// }
-
-// .blog-container{
-//   width:85%;
-//   margin:auto;
-//   column-count:2;
-//   column-gap:120px;
-// }
-
-// /* ===== CARD ===== */
-
-// .blog-card{
-//   break-inside:avoid;
-//   margin-bottom:120px;
-//   display:inline-block;
-//   width:100%;
-//   background:#fff;
-//   box-shadow:0 20px 40px rgba(0,0,0,0.08);
-//   transition:all 0.6s ease;
-//   opacity:0;
-//   transform:translateY(60px);
-//   border-radius:6px;
-//   overflow:hidden;
-//   cursor:pointer;
-// }
-
-// .blog-card.show{
-//   opacity:1;
-//   transform:translateY(0);
-// }
-
-// .blog-card:hover{
-//   transform:translateY(-12px);
-//   box-shadow:0 35px 70px rgba(0,0,0,0.15);
-// }
-
-// .blog-card.tall{
-//   margin-top:60px;
-// }
-
-// .blog-card.medium{
-//   margin-top:120px;
-// }
-
-// .card-image img{
-//   width:100%;
-//   height:300px;
-//   display:block;
-//   object-fit:cover;
-// }
-
-// .blog-content{
-//   padding:35px 40px 45px;
-// }
-
-// .blog-content h2{
-//   font-size:26px;
-//   line-height:1.4;
-//   font-weight:700;
-//   color:#0f172a;
-// }
-
-// /* ===== SINGLE BLOG ===== */
-
-// .single-blog-wrapper{
-//   padding:100px 0;
-//   background:#fff;
-// }
-
-// .single-layout{
-//   width:85%;
-//   margin:auto;
-//   display:flex;
-//   gap:60px;
-// }
-
-// .single-main{
-//   flex:2;
-// }
-
-// .single-sidebar{
-//   flex:1;
-//   position:sticky;
-//   top:100px;
-//   align-self:flex-start;
-// }
-
-// .featured-image{
-//   width:100%;
-//   margin:30px 0;
-//   border-radius:8px;
-// }
-
-// .single-main h1{
-//   font-size:32px;
-// }
-
-// .single-content{
-//   font-size:18px;
-//   line-height:1.8;
-// }
-
-// .single-content h2,
-// .single-content h3{
-//   margin-top:30px;
-// }
-
-// .single-content ul{
-//   margin-left:20px;
-// }
-
-// .sidebar-box{
-//   padding:30px;
-//   background:#f5f5f5;
-//   border-radius:8px;
-//   margin-bottom:30px;
-// }
-
-// .contact-btn{
-//   margin-top:15px;
-//   padding:10px 20px;
-//   background:#0f172a;
-//   color:#fff;
-//   border:none;
-//   cursor:pointer;
-// }
-
-// .back-btn{
-//   margin-bottom:20px;
-//   padding:8px 16px;
-//   border:none;
-//   background:#eee;
-//   cursor:pointer;
-// }
-
-// /* ===== MOBILE ===== */
-
-// @media(max-width:992px){
-//   .blog-container{
-//     column-count:1;
-//     column-gap:0;
-//   }
-
-//   .blog-card{
-//     margin-bottom:60px;
-//   }
-
-//   .single-layout{
-//     flex-direction:column;
-//   }
-// }
-
-
-// /* ===== Highlight Box ===== */
-
-// .highlight-box{
-//   background:#f1f5f9;
-//   padding:25px;
-//   border-left:4px solid #0f172a;
-//   margin:30px 0;
-//   border-radius:6px;
-// }
-
-// /* ===== Trust Section ===== */
-
-// .trust-section{
-//   display:flex;
-//   gap:20px;
-//   margin:40px 0;
-// }
-
-// .trust-box{
-//   flex:1;
-//   background:#f8fafc;
-//   padding:25px;
-//   text-align:center;
-//   border-radius:8px;
-//   box-shadow:0 5px 15px rgba(0,0,0,0.05);
-// }
-
-// .trust-box h3{
-//   font-size:24px;
-//   margin-bottom:5px;
-//   color:#0f172a;
-// }
-
-// /* ===== Sticky Sidebar ===== */
-
-// .sticky-cta{
-//   position:sticky;
-//   top:100px;
-// }
-// .sidebar-box{
-//   padding:25px;
-//   background:#f5f5f5;
-//   border-radius:8px;
-//   margin-bottom:30px;
-// }
-
-// .sidebar-box h3{
-//   margin-bottom:15px;
-// }
-
-// .sidebar-box ul{
-//   padding-left:18px;
-//   line-height:1.8;
-// }
-
-// .trust-sidebar{
-//   background:#eef2ff;
-// }
-
-// .highlight-sidebar{
-//   background:#0f172a;
-//   color:#fff;
-// }
-
-// .highlight-sidebar button{
-//   background:#fff;
-//   color:#0f172a;
-// }
-
-
-// `;

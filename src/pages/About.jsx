@@ -415,76 +415,65 @@ function ChooseWe() {
   );
 }
 
-
-
-function AboutHero() {
+function WhyChooseUsSection() {
 
   const sectionRef = useRef(null);
 
   useEffect(() => {
 
-    /* ===== SAFE SCROLL REVEAL ===== */
-    const section = sectionRef.current;
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("sps-about-visible");
+          entry.target.classList.add("why-visible");
         }
       });
     }, { threshold: 0.25 });
 
-    if (section) observer.observe(section);
+    if (sectionRef.current) observer.observe(sectionRef.current);
 
-    /* ===== ADD CSS ONLY ONCE ===== */
-    const styleId = "sps-about-hero-style";
+    const styleId = "why-choose-style";
 
     if (!document.getElementById(styleId)) {
 
       const css = `
+*{ margin:0; padding:0; box-sizing:border-box; }
 
-/* ===== SECTION ===== */
-.sps-about-hero{
-  padding:80px 6vw;
-  font-family:Inter,system-ui;
+/* ===== WRAPPER ===== */
+.why-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;   /* TEXT SIDE BIGGER */
+  gap: 80px;
+  padding: 80px 6vw;
+  align-items: center;
+  font-family: Inter, sans-serif;
   overflow:hidden;
 }
 
-/* GRID */
-.sps-about-wrap{
-  max-width:1300px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:1fr 1.1fr;
-  gap:80px;
-  align-items:center;
-}
-
 /* ===== LEFT IMAGES ===== */
-.sps-about-images{
-  position:relative;
+.why-left {
+  position: relative;
   opacity:0;
   transform:translateX(-60px);
   transition:1s ease;
 }
 
-.sps-about-visible .sps-about-images{
+.why-visible .why-left{
   opacity:1;
   transform:translateX(0);
 }
 
-.sps-about-img-main{
+.why-main-img {
   width:100%;
   border-radius:24px;
   box-shadow:0 30px 60px rgba(0,0,0,0.2);
   transition:0.5s ease;
 }
 
-.sps-about-img-main:hover{
+.why-main-img:hover{
   transform:scale(1.03);
 }
 
-.sps-about-img-float{
+.why-small-img {
   position:absolute;
   bottom:-60px;
   right:-40px;
@@ -502,81 +491,72 @@ function AboutHero() {
 }
 
 /* ===== RIGHT CONTENT ===== */
-.sps-about-content{
+.why-right{
   opacity:0;
   transform:translateX(60px);
   transition:1s ease;
 }
 
-.sps-about-visible .sps-about-content{
+.why-visible .why-right{
   opacity:1;
   transform:translateX(0);
 }
 
-.sps-about-content small{
-  display:block;
-  font-size:13px;
-  letter-spacing:0.14em;
-  font-weight:800;
-  color:#062242;
+.why-top-text {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: #062242;
   margin-bottom:12px;
 }
-
-.sps-about-content h1{
-  font-size:46px;
-  line-height:1.25;
-  font-weight:900;
-  color:#062242;
+ 
+.why-title {
+  font-size: 46px;
+  font-weight: 900;
   margin-bottom:18px;
+  color: #062242;
+  line-height:1.25;
 }
 
-.sps-about-content p.sub{
-  font-size:18px;
-  color:#486C85;
-  margin-bottom:22px;
+.why-desc {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #486C85;
 }
 
-.sps-about-content p{
-  font-size:16px;
-  color:#486C85;
-  line-height:1.7;
-  margin-bottom:26px;
-}
-
-/* ===== BOTTOM GRID ===== */
+/* ===== CHECK LIST ===== */
 .sps-about-bottom{
-  display:grid;
-  grid-template-columns:1fr 320px;
-  gap:40px;
-  margin-top:20px;
+  margin-top:30px;
 }
 
-/* CHECK LIST */
 .sps-checks{
   display:flex;
   flex-direction:column;
-  gap:16px;
+  gap:18px;
 }
 
 .sps-check{
   display:flex;
-  gap:12px;
-  align-items:center;
-  font-size:16px;
+  gap:14px;
+  align-items:flex-start;
+  font-size:15px;           /* slightly reduced */
   font-weight:600;
+  line-height:1.5;          /* better spacing */
   color:#062242;
+  max-width:420px;          /* prevents awkward wrap */
   opacity:0;
   transform:translateY(20px);
   transition:0.6s ease;
 }
 
-.sps-about-visible .sps-check:nth-child(1){ transition-delay:0.3s; opacity:1; transform:translateY(0);}
-.sps-about-visible .sps-check:nth-child(2){ transition-delay:0.5s; opacity:1; transform:translateY(0);}
-.sps-about-visible .sps-check:nth-child(3){ transition-delay:0.7s; opacity:1; transform:translateY(0);}
-.sps-about-visible .sps-check:nth-child(4){ transition-delay:0.9s; opacity:1; transform:translateY(0);}
+/* Animation Trigger */
+.why-visible .sps-check:nth-child(1){ transition-delay:0.3s; opacity:1; transform:translateY(0);}
+.why-visible .sps-check:nth-child(2){ transition-delay:0.5s; opacity:1; transform:translateY(0);}
+.why-visible .sps-check:nth-child(3){ transition-delay:0.7s; opacity:1; transform:translateY(0);}
+.why-visible .sps-check:nth-child(4){ transition-delay:0.9s; opacity:1; transform:translateY(0);}
 
 .sps-check span{
-  width:24px;
+  min-width:24px;
   height:24px;
   border-radius:50%;
   background:#062242;
@@ -584,78 +564,50 @@ function AboutHero() {
   display:grid;
   place-items:center;
   font-size:14px;
-}
-
-/* EXPERIENCE CARD */
-.sps-exp-card{
-  background:linear-gradient(135deg,#062242,#3F6C87);
-  border-radius:22px;
-  padding:32px;
-  color:#fff;
-  box-shadow:0 30px 60px rgba(6,34,66,0.4);
-  transform:scale(0.9);
-  opacity:0;
-  transition:0.8s ease 0.6s;
-}
-
-.sps-about-visible .sps-exp-card{
-  transform:scale(1);
-  opacity:1;
-}
-
-.sps-exp-card h3{
-  font-size:20px;
-  margin-bottom:14px;
-}
-
-.sps-exp-number{
-  font-size:48px;
-  font-weight:900;
-  margin-top:10px;
-}
-
-.sps-exp-card p{
-  font-size:16px;
+  margin-top:3px;
 }
 
 /* ===== TABLET ===== */
 @media(max-width:1000px){
-  .sps-about-wrap{
+
+  .why-wrap {
     grid-template-columns:1fr;
     gap:60px;
   }
 
-  .sps-about-img-float{
+  .why-small-img{
     position:static;
     width:100%;
     margin-top:20px;
   }
 
-  .sps-about-bottom{
-    grid-template-columns:1fr;
+  .why-title{
+    font-size:34px;
   }
 
-  .sps-about-content h1{
-    font-size:34px;
+  .sps-check{
+    max-width:100%;
   }
 }
 
 /* ===== MOBILE ===== */
 @media(max-width:600px){
-  .sps-about-hero{
-    padding:70px 5vw;
-  }
 
-  .sps-about-content{
-    text-align:center;
+  .why-wrap{
+    padding:70px 5vw;
   }
 
   .sps-check{
     justify-content:center;
+    text-align:left;
   }
 
-  .sps-exp-card{
+  .why-right{
     text-align:center;
+  }
+
+  .why-title{
+    font-size:28px;
   }
 }
 `;
@@ -671,69 +623,55 @@ function AboutHero() {
   }, []);
 
   return (
-    <section className="sps-about-hero" ref={sectionRef}>
-      <div className="sps-about-wrap">
+    <section className="why-wrap" ref={sectionRef}>
+      
+      <div className="why-left">
+        <img
+          src="/images/ser/house.png"
+          alt="Relocation team"
+          className="why-main-img"
+        />
 
-        <div className="sps-about-images">
-          <img
-            src="/images/ser/house.png"
-            alt="Professional Packers"
-            className="sps-about-img-main"
-          />
-          <img
-            src="/images/truck.png"
-            alt="Safe Transportation"
-            className="sps-about-img-float"
-          />
-        </div>
+        <img
+          src="/images/truck.png"
+          alt="Safe Transportation"
+          className="why-small-img"
+        />
+      </div>
 
-        <div className="sps-about-content">
-          <small>CHENNAI LAL PACKERS & MOVERS</small>
+      <div className="why-right">
+        <p className="why-top-text">CHENNAI LAL PACKERS & MOVERS</p>
 
-          <h1>
-            Reliable Packers And Movers Solutions Saves Your Time!
-          </h1>
+        <h2 className="why-title">
+          Reliable Packers And Movers <br /> Solutions Saves Your Time!
+        </h2>
 
-          <p className="sub">
-            Trusted Relocation Experts For A Hassle-Free Moving Experience.
-          </p>
+        <p className="why-desc">
+          CHENNAI LAL Packers & Movers is a leading relocation service provider in
+          South India, offering safe, reliable, and cost-effective moving
+          solutions.
+        </p>
 
-          <p>
-            CHENNAI LAL Packers & Movers is a leading relocation service provider in
-            South India, offering safe, reliable, and cost-effective moving
-            solutions.
-          </p>
-
-          <div className="sps-about-bottom">
-
-            <div className="sps-checks">
-              {[
-                "Reliable & Secure Moving",
-                "Affordable Service Pricing",
-                "Timely & Efficient Service",
-                "Expert Packing & Handling"
-              ].map((text, i) => (
-                <div key={i} className="sps-check">
-                  <span>✓</span> {text}
-                </div>
-              ))}
-            </div>
-
-            <div className="sps-exp-card">
-              <h3>Flexible, Improved & Accelerated Solutions!</h3>
-              <div className="sps-exp-number">10+</div>
-              <p>Years Of Experience</p>
-            </div>
-
+        <div className="sps-about-bottom">
+          <div className="sps-checks">
+            {[
+              "Reliable & Secure Moving",
+              "Affordable Service Pricing",
+              "Timely & Efficient Service",
+              "Expert Packing & Handling"
+            ].map((text, i) => (
+              <div key={i} className="sps-check">
+                <span>✓</span>
+                {text}
+              </div>
+            ))}
           </div>
-
         </div>
+
       </div>
     </section>
   );
 }
-
-
 
 
 
@@ -3228,7 +3166,8 @@ html,body{
       </section>
 
       {/* Other Sections */}
-      <AboutHero />
+      {/* <AboutHero /> */}
+      <WhyChooseUsSection />
       <MissionVision />
       <ChooseWe />
       <WhyDifferent />
